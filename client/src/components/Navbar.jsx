@@ -16,7 +16,9 @@ export default function Navbar () {
     const iconButtons = `cursor-pointer`
 
     return (
-        <nav className="flex justify-between items-center border">
+        <nav 
+            className="absolute top-0 left-0 w-full z-50 flex justify-between items-center border"
+        >
             {/* Logo that navigates back to root */}
             <NavLink to="/" className="border cursor-pointer"> 
                 <svg className="h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 498 127" fill="none">
