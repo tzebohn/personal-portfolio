@@ -8,10 +8,11 @@ import { Canvas } from "@react-three/fiber"
 import Model from "./Model"
 import heroBg from "../../assets/images/background.jpg"
 import TypingText from "./TypingText"
+import { PresentationControls } from "@react-three/drei"
 
 export default function Hero () {
     return (
-        <section className="relative w-full h-screen overflow-hidden">
+        <section className="relative w-full h-screen overflow-hidden pointer-events-none touch-action-none">
             {/* Background image */}
             <div
                 className="absolute inset-0 bg-cover bg-center opacity-95 mix-blend-overlay"
@@ -21,12 +22,28 @@ export default function Hero () {
             {/* Animated particles */}
 
             {/* 3D Model */}
-            <div className="absolute inset-0">
-                <Canvas camera={{ position: [0, 0, 5], fov: 45 }} dpr={[1, 2]}>
-                    <ambientLight intensity={0.5} />
-                    <directionalLight position={[2, 2, 5]} intensity={1} />
-                    <Model />
-                </Canvas>
+            <div 
+                className="absolute left-1/2 top-1/2 mt-20 lg:mt-40 w-[max(80vw,480px)] max-h-[50vh] lg:max-h-[70vh] 
+                            aspect-[4/5] -translate-x-1/2 -translate-y-1/2
+                            pointer-events-auto touch-action-none"
+            >
+                    <Canvas 
+                        camera={{ position: [0, 0, 6], fov: 35, near: 0.1, far: 100 }} 
+                        dpr={[1, 2]}
+                        className="touch-action-none"
+                    >
+                        <ambientLight intensity={0.5} />
+                        <directionalLight position={[2, 2, 5]} intensity={1} />
+                        <PresentationControls
+                            global
+                            polar={[-0.35, 0.35]}
+                            azimuth={[-0.7, 0.7]}
+                            config={{ mass: 2, tension: 400 }}
+                            snap={false}
+                        >
+                            <Model />
+                        </PresentationControls>
+                    </Canvas>
             </div>
 
             {/* Hero text */}
