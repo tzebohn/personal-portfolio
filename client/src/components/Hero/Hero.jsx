@@ -9,6 +9,7 @@ import Model from "./Model"
 import heroBg from "../../assets/images/background.jpg"
 import TypingText from "./TypingText"
 import { PresentationControls } from "@react-three/drei"
+import AstralParticles from "./AstralParticles"
 
 export default function Hero () {
     return (
@@ -18,8 +19,6 @@ export default function Hero () {
                 className="absolute inset-0 bg-cover bg-center opacity-95 mix-blend-overlay"
                 style={{ backgroundImage: `url(${heroBg})` }}
             />
-
-            {/* Animated particles */}
 
             {/* 3D Model */}
             <div 
@@ -34,6 +33,44 @@ export default function Hero () {
                     >
                         <ambientLight intensity={0.5} />
                         <directionalLight position={[2, 2, 5]} intensity={1} />
+
+                        {/* Animated particles */}
+
+                        {/* Far stars */}
+                        <AstralParticles
+                            count={120}
+                            size={.08}
+                            opacity={0.25}
+                            depth={14}
+                            speed={0.08}
+                            drift={0.001}
+                            color="#facc15"
+                            parallaxFactor={0.02}
+                        />
+
+                        {/* Mid stars */}
+                        <AstralParticles
+                            count={80}
+                            size={.1}
+                            opacity={0.45}
+                            depth={8}
+                            speed={0.1}
+                            drift={0.01}
+                            parallaxFactor={0.04}
+                        />
+
+                        {/* Glow overlay */}
+                        <AstralParticles
+                            count={80}
+                            size={0.08}
+                            opacity={0.15}
+                            depth={8}
+                            speed={0.03}
+                            drift={0.015}
+                            color="#c084fc"
+                            parallaxFactor={0.06}
+                        />
+
                         <PresentationControls
                             global
                             polar={[-0.35, 0.35]}
