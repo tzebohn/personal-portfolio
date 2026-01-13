@@ -17,7 +17,7 @@ export default function Navbar () {
 
     return (
         <nav 
-            className="absolute top-0 left-0 w-full z-50 flex justify-between items-center p-4 px-6"
+            className="fixed top-0 left-0 w-full z-50 flex justify-between items-center p-4 px-6"
         >
             {/* Logo that navigates back to root */}
             <NavLink to="/" className="cursor-pointer"> 
