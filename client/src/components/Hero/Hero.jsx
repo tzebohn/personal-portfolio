@@ -29,7 +29,7 @@ export default function Hero () {
                     <Canvas 
                         camera={{ position: [0, 0, 6], fov: 35, near: 0.1, far: 100 }} 
                         dpr={[1, 2]}
-                        className="touch-action-none"
+                        style={{ touchAction: "none" }}
                     >
                         <ambientLight intensity={0.5} />
                         <directionalLight position={[2, 2, 5]} intensity={1} />
