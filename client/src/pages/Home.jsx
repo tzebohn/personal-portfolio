@@ -69,7 +69,7 @@ export default function Home () {
                         <h2 className="text-gray-500 font-semibold text-xl lg:text-2xl tracking-wide">Introduction</h2>
                         <div className="flex flex-col gap-4 lg:items-center">
                             <h1 className="text-white font-bold text-3xl lg:text-5xl tracking-wide">Overview</h1>
-                            <p className="text-gray-500 font-semibold max-w-xl xs:text-sm sm:text-base md:text-lg lg:text-xl lg:text-center leading-relaxed">
+                            <p className="text-gray-500 font-semibold max-w-xl text-sm xs:text-base md:text-lg lg:text-xl lg:text-center leading-relaxed">
                                 I am a Computer Science bachelor's graduate at CUNY Brooklyn College
                                 with a passion for technology and learning. My interests 
                                 include web development, modern programming frameworks,
