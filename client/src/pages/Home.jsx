@@ -6,6 +6,7 @@ import SecurityIcon from "../assets/icons/security.svg?react"
 import ApiIcon from "../assets/icons/api.svg?react"
 import DatabaseIcon from "../assets/icons/database.svg?react"
 import DeployIcon from "../assets/icons/deploy.svg?react"
+import DevopsIcon from "../assets/icons/devops.svg?react"
 import GridCard from "../components/Home/GridCard";
 
 // Grid Cards to display 
@@ -39,6 +40,11 @@ const cards = [
         Icon: DeployIcon,
         title: "Deployment",
         description: "I deploy and host web applications on modern plaforms, ensuring they are fast, reliable, and accessible.",
+    },
+    {
+        Icon: DevopsIcon,
+        title: "Testing",
+        description: "DevOps and CI/CD for modern web apps, with automated testing using Vitest.",
     },
     {
         Icon: SecurityIcon,

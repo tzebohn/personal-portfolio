@@ -5,18 +5,18 @@
  * Displays an SVG icon, a title, and a description.
  */
 
-import { useRef } from "react"
+import { useRef, useState } from "react"
 
 export default function GridCard ({ Icon, title, description }) {
-    const iconRef = useRef()    // Tracks SVG icon
+    const iconRef = useRef()                        // Tracks SVG icon
+    const [active, setActive] = useState(false)     // Flag for user hover/click
 
     /**
-     * Function draws SVG icon when user hovers over container
+     * Function draws SVG icon when user hovers on (PC)
+     * or clicks (Mobile) on container.
      */
-    const handleHover = () => {
+    const triggerDraw = () => {
         if (!iconRef.current) return
-
-        console.log(iconRef.current)
 
         const paths = iconRef.current.querySelectorAll(
             "path, line, circle, rect, polyline, polygon"
@@ -42,7 +42,7 @@ export default function GridCard ({ Icon, title, description }) {
     /**
      * Function resets SVG CSS styles when mouse exits container
      */
-    const handleLeave = () => {
+    const resetDraw = () => {
         const paths = iconRef.current.querySelectorAll(
             "path, line, circle, rect, polyline, polygon"
         )
@@ -54,18 +54,46 @@ export default function GridCard ({ Icon, title, description }) {
         })
     }
 
+    /**
+     * Function gets called when cursor enters container
+     */
+    const handleHover = () => {
+        triggerDraw()
+        setActive(true)
+    }
+
+    /**
+     * Function gets called when cursor exits container
+     */
+    const handleLeave = () => {
+        resetDraw()
+        setActive(false)
+    }
+
+    const handleMobileClick = () => {
+        // Check if already displaying details
+        if (!active) {
+            triggerDraw()
+            setActive(true)
+        } else {
+            resetDraw()
+            setActive(false)            
+        }
+    }
+
     return (
         <div
-            className="
+            className={`
                 h-[260px]
                 sm:h-auto
                 p-6  
                 transition-colors duration-300
                 group
-                hover:bg-white/10
-            "
+                ${active && "bg-white/10"}
+            `}
             onMouseEnter={handleHover}
             onMouseLeave={handleLeave}
+            onClick={handleMobileClick}
         >   
             <div 
                 className="
@@ -78,29 +106,28 @@ export default function GridCard ({ Icon, title, description }) {
                 <div>
                     <Icon 
                         ref={iconRef}
-                        className="border-0 transition-transform duration-100 delay-75 group-hover:-translate-y-1"
+                        className={`border-0 transition-transform duration-100 delay-75 ${active && "-translate-y-1"}`}
                     />
                 </div>
 
                 {/* Title */}
                 <h3 
-                    className="
+                    className={`
                         text-center text-gray-500 font-medium tracking-wide
-                        group-hover:text-white
-                        group-hover:font-semibold
+                        ${active && "text-white font-semibold"}
                         transition-transform duration-300 delay-75 group-hover:-translate-y-1
-                    "
+                    `}
                 >
                     {title}
                 </h3>
 
                 {/* Description */}
                 <p 
-                    className="
+                    className={`
                         text-gray-500 font-medium
-                        opacity-0 group-hover:opacity-100 text-center
+                        ${active ? "opacity-100" : "opacity-0"} text-center
                         transition-transform duration-300 delay-100 group-hover:-translate-y-1
-                    ">
+                    `}>
                     {description}
                 </p>
             </div>
