@@ -6,11 +6,14 @@
  */
 
 import { useRef, useState } from "react"
+import { useInputDevice } from "../../contexts/inputDevice/useInputDevice"
 
 export default function GridCard ({ Icon, title, description }) {
     const iconRef = useRef()                        // Tracks SVG icon
     const [active, setActive] = useState(false)     // Flag for user hover/click
 
+    const { isTouch } = useInputDevice()            // Tracks user input device
+    
     /**
      * Function draws SVG icon when user hovers on (PC)
      * or clicks (Mobile) on container.
@@ -70,6 +73,10 @@ export default function GridCard ({ Icon, title, description }) {
         setActive(false)
     }
 
+    /**
+     * Function gets called when user taps container
+     * via touchscreen
+     */
     const handleMobileClick = () => {
         // Check if already displaying details
         if (!active) {
@@ -91,9 +98,9 @@ export default function GridCard ({ Icon, title, description }) {
                 group
                 ${active && "bg-white/10"}
             `}
-            onMouseEnter={handleHover}
-            onMouseLeave={handleLeave}
-            onClick={handleMobileClick}
+            onMouseEnter={!isTouch ? handleHover : undefined}
+            onMouseLeave={!isTouch ? handleLeave : undefined}
+            onClick={isTouch ? handleMobileClick : undefined}
         >   
             <div 
                 className="
