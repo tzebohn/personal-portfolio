@@ -64,7 +64,7 @@ export default function Home () {
             {/* Main body content */}
             <main>
                 {/* Introduction section */}
-                <section className="bg-[#03050C] p-4 px-8">
+                <section className="bg-[#03050C] pt-4 px-8">
                     <div className="flex flex-col gap-4">
                         <h2 className="text-gray-500 font-semibold text-xl lg:text-2xl tracking-wide">Introduction</h2>
                         <div className="flex flex-col gap-4 lg:items-center">
