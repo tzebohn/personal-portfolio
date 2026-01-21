@@ -8,6 +8,12 @@ import DatabaseIcon from "../assets/icons/database.svg?react"
 import DeployIcon from "../assets/icons/deploy.svg?react"
 import DevopsIcon from "../assets/icons/devops.svg?react"
 import GridCard from "../components/Home/GridCard";
+import ProjectsTransition from "../components/Home/ProjectsTransition";
+import StockMarketVideo from "../assets/videos/stockmarket.mp4"
+import CollegeInvadersImg from "../assets/images/collegeinvaders.png"
+import MessageboardImg from "../assets/images/messageboard.png"
+import ShopeasyImg from "../assets/images/shopeasy.png"
+import "./home.css"
 
 // Grid Cards to display 
 const cards = [
@@ -98,6 +104,398 @@ export default function Home () {
 
                 </section>
 
+                {/* Project highlights */}
+                <section>
+                    {/* Nice transition into projects */}
+                    < ProjectsTransition />
+                    
+                    {/* Projects go down here */}
+                    <div className="bg-black pt-20">
+                        <div className="relative overflow-hidden">
+                            {/* Grid layer goes here */}
+                            <div className="astral-grid" />
+
+                            {/* Project Content */}
+                            <div className="relative flex flex-col items-center px-5 lg:px-10">
+                                {/* Featured Project 1 */}
+                                <article className="w-full max-w-[1350px] mx-auto xl:mb-[200px] lg:mb-[150px] md:mb-[120px] mb-20">
+                                    <div className="flex flex-col items-center gap-10 text-white md:flex-row">
+
+                                        {/* Project card */}
+                                        <div 
+                                            className="
+                                                project-card
+                                                flex-1 max-w-[583px]
+                                                text-white/90 font-[Orbitron]
+                                                border border-[#2596BE]/30 hover:border-[#2596BE]/60
+                                                rounded-lg p-6 
+                                                bg-black
+                                                shadow-lg shadow-[#2596BE]/20
+                                                hover:shadow-xl hover:shadow-[#2596BE]/30
+                                                order-1 md:order-1
+                                            "
+                                        >
+
+                                            <h3
+                                                className="
+                                                    text-[#2596BE]
+                                                    xl:text-[40px] lg:text-[32px] md:text-[28px] text-2xl
+                                                    xl:leading-[50px] lg:leading-[42px] leading-8
+                                                    [text-shadow:0_0_6px_rgba(37,150,190,0.6),0_0_18px_rgba(37,150,190,0.35)]
+                                                    mb-6 
+                                                "
+                                            >
+                                                Stock Scanner
+                                            </h3>
+
+                                            {/* Add project descriptions below here */}
+                                            <div className="mb-6 border-l-2 border-[#2596BE]/30 pl-4">
+                                                <p className="text-xl text-[#2596BE]">
+                                                    MARKET DATA: <span className="text-white">LIVE & CONTINUOUS</span>
+                                                </p>
+                                                <p className="text-xl text-[#2596BE]">
+                                                    SIGNAL TYPE: <span className="text-white text-shadow-glow-sm">MOMENTUM & NEWS</span>
+                                                </p>
+                                            </div>
+
+                                            
+                                            <div className="xl:text-2xl md:text-xl text-lg xl:leading-[36px] text-gray-300 mb-8 space-y-2">
+                                                <p>
+                                                    A data-driven tool for monitoring stock momentum. Aggregates live news and market data to help users quickly identify trending stocks.
+                                                </p>
+                                                <ul className="space-y-1 mt-4">
+                                                    <li className="text-white"><span className="text-[#2596BE]">&gt;</span> Real-time data aggregation</li>
+                                                    <li className="text-white"><span className="text-[#2596BE]">&gt;</span> Clean, responsive data visualizations</li>
+                                                </ul>
+                                            </div>
+
+                                            
+                                            <button 
+                                                className="
+                                                    text-[#2596BE] uppercase border
+                                                    rounded-tl-lg rounded-br-lg
+                                                    p-2 px-6
+                                                    hover:bg-[rgba(37,150,190,0.1)]
+                                                    hover:shadow-[0_0_15px_rgba(237,63,10,0.3)]
+                                                    hover:[text-shadow:0_0_8px_rgba(237,63,10,0.8)]
+                                                    hover:-translate-y-0.5
+                                                    overflow-hidden
+                                                "
+                                                style={{ 
+                                                    clipPath: `
+                                                        polygon(
+                                                        10px 0,100% 0,
+                                                        100% calc(100% - 10px),
+                                                        calc(100% - 10px) 100%,
+                                                        0 100%,0 10px)
+                                                    `
+                                                }}
+                                            >
+                                                Stock Scanner
+                                            </button>
+                                        </div>
+
+                                        {/* Video Container*/}
+                                        <div className="project-card flex-1 w-full rounded-lg border border-[#2596BE]/30 shadow-lg shadow-[#2596BE]/20 order-2 md:order-2">
+                                            <video 
+                                                src={StockMarketVideo}
+                                                autoPlay
+                                                muted
+                                                loop
+                                                playsInline
+                                                className="w-full h-full object-cover rounded-lg"
+                                            />
+                                        </div>
+                                    </div>
+                                </article>
+
+                                {/* Featured Project 2 */}
+                                <article className="w-full max-w-[1350px] mx-auto xl:mb-[200px] lg:mb-[150px] md:mb-[120px] mb-20">
+                                    <div className="flex flex-col items-center gap-10 text-white md:flex-row">
+
+                                        {/* Project card */}
+                                        <div 
+                                            className="
+                                                project-card
+                                                order-2
+                                                flex-1 max-w-[583px]
+                                                text-white/90 font-[Orbitron]
+                                                border border-[#2596BE]/30 hover:border-[#2596BE]/60
+                                                rounded-lg p-6 
+                                                bg-black
+                                                shadow-lg shadow-[#2596BE]/20
+                                                hover:shadow-xl hover:shadow-[#2596BE]/30
+                                                order-1 md:order-2
+                                            "
+                                        >
+
+                                            <h3
+                                                className="
+                                                    text-[#2596BE]
+                                                    xl:text-[40px] lg:text-[32px] md:text-[28px] text-2xl
+                                                    xl:leading-[50px] lg:leading-[42px] leading-8
+                                                    [text-shadow:0_0_6px_rgba(37,150,190,0.6),0_0_18px_rgba(37,150,190,0.35)]
+                                                    mb-6
+                                                    uppercase
+                                                "
+                                            >
+                                                College Invaders
+                                            </h3>
+
+                                            {/* Add project descriptions below here */}
+                                            <div className="mb-6 border-l-2 border-[#2596BE]/30 pl-4">
+                                                <p className="text-xl text-[#2596BE]">
+                                                    GAMEPLAY STATUS: <span className="text-white">FULLY OPERATIONAL</span>
+                                                </p>
+                                                <p className="text-xl text-[#2596BE]">
+                                                    CORE MECHANICS: <span className="text-white text-shadow-glow-sm">SHOOT & DODGE</span>
+                                                </p>
+                                            </div>
+
+                                            
+                                            <div className="xl:text-2xl md:text-xl text-lg xl:leading-[36px] text-gray-300 mb-8 space-y-2">
+                                                <p>
+                                                    A modern take on the classic Space Invaders arcade shooter. Players defend College against descending agents with responsive controls and smooth gameplay.
+                                                </p>
+                                                <ul className="space-y-1 mt-4">
+                                                    <li className="text-white"><span className="text-[#2596BE]">&gt;</span> Progressive enemy waves with escalting difficulty</li>
+                                                    <li className="text-white"><span className="text-[#2596BE]">&gt;</span> Score tracking</li>
+                                                </ul>
+                                            </div>
+
+                                            
+                                            <a
+                                                href="https://tzebohn.github.io/collegeinvaders/"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="
+                                                    inline-flex items-center justify-center
+                                                    text-[#2596BE] uppercase border
+                                                    rounded-tl-lg rounded-br-lg
+                                                    p-2 px-6
+                                                    hover:bg-[rgba(37,150,190,0.1)]
+                                                    hover:shadow-[0_0_15px_rgba(237,63,10,0.3)]
+                                                    hover:[text-shadow:0_0_8px_rgba(237,63,10,0.8)]
+                                                    hover:-translate-y-0.5
+                                                    overflow-hidden
+                                                "
+                                                style={{ 
+                                                    clipPath: `
+                                                        polygon(
+                                                        10px 0,100% 0,
+                                                        100% calc(100% - 10px),
+                                                        calc(100% - 10px) 100%,
+                                                        0 100%,0 10px)
+                                                    `
+                                                }}
+                                            >
+                                                College Invaders
+                                            </a>
+                                        </div>
+
+                                        {/* Video Container*/}
+                                        <div className="project-card flex-1 order-1 w-full rounded-lg border border-[#2596BE]/30 shadow-lg shadow-[#2596BE]/20 order-2 md:order-1">
+                                            <img 
+                                                src={CollegeInvadersImg}
+                                                className="w-full h-full object-cover rounded-lg"
+                                            />
+                                        </div>
+                                    </div>
+                                </article>
+
+                                {/* Featured Project 3 */}
+                                <article className="w-full max-w-[1350px] mx-auto xl:mb-[200px] lg:mb-[150px] md:mb-[120px] mb-20">
+                                    <div className="flex flex-col items-center gap-10 text-white md:flex-row">
+
+                                        {/* Project card */}
+                                        <div 
+                                            className="
+                                                project-card
+                                                flex-1 max-w-[583px]
+                                                text-white/90 font-[Orbitron]
+                                                border border-[#2596BE]/30 hover:border-[#2596BE]/60
+                                                rounded-lg p-6 
+                                                bg-black
+                                                shadow-lg shadow-[#2596BE]/20
+                                                hover:shadow-xl hover:shadow-[#2596BE]/30
+                                                order-1 md:order-1
+                                            "
+                                        >
+
+                                            <h3
+                                                className="
+                                                    text-[#2596BE]
+                                                    xl:text-[40px] lg:text-[32px] md:text-[28px] text-2xl
+                                                    xl:leading-[50px] lg:leading-[42px] leading-8
+                                                    [text-shadow:0_0_6px_rgba(37,150,190,0.6),0_0_18px_rgba(37,150,190,0.35)]
+                                                    mb-6 
+                                                "
+                                            >
+                                                Message Board
+                                            </h3>
+
+                                            {/* Add project descriptions below here */}
+                                            <div className="mb-6 border-l-2 border-[#2596BE]/30 pl-4">
+                                                <p className="text-xl text-[#2596BE]">
+                                                    MESSAGES: <span className="text-white">VALIDATED & VERIFIED</span>
+                                                </p>
+                                                <p className="text-xl text-[#2596BE]">
+                                                    STATUS: <span className="text-white text-shadow-glow-sm">ACTIVE & MODERATED</span>
+                                                </p>
+                                            </div>
+
+                                            
+                                            <div className="xl:text-2xl md:text-xl text-lg xl:leading-[36px] text-gray-300 mb-8 space-y-2">
+                                                <p>
+                                                    A platform for open conversations and discussions.
+                                                </p>
+                                                <ul className="space-y-1 mt-4">
+                                                    <li className="text-white"><span className="text-[#2596BE]">&gt;</span> Automatic strict profanity filtering</li>
+                                                    <li className="text-white"><span className="text-[#2596BE]">&gt;</span> Real-time messaging via WebSockets</li>
+                                                </ul>
+                                            </div>
+
+                                            
+                                            <a  
+                                                href="https://odin-message-board-3i88.onrender.com"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="
+                                                    inline-flex items-center justify-center
+                                                    text-[#2596BE] uppercase border
+                                                    rounded-tl-lg rounded-br-lg
+                                                    p-2 px-6
+                                                    hover:bg-[rgba(37,150,190,0.1)]
+                                                    hover:shadow-[0_0_15px_rgba(237,63,10,0.3)]
+                                                    hover:[text-shadow:0_0_8px_rgba(237,63,10,0.8)]
+                                                    hover:-translate-y-0.5
+                                                    overflow-hidden
+                                                "
+                                                style={{ 
+                                                    clipPath: `
+                                                        polygon(
+                                                        10px 0,100% 0,
+                                                        100% calc(100% - 10px),
+                                                        calc(100% - 10px) 100%,
+                                                        0 100%,0 10px)
+                                                    `
+                                                }}
+                                            >
+                                                Message Board
+                                            </a>
+                                        </div>
+
+                                        {/* Video Container*/}
+                                        <div className="project-card flex-1 w-full rounded-lg border border-[#2596BE]/30 shadow-lg shadow-[#2596BE]/20 order-2 md:order-2">
+                                            <img 
+                                                src={MessageboardImg}
+                                                className="w-full h-full object-cover rounded-lg"
+                                            />
+                                        </div>
+                                    </div>
+                                </article>
+
+                                {/* Featured Project 4 */}
+                                <article className="w-full max-w-[1350px] mx-auto xl:mb-[200px] lg:mb-[150px] md:mb-[120px] mb-20">
+                                    <div className="flex flex-col items-center gap-10 text-white md:flex-row">
+
+                                        {/* Project card */}
+                                        <div 
+                                            className="
+                                                project-card
+                                                order-2
+                                                flex-1 max-w-[583px]
+                                                text-white/90 font-[Orbitron]
+                                                border border-[#2596BE]/30 hover:border-[#2596BE]/60
+                                                rounded-lg p-6 
+                                                bg-black
+                                                shadow-lg shadow-[#2596BE]/20
+                                                hover:shadow-xl hover:shadow-[#2596BE]/30
+                                                order-1 md:order-2
+                                            "
+                                        >
+
+                                            <h3
+                                                className="
+                                                    text-[#2596BE]
+                                                    xl:text-[40px] lg:text-[32px] md:text-[28px] text-2xl
+                                                    xl:leading-[50px] lg:leading-[42px] leading-8
+                                                    [text-shadow:0_0_6px_rgba(37,150,190,0.6),0_0_18px_rgba(37,150,190,0.35)]
+                                                    mb-6
+                                                    uppercase
+                                                "
+                                            >
+                                                ShopEasy
+                                            </h3>
+
+                                            {/* Add project descriptions below here */}
+                                            <div className="mb-6 border-l-2 border-[#2596BE]/30 pl-4">
+                                                <p className="text-xl text-[#2596BE]">
+                                                    STATUS: <span className="text-white">ACTIVE</span>
+                                                </p>
+                                                <p className="text-xl text-[#2596BE]">
+                                                    PRODUCTS: <span className="text-white text-shadow-glow-sm">AVAILABLE</span>
+                                                </p>
+                                            </div>
+
+                                            
+                                            <div className="xl:text-2xl md:text-xl text-lg xl:leading-[36px] text-gray-300 mb-8 space-y-2">
+                                                <p>
+                                                    A simple e-commerce site for browsing and purchasing products online.
+                                                </p>
+                                                <ul className="space-y-1 mt-4">
+                                                    <li className="text-white"><span className="text-[#2596BE]">&gt;</span> Clear product listings</li>
+                                                    <li className="text-white"><span className="text-[#2596BE]">&gt;</span> Simple checkout flow</li>
+                                                </ul>
+                                            </div>
+
+                                            
+                                            <a 
+                                                href="https://tzebohn.github.io/Odin-Shopping-Cart/"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="
+                                                    inline-flex items-center justify-center
+                                                    text-[#2596BE] uppercase border
+                                                    rounded-tl-lg rounded-br-lg
+                                                    p-2 px-6
+                                                    hover:bg-[rgba(37,150,190,0.1)]
+                                                    hover:shadow-[0_0_15px_rgba(237,63,10,0.3)]
+                                                    hover:[text-shadow:0_0_8px_rgba(237,63,10,0.8)]
+                                                    hover:-translate-y-0.5
+                                                    overflow-hidden
+                                                "
+                                                style={{
+                                                    clipPath: `
+                                                        polygon(
+                                                        10px 0,100% 0,
+                                                        100% calc(100% - 10px),
+                                                        calc(100% - 10px) 100%,
+                                                        0 100%,0 10px)
+                                                    `
+                                                }}
+                                            >
+                                                ShopEasy
+                                            </a>
+                                        </div>
+
+                                        {/* Video Container*/}
+                                        <div className="project-card flex-1 order-1 w-full rounded-lg border border-[#2596BE]/30 shadow-lg shadow-[#2596BE]/20 order-2 md:order-1">
+                                            <img 
+                                                src={ShopeasyImg}
+                                                className="w-full h-full object-cover rounded-lg"
+                                            />
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Roadmap / Timeline Section*/}
+
+                {/* FAQ Section */}
             </main>
         </>
     )
