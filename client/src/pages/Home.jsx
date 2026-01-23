@@ -258,7 +258,7 @@ export default function Home () {
                                                     A modern take on the classic Space Invaders arcade shooter. Players defend College against descending agents with responsive controls and smooth gameplay.
                                                 </p>
                                                 <ul className="space-y-1 mt-4">
-                                                    <li className="text-white"><span className="text-[#2596BE]">&gt;</span> Progressive enemy waves with escalting difficulty</li>
+                                                    <li className="text-white"><span className="text-[#2596BE]">&gt;</span> Progressive enemy waves with escalating difficulty</li>
                                                     <li className="text-white"><span className="text-[#2596BE]">&gt;</span> Score tracking</li>
                                                 </ul>
                                             </div>

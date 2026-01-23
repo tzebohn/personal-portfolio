@@ -1,0 +1,107 @@
+.logo-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 0.8s ease;
+}
+
+.group:hover .logo-path {
+  stroke-dashoffset: 0;
+}
+
+.group:hover .logo-path {
+  filter: drop-shadow(0 0 6px rgba(96,165,250,0.6));
+}
+
+.logo-stroke path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 0.8s ease, stroke 0.3s ease;
+}
+
+.group:hover .logo-stroke path {
+  stroke-dashoffset: 0;
+  stroke: #2BA0FF; /* bright accent color */
+  filter: drop-shadow(0 0 6px rgba(43,160,255,0.8));
+
+}
+.group:hover .logo-stroke path {
+  stroke-dashoffset: 0;
+  filter: drop-shadow(0 0 6px rgba(43,160,255,0.8))
+          drop-shadow(0 0 12px rgba(43,160,255,0.5));
+}
+
+button:hover .top {
+  transform: translateX(2px);
+}
+
+button:hover .bottom {
+  transform: translateX(2px);
+}
+
+button:active .middle {
+  fill: #2BA0FF;
+}
+
+.top, .bottom {
+    transition: transform 0.25s ease;
+}
+
+.close-btn line {
+  transform-origin: 50% 50%;
+  transition: transform 0.3s ease;
+}
+
+.close-btn:active .left {
+  transform: rotate(-60deg) translateY(-8px);
+}
+
+.close-btn:active .right {
+  transform: rotate(60deg) translateY(8px);
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(140%);
+    opacity: 0;
+  }
+
+  55% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  70% {
+    transform: translateX(-16px);
+  }
+
+  82% {
+    transform: translateX(10px);
+  }
+
+  92% {
+    transform: translateX(-6px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-slideInRight {
+  animation: slideInFromRight 0.4s ease-out forwards;
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.see-projects {
+  animation: slide-in-right 0.2s ease-out forwards;
+}
