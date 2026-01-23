@@ -59,6 +59,15 @@ export default function MainLayout () {
         }
     }, [showProjects])
 
+    /**
+     * Function allows users an alternate way of closing Menu
+     */
+    const handleMenuClose = () => {
+        if (menuOpen) {
+            setMenuOpen(false)
+        }
+    }
+
     return (
         <div className="relative min-h-screen bg-[#1d1e21]">
             {!isTouch && <Cursor />}
@@ -109,9 +118,11 @@ export default function MainLayout () {
             <div 
                 className={
                     `relative transition-all duration-300 ease-in-out
-                    ${menuOpen ? "scale-90 -translate-y-30 filter brightness-50 pointer-events-none" : "scale-100 translate-y-0 filter brightness-100"}
+                    ${menuOpen ? "scale-90 -translate-y-30 filter brightness-50" : "scale-100 translate-y-0 filter brightness-100"}
                     `
-                }>
+                }
+                onClick={handleMenuClose}
+            >
                 <Outlet />
                 <Footer />
             </div>

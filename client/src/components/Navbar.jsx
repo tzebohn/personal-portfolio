@@ -61,7 +61,7 @@ export default function Navbar ({ menuOpen, setMenuOpen, showProjects, setShowPr
         <>
             {showBar && !showProjects &&
                 <nav 
-                    className="fixed top-0 left-0 w-full z-50 flex justify-between items-center p-4 px-12"
+                    className="fixed top-0 left-0 w-full z-50 flex justify-between items-center p-4 px-3 md:px-12"
                 >
                     {/* Logo that navigates back to root */}
                     <NavLink to="/" className="group cursor-pointer">
