@@ -13,12 +13,14 @@
  */
 
 import { useEffect, useRef, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import "./styles.css"
 
 export default function Navbar ({ menuOpen, setMenuOpen, showProjects, setShowProjects }) {
-    const [showBar, setShowBar] = useState(true)            // Tracks Navbar visibility
-    const lastScrollY = useRef(window.scrollY)              // Tracks the last scroll position
+    const [showBar, setShowBar] = useState(true)    // Tracks Navbar visibility
+    const lastScrollY = useRef(window.scrollY)      // Tracks the last scroll position
+
+    const location = useLocation()                  // Tracks current URL path      
     
     /**
      * Runs on component mount
@@ -57,6 +59,23 @@ export default function Navbar ({ menuOpen, setMenuOpen, showProjects, setShowPr
     // Global tailwindcss styles
     const iconButtons = `cursor-pointer text-white`
 
+    /**
+     * Called when user presses < TL /> Home Logo
+     * 
+     * Handles going back to the top of the homepage
+     * if the user is already currently at the homepage.
+     * 
+     * Otherwise, react router will handle navigating to homepage
+     */
+    function handleNavigate (e) {
+        // User is already at homepage when button was clicked
+        if (location.pathname === "/") {
+            e.preventDefault()
+            window.scrollTo({ top: 0, behavior: "smooth" })
+        }
+        // Else let react router handle navigation to home
+    }
+
     return (
         <>
             {showBar && !showProjects &&
@@ -64,7 +83,7 @@ export default function Navbar ({ menuOpen, setMenuOpen, showProjects, setShowPr
                     className="fixed top-0 left-0 w-full z-50 flex justify-between items-center p-4 px-3 md:px-12"
                 >
                     {/* Logo that navigates back to root */}
-                    <NavLink to="/" className="group cursor-pointer">
+                    <NavLink to="/" className="group cursor-pointer" onClick={handleNavigate}>
                         <svg className="h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 498 127" fill="none">
                             <g className="logo-stroke">
                                 <path d="M49.44 91.76L8.16 71.12V61.52L49.44 40.88V49.232L19.68 63.824C18.464 64.4 17.312 64.912 16.224 65.36C15.2 65.744 14.432 66 13.92 66.128C14.496 66.256 15.328 66.544 16.416 66.992C17.504 67.376 18.592 67.856 19.68 68.432L49.44 83.12V91.76ZM139.605 98V35.696H120.405V27.824H167.445V35.696H148.245V98H139.605ZM183.728 98V27.92H192.368V90.128H224.048V98H183.728Z" fill="white"/>
