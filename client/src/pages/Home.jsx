@@ -14,6 +14,9 @@ import CollegeInvadersImg from "../assets/images/collegeinvaders.png"
 import MessageboardImg from "../assets/images/messageboard.png"
 import ShopeasyImg from "../assets/images/shopeasy.png"
 import "./home.css"
+import RoadmapItems from "../components/Home/RoadmapItems";
+import { useRef } from "react";
+import { motion, useTransform, useScroll } from "framer-motion"
 
 // Grid Cards to display 
 const cards = [
@@ -60,6 +63,19 @@ const cards = [
 ]
 
 export default function Home () {
+
+    const lineScrollRef = useRef(null)      // Tracks the current scroll height for roadmap container
+
+    /**
+     * Transform the length of the vertical line visually
+     * as the user scrolls
+     */
+    const { scrollYProgress } = useScroll({
+        target: lineScrollRef,
+        offset: ["start 85%", "end 25%"]
+    })
+    const lineScale = useTransform(scrollYProgress, [0, 1], [0, 1])
+
     return (
         <>
             {/* Hero Banner */}
@@ -204,6 +220,7 @@ export default function Home () {
                                                 loop
                                                 playsInline
                                                 className="w-full h-full object-cover rounded-lg"
+                                                loading="lazy"
                                             />
                                         </div>
                                     </div>
@@ -298,6 +315,7 @@ export default function Home () {
                                             <img 
                                                 src={CollegeInvadersImg}
                                                 className="w-full h-full object-cover rounded-lg"
+                                                loading="lazy"
                                             />
                                         </div>
                                     </div>
@@ -390,6 +408,7 @@ export default function Home () {
                                             <img 
                                                 src={MessageboardImg}
                                                 className="w-full h-full object-cover rounded-lg"
+                                                loading="lazy"
                                             />
                                         </div>
                                     </div>
@@ -484,6 +503,7 @@ export default function Home () {
                                             <img 
                                                 src={ShopeasyImg}
                                                 className="w-full h-full object-cover rounded-lg"
+                                                loading="lazy"
                                             />
                                         </div>
                                     </div>
@@ -494,7 +514,118 @@ export default function Home () {
                 </section>
 
                 {/* Roadmap / Timeline Section*/}
+                <section ref={lineScrollRef} className="bg-[#03050C] py-10">
+                    {/* Heading */}
+                    <h1 
+                        className="
+                            text-white/90 text-4xl sm:text-5xl 
+                            tracking-[0.3em] font-[Orbitron]
+                            text-center uppercase font-bold 
+                            transition-all duration-300
+                            drop-shadow-[0_0_8px_rgba(37,150,190,0.25)]
+                            glow-text py-10 mb-10
+                        " 
+                        >
+                            ROADMAP
+                    </h1>
 
+                    {/* Timeline content cards */}
+                    <div className="relative max-w-7xl mx-auto px-4">
+                        {/* Vertical line */}
+                        <motion.div 
+                            style={{ scaleY: lineScale }}
+                            className="absolute top-0 left-4 md:left-1/2 md:-translate-x-1/2 h-full w-[4px] bg-[#2596BE] origin-top"
+                        />
+
+                        {/* Roadmap items */}
+                        <div className="space-y-10">
+                            <RoadmapItems 
+                                side={"left"}
+                                phase={1}
+                                status={"complete"}
+                                title={"Learned Java Programming"}
+                                descriptions={[
+                                    "Mastered Java syntax and OOP concepts (inheritance, polymorphism, encapsulation)", 
+                                    "Built proficient programs", 
+                                    "Implemented data structures and sorting algorithms to optimize performance",
+                                    "Developed strong skills in debugging and error handling"
+                                ]}
+                            />
+
+                            <RoadmapItems 
+                                side={"right"}
+                                phase={2}
+                                status={"complete"}
+                                title={"Intermediate C++ Programming"}
+                                descriptions={[
+                                    "Gained experience in C++ syntax, structuring classes and objects", 
+                                    "Learned pointers, references, and memory management techniques (stack & heap)", 
+                                    "Applied advanced C++ features like constructors and destructors ",
+                                ]}
+                            />
+
+                            <RoadmapItems 
+                                side={"left"}
+                                phase={3}
+                                status={"complete"}
+                                title={"Learned Robotics Basics & Developed Autonomous Behaviors"}
+                                descriptions={[
+                                    "Developed a wavefront algorithm to calculate the most optimal path for the robot",
+                                    "Studied the fundamentals of robotics, focused on sensors like infrared laser, camera and bumpers", 
+                                    "Programmed custom algorithms in C++ to enable robot navigation and obstacle avoidance",
+                                    "Integrated sensor data for real-time decison-making"
+                                ]}
+                            />
+
+                            <RoadmapItems 
+                                side={"right"}
+                                phase={4}
+                                status={"complete"}
+                                title={"Graduate College"}
+                                descriptions={[
+                                    "Bachelor's Degree in Computer Science", 
+                                    "Completed core CS coursework and projects", 
+                                    "Built strong problem-solving and technical skills"
+                                ]}
+                            />
+
+                            <RoadmapItems 
+                                side={"left"}
+                                phase={5}
+                                status={"progress"}
+                                title={"Self-Learning Web Development Basics"}
+                                descriptions={[
+                                    "Learned core HTML, CSS, and Javascript concepts", 
+                                    "Built projects using React, Tailwind, Node.js, and Express", 
+                                    "Used modern tools like Vitest for testing",
+                                    "Practiced debugging and problem-solving through hands-on development"
+                                ]}
+                            />
+
+                            <RoadmapItems 
+                                side={"right"}
+                                phase={6}
+                                status={"progress"}
+                                title={"Networking & Career Development"}
+                                descriptions={[
+                                    "Build professional connections through networking and outreach", 
+                                    "Actively searching and applying for internships and entry-level roles", 
+                                    "Preparing for interviews through Leetcode and resume refinement"
+                                ]}
+                            />
+                            <RoadmapItems 
+                                side={"left"}
+                                phase={7}
+                                status={"planned"}
+                                title={"Finally Getting a Job"}
+                                descriptions={[
+                                    "Passed interviews, coding challenges, and vibes checks", 
+                                    "Successfully landed a job and achieved employed status 🙂", 
+                                ]}
+                            />
+                        </div>
+                    </div>
+                </section>
                 {/* FAQ Section */}
             </main>
         </>
