@@ -15,7 +15,7 @@ import MessageboardImg from "../assets/images/messageboard.png"
 import ShopeasyImg from "../assets/images/shopeasy.png"
 import "./home.css"
 import RoadmapItems from "../components/Home/RoadmapItems";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useTransform, useScroll } from "framer-motion"
 
 // Grid Cards to display 
@@ -63,8 +63,23 @@ const cards = [
 ]
 
 export default function Home () {
+    const [isMdUp, setIsMdUp] = useState(false) // Tracks if current screen width is 768px or greater
 
     const lineScrollRef = useRef(null)      // Tracks the current scroll height for roadmap container
+
+    /**
+     * Checks if current screen width is >= 768px
+     * on component mount or resizing 
+     */
+    useEffect(() => {
+        const check = () => setIsMdUp(window.innerWidth >= 768)
+        check() // Check width on mount
+
+        // Event listener for resizing
+        window.addEventListener("resize", check)
+
+        return () => window.removeEventListener("resize", check)
+    })
 
     /**
      * Transform the length of the vertical line visually
@@ -74,7 +89,11 @@ export default function Home () {
         target: lineScrollRef,
         offset: ["start 85%", "end 25%"]
     })
-    const lineScale = useTransform(scrollYProgress, [0, 1], [0, 1])
+    const lineScale = useTransform(
+        scrollYProgress, 
+        [0, isMdUp ? .9 : 1], 
+        [0, 1]
+    )
 
     return (
         <>
