@@ -619,7 +619,7 @@ export default function Home () {
                                 status={"planned"}
                                 title={"Finally Getting a Job"}
                                 descriptions={[
-                                    "Passed interviews, coding challenges, and vibes checks", 
+                                    "Passed interviews, coding challenges, and vibe checks", 
                                     "Successfully landed a job and achieved employed status 🙂", 
                                 ]}
                             />
