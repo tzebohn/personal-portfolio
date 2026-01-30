@@ -54,17 +54,21 @@ export default function Footer () {
                             let's schedule a conversation. I'll
                             bring the coffee.
                         </p>
-                        <button 
+                        <a 
+                            href="https://forms.gle/yqccyh2pZwnyPuHY6"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className={`
                                 flex items-center justify-center gap-4 
                                 border rounded-full p-2 xs:px-4
                                 hover:bg-gray-800
                                 active:bg-gray-800
                             `}
+                            aria-label="Fill out contact form"
                         >
                             <FaRegHandshake className="w-6 h-6 sm:w-8 sm:h-8 text-white"/>
                             <span className="text-sm xs:text-lg font-semibold">Let's Connect</span>
-                        </button>
+                        </a>
                     </div>
                 </section>
 
