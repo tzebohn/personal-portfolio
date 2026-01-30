@@ -13,10 +13,14 @@ import StockMarketVideo from "../assets/videos/stockmarket.mp4"
 import CollegeInvadersImg from "../assets/images/collegeinvaders.png"
 import MessageboardImg from "../assets/images/messageboard.png"
 import ShopeasyImg from "../assets/images/shopeasy.png"
+import faqBackground from "../assets/images/faqbackground.jpg"
 import "./home.css"
 import RoadmapItems from "../components/Home/RoadmapItems";
 import { useEffect, useRef, useState } from "react";
 import { motion, useTransform, useScroll } from "framer-motion"
+import FaqCards from "../components/Home/FaqCards";
+import { FaQ } from "react-icons/fa6";
+import { FaCarSide } from "react-icons/fa";
 
 // Grid Cards to display 
 const cards = [
@@ -645,7 +649,86 @@ export default function Home () {
                         </div>
                     </div>
                 </section>
+
                 {/* FAQ Section */}
+                <section className="relative min-h-screen flex items-center justify-center">
+                    {/* Background image */}
+                    <div
+                        className="absolute inset-0 bg-cover bg-center"
+                        style={{ backgroundImage: `url(${faqBackground})` }}
+                    />
+
+                    {/* Grayed out overlay */}
+                    <div className="absolute inset-0 bg-black/50"/>
+
+                    <div className="relative flex justify-center items-center max-w-7xl mx-auto py-20">
+                        <div className="">
+                            <h1 
+                                className="
+                                    text-white/90 text-xl xs:text-4xl sm:text-5xl 
+                                    tracking-[0.3em] font-[Orbitron]
+                                    text-center uppercase font-bold 
+                                    transition-all duration-300
+                                    drop-shadow-[0_0_8px_rgba(37,150,190,0.25)]
+                                    glow-text py-10 mb-10
+                                " 
+                                >
+                                    Frequently Asked Questions
+                            </h1>
+
+                            {/* Questions section */}
+                            <div className="flex flex-col gap-8 p-4 md:max-w-5xl md:mx-auto">
+                                <FaqCards
+                                    title={"Who are you and what do you do?"}
+                                    description={`
+                                        I'm an aspiring software engineer with a passion for building clean, efficient,
+                                        and scalable solutions. I specialize in full-stack development, where I get to
+                                        work on both the frontend and backend logic. I'm always experimenting with new 
+                                        tools and tech to keep improving and stay on top of what's trending in the industry.
+                                        `
+                                    }
+                                />
+                                <FaqCards
+                                    title={"What makes you different from others in your field?"}
+                                    description={`
+                                        I'd say one of my strongest traits is how adaptable I am. In the fast 
+                                        evolving field of software engineering, staying flexible and continuously
+                                        learning is crucial. Whenever new technologies or tools emerge, I make it
+                                        a priority to understand the concepts behind them. I dive deep into exploring
+                                        how they work, how they can be applied, and how they can improve the way
+                                        I approach problems.
+                                        `
+                                    }
+                                />                         
+                                <FaqCards
+                                    title={"How do you pronounce your name?"}
+                                    description={"I know my name can be a little tricky at first glance — it's pronounced [Tea-zz Bohn]. Like John but with a B."} 
+                                />
+                                <FaqCards
+                                    title={"Where are you based?"}
+                                    description={`
+                                        My parents are from Hong Kong, but I was born and raised in New York, 
+                                        so I’m bilingual and fluent in both English and Cantonese. It's been a huge 
+                                        advantage when it comes to understanding different perspectives and 
+                                        communicating across cultures.
+                                        `
+                                    } 
+                                />
+                                <FaqCards
+                                    title={"What's your background in software engineering?"}
+                                    description={`
+                                        While I don’t have formal job experience yet, I’ve been developing my 
+                                        skills through hands-on projects, both on my own and in collaboration with other
+                                        students. As a self-taught Full Stack Web Developer, I’m always building, 
+                                        experimenting, and pushing my knowledge further. I’m excited to bring that 
+                                        learning into a professional environment.
+                                        `
+                                    }
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </main>
         </>
     )

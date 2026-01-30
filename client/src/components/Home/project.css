@@ -4,3 +4,18 @@
     0 0 20px rgba(37,150,190,0.25),
     0 0 40px rgba(37,150,190,0.15);
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.25s ease-out;
+}
