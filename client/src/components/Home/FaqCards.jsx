@@ -1,7 +1,13 @@
 /**
+ * FaqCards component
  * 
+ * Displays frequently asked questions in a card format
+ * 
+ * props:
+ * - title (String): The frequently asked question
+ * - description (String): The response to the question
  */
-import { SpotLightShadow } from "@react-three/drei";
+
 import { useState } from "react";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 
