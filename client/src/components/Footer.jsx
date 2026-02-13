@@ -158,7 +158,7 @@ export default function Footer () {
             </footer>
 
             <div className="text-white bg-gradient-to-b from-black via-[#04060d] to-[#090e1a]">
-                <div className="min-h-24 flex flex-col items-center md:flex-row md:justify-between md:items-end">
+                <div className="min-h-24 flex flex-col items-center md:flex-row md:justify-between md:items-end px-4">
                     <nav className="flex flex-wrap justify-center gap-8 order-1 md:order-2">
                         <a 
                             href="https://github.com/tzebohn" 
