@@ -6,16 +6,16 @@
 
     background-image:
         linear-gradient(
-            rgba(37, 150, 190, 0.12) 1px,
+            rgba(37, 150, 190, 0.4) 1px,
             transparent 1px
         ),
         linear-gradient(
             90deg,
-            rgba(37, 150, 190, 0.12) 1px,
+            rgba(37, 150, 190, 0.35) 1px,
             transparent 1px
         );
 
-    background-size: 70px 70px;
+    background-size: 40px 25px;
 
     transform-origin: top center;
     transform:
@@ -44,7 +44,7 @@
         background-position: 0 0;
     }
     to {
-        background-position: 0 140px;
+        background-position: 0 25px;
     }
 }
 
