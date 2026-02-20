@@ -194,7 +194,8 @@ export default function Home () {
                                         media: {
                                             type: "image",
                                             src: CollegeInvadersImg
-                                        }
+                                        },
+                                        href: "https://tzebohn.github.io/collegeinvaders/"
                                     }}
                                     isAvailable={true}
                                     reverse
@@ -216,7 +217,8 @@ export default function Home () {
                                         media: {
                                             type: "image",
                                             src: MessageboardImg
-                                        }
+                                        },
+                                        href: "https://odin-message-board-3i88.onrender.com"
                                     }}
                                     isAvailable={true}
                                 />
@@ -237,7 +239,8 @@ export default function Home () {
                                         media: {
                                             type: "image",
                                             src: ShopeasyImg
-                                        }
+                                        },
+                                        href: "https://tzebohn.github.io/Odin-Shopping-Cart/"
                                     }}
                                     isAvailable={true}
                                     reverse
