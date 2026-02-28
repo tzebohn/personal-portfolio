@@ -6,9 +6,22 @@ import TwitterIcon from "../assets/icons/twitter.svg?react"
 import DiscordIcon from "../assets/icons/discord.svg?react"
 import { FaRegHandshake } from "react-icons/fa6"
 import { useInputDevice } from "../contexts/inputDevice/useInputDevice"
+import { useState } from "react"
 
 export default function Footer () {
     const { isTouch } = useInputDevice()
+
+    const [copied, setCopied] = useState(false)
+
+    const handleCopy = async () => {
+        try {
+            await navigator.clipboard.writeText("bohnling@gmail.com")
+            setCopied(true)
+            setTimeout(() => setCopied(false), 1000)
+        } catch (err) {
+            console.error(err)
+        }
+    }
 
     const iconStyles = `w-11 h-11 md:w-14 md:h-14`
     const anchorStyles = `
@@ -118,15 +131,19 @@ export default function Footer () {
                             </a>
 
                             {/* Email link */}
-                            <a
-                                href="#"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={`${anchorStyles}`}
-                                aria-label="Send me an Email"
+                            <button
+                                onClick={handleCopy}
+                                className={`${anchorStyles} relative`}
+                                aria-label="Copy email to clipboard"
                             >
                                 <EmailIcon className={`${iconStyles}`}/>
-                            </a>
+                                {copied && (
+                                    <span className="absolute -top-6 text-xs bg-black text-white px-2 py-1 rounded">
+                                    Copied!
+                                    </span>
+                                )}
+                            </button>
+
 
                             {/* Twitter link */}
                             <a
