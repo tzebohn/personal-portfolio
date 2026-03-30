@@ -10,3 +10,7 @@
 .logo-cursor {
   animation: blink 2s steps(1) infinite;
 }
+
+body {
+  background-color: #03050C;
+}

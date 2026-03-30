@@ -9,7 +9,7 @@ import DeployIcon from "../assets/icons/deploy.svg?react"
 import DevopsIcon from "../assets/icons/devops.svg?react"
 import GridCard from "../components/Home/GridCard";
 import ProjectsTransition from "../components/Home/ProjectsTransition";
-import StockMarketVideo from "../assets/videos/stockmarket.mp4"
+import StockMarketImg from "../assets/images/stockscanner.jpg"
 import CollegeInvadersImg from "../assets/images/collegeinvaders.png"
 import MessageboardImg from "../assets/images/messageboard.png"
 import ShopeasyImg from "../assets/images/shopeasy.png"
@@ -112,7 +112,6 @@ export default function Home () {
                 {/* Introduction section */}
                 <section className="bg-[#03050C] pt-4 px-8">
                     <div className="flex flex-col gap-4">
-                        <h2 className="text-gray-500 font-semibold text-xl lg:text-2xl tracking-wide">Introduction</h2>
                         <div className="flex flex-col gap-4 lg:items-center">
                             <h1 className="text-white font-bold text-3xl lg:text-5xl tracking-wide">Overview</h1>
                             <p className="text-gray-500 font-semibold max-w-xl text-sm xs:text-base md:text-lg lg:text-xl lg:text-center leading-relaxed">
@@ -139,7 +138,7 @@ export default function Home () {
 
                     {/* Vertical divider */}
                     <div className="mt-4 flex items-center justify-center">
-                        <div className="w-[2px] h-40 bg-gray-700"/>
+                        <div className="w-0.5 h-40 bg-gray-700"/>
                     </div>
 
                 </section>
@@ -171,8 +170,8 @@ export default function Home () {
                                             "Clean, responsive data visualizations"
                                         ],
                                         media: {
-                                            type: "video",
-                                            src: StockMarketVideo
+                                            type: "image",
+                                            src: StockMarketImg
                                         }
                                     }}
                                     isAvailable={false}
