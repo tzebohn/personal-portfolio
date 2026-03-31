@@ -95,7 +95,7 @@ export default function Footer () {
                     />
 
                     {/* Social buttons */}
-                    <div className="relative z-10 flex justify-center pt-12">
+                    <div id="contact" className="relative z-10 flex justify-center pt-12">
                         <div className="grid grid-cols-3 gap-6">
                             {/* Github link */}
                             <a

@@ -144,7 +144,7 @@ export default function Home () {
                 </section>
 
                 {/* Project highlights */}
-                <section>
+                <section id="projects">
                     {/* Nice transition into projects */}
                     < ProjectsTransition />
                     
@@ -250,7 +250,7 @@ export default function Home () {
                 </section>
 
                 {/* Roadmap / Timeline Section*/}
-                <section ref={lineScrollRef} className="bg-[#03050C] py-10">
+                <section ref={lineScrollRef} id="roadmap" className="bg-[#03050C] py-10">
                     {/* Heading */}
                     <h1 
                         className="

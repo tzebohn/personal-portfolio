@@ -30,12 +30,10 @@ export default function MainLayout () {
      */
     useEffect(() => {
         if (menuOpen) {
-            // Scroll up to the top
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            })
-            // Prevent scrolling
+            // Instantly jump to top
+            window.scrollTo({ top: 0 })
+
+            // Then lock scroll
             document.body.style.overflow = "hidden"
         } else {
             document.body.style.overflow = ""
@@ -68,40 +66,44 @@ export default function MainLayout () {
         }
     }
 
+    /**
+     * Function scrolls to a specific section of the page when a menu link is clicked
+     * @param {string} id - id of the section to scroll to
+     */
+    const scrollToSection = (id) => {
+        const element = document.getElementById(id)
+        if (element) {
+            setMenuOpen(false)
+            element.scrollIntoView()
+        }
+    }
+
     return (
-        <div className="relative min-h-screen bg-[#1d1e21]">
+        <div className=" relative min-h-screen bg-linear-to-br from-[#0f0a1a] to-[#05070a]">
             {!isTouch && <Cursor />}
 
             <Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} showProjects={showProjects} setShowProjects={setShowProjects}/>
 
             {/* Menu overlay links */}
             {menuOpen && (
-                <div className="absolute top-0 left-0 w-full pointer-events-auto">
+                <div className="fixed top-0 left-0 w-full pointer-events-auto z-40 pt-24 sm:pt-32 md:pt-40 pb-16 sm:pb-20 md:pb-24">
                     <ul 
                         className="
-                            w-[60%] mx-auto mt-[120px] mb-[50px]
-                            grid grid-cols-2 gap-4
-                            md:grid-none 
-                            md:flex md:justify-between 
+                            max-w-7xl mx-auto px-6
+                            grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 md:gap-12 lg:gap-16
                         "
                     >
                         <li className="flex items-center justify-center">
-                            <a className="text-white font-semibold text-lg tracking-wide hover:underline" href="">Home</a>
+                            <a className="text-white font-semibold text-sm sm:text-base md:text-lg lg:text-xl tracking-wide hover:text-blue-600 transition-colors duration-300">Resume</a>
                         </li>
                         <li className="flex items-center justify-center">
-                            <a className="text-white font-semibold text-lg tracking-wide hover:underline" href="">About</a>
+                            <a className="text-white font-semibold text-sm sm:text-base md:text-lg lg:text-xl tracking-wide hover:text-blue-600 transition-colors duration-300" onClick={() => scrollToSection("contact")}>Contact</a>
                         </li>
                         <li className="flex items-center justify-center">
-                            <a className="text-white font-semibold text-lg tracking-wide hover:underline" href="">Projects</a>
+                            <a className="text-white font-semibold text-sm sm:text-base md:text-lg lg:text-xl tracking-wide hover:text-blue-600 transition-colors duration-300" onClick={() => scrollToSection("roadmap")}>Roadmap</a>
                         </li>
                         <li className="flex items-center justify-center">
-                            <a className="text-white font-semibold text-lg tracking-wide hover:underline" href="">Pictures</a>
-                        </li>
-                        <li className="flex items-center justify-center">
-                            <a className="text-white font-semibold text-lg tracking-wide hover:underline" href="">Contacts</a>
-                        </li>
-                        <li className="flex items-center justify-center">
-                            <a className="text-white font-semibold text-lg tracking-wide hover:underline" href="">Blog</a>
+                            <a className="text-white font-semibold text-sm sm:text-base md:text-lg lg:text-xl tracking-wide hover:text-blue-600 transition-colors duration-300" onClick={() => scrollToSection("projects")}>Projects</a>
                         </li>
                     </ul>
                 </div>
@@ -118,7 +120,7 @@ export default function MainLayout () {
             <div 
                 className={
                     `relative transition-all duration-300 ease-in-out
-                    ${menuOpen ? "scale-90 -translate-y-50 filter brightness-50" : "scale-100 translate-y-0 filter brightness-100"}
+                    ${menuOpen ? "scale-90 -translate-y-100 xs:-translate-y-75 md:-translate-y-40 filter brightness-50 pointer-events-none" : "scale-100 translate-y-0 filter brightness-100 pointer-events-auto"}
                     `
                 }
                 onClick={handleMenuClose}
