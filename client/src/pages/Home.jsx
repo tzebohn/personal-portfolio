@@ -260,6 +260,20 @@ export default function Home () {
                                 {/* Featured Project 1 */}
                                 <FeaturedProjects
                                     project={{
+                                        front: {
+                                            technologies: [
+                                                "React & TailwindCSS",
+                                                "Node.js",
+                                                "Express",
+                                                "MySQL",
+                                                "p-limit (npm package)",
+                                                "Puppeteer"
+                                            ],
+                                            roles: ["Full Stack Development"],
+                                            stats: [
+                                                { label: "TEAM SIZE", value: "1" }
+                                            ]
+                                        },
                                         title: "Stock Scanner",
                                         stats: [
                                             { label: "MARKET DATA", value: "LIVE & CONTINUOUS" },
@@ -281,6 +295,18 @@ export default function Home () {
                                 {/* Featured Project 2 */}
                                 <FeaturedProjects
                                     project={{
+                                        front: {
+                                            technologies: [
+                                                "Phaser",
+                                                "Javascript",
+                                                "HTML & CSS",
+                                                "Github Pages for deployment"
+                                            ],
+                                            roles: ["Backbone Team", "Codebase Maintainer", "UI/UX Designer"],
+                                            stats: [
+                                                { label: "TEAM SIZE", value: "20-30" }
+                                            ]
+                                        },
                                         title: "College Invaders",
                                         stats: [
                                             { label: "GAMEPLAY STATUS", value: "FULLY OPERATIONAL" },
@@ -304,6 +330,19 @@ export default function Home () {
                                 {/* Featured Project 3 */}
                                 <FeaturedProjects
                                     project={{
+                                        front: {
+                                            technologies: [
+                                                "React & TailwindCSS",
+                                                "Node.js & Express",
+                                                "MySQL",
+                                                "WebSockets",
+                                                "AWS & Render for deployment"
+                                            ],
+                                            roles: ["Full Stack Development"],
+                                            stats: [
+                                                { label: "TEAM SIZE", value: "1" }
+                                            ]
+                                        },
                                         title: "Message Board",
                                         stats: [
                                             { label: "MESSAGES", value: "VALIDATED & VERIFIED" },
@@ -326,6 +365,18 @@ export default function Home () {
                                 {/* Featured Project 4 */}
                                 <FeaturedProjects
                                     project={{
+                                        front: {
+                                            technologies: [
+                                                "React & TailwindCSS",
+                                                "Framer Motion for animations",
+                                                "Github Pages for deployment",
+                                                "Public store data API"
+                                            ],
+                                            roles: ["Frontend Development"],
+                                            stats: [
+                                                { label: "TEAM SIZE", value: "1" }
+                                            ]
+                                        },
                                         title: "ShopEasy",
                                         stats: [
                                             { label: "STATUS", value: "ACTIVE" },

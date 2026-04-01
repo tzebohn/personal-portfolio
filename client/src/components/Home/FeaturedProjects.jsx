@@ -17,111 +17,239 @@
  *  - reverse: Ensures a nice alternating pattern between each FeaturedProjects component
  */
 
+import { useState } from "react"
+import { useIsMobile } from "../../hooks/useIsMobile"
+
 export default function FeaturedProjects ({ project, isAvailable, reverse }) {
+    const [showBack, setShowBack] = useState(false) // Tracks whether the back of the project card is shown
+
+    const isMobile = useIsMobile()
+
     return (
         <article className="w-full max-w-[1350px] mx-auto xl:mb-[200px] lg:mb-[150px] md:mb-[120px] mb-20">
-            <div className={`flex flex-col items-center gap-10 text-white ${reverse ? "md:flex-row-reverse" : "md:flex-row"}`}>
-
-                {/* Project card */}
-                <div 
-                    className={`
-                        project-card
-                        flex-1 max-w-[583px]
-                        text-white/90 font-[Orbitron]
-                        border border-[#2596BE]/30
-                        rounded-lg p-6 
-                        bg-black
-                        shadow-lg shadow-[#2596BE]/20
-                        ${isAvailable ? "hover:border-[#2596BE]/60 hover:shadow-xl hover:shadow-[#2596BE]/30 brightness-150" : "grayscale-50"}
-                    `}
-                >
-
-                    <h3
-                        className="
-                            text-[#2596BE]
-                            xl:text-[40px] lg:text-[32px] md:text-[28px] text-2xl
-                            xl:leading-[50px] lg:leading-[42px] leading-8
-                            [text-shadow:0_0_6px_rgba(37,150,190,0.6),0_0_18px_rgba(37,150,190,0.35)]
-                            mb-6 
-                        "
-                    >
-                        {project.title}
-                    </h3>
-
-                    {/* Add project descriptions below here */}
-                    <div className="mb-6 border-l-2 border-[#2596BE]/30 pl-4">
-                        {project.stats.map((stat, index) => (
-                            <p key={index} className="text-xl text-[#2596BE]">
-                                {`${stat.label}: `}<span className="text-white">{stat.value}</span>
-                            </p>
-                        ))}
-                    </div>
-
-                    
-                    <div className="xl:text-2xl md:text-xl text-lg xl:leading-[36px] text-gray-300 mb-8 space-y-2">
-                        <p>
-                            {project.description}
-                        </p>
-                        <ul className="space-y-1 mt-4">
-                            {project.features.map((item, index) => (
-                                <li key={index} className="text-white"><span className="text-[#2596BE]">&gt;</span>{` ${item}`}</li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {isAvailable ? (
-                        <a  
-                            href={project.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="
-                                uppercase overflow-hidden cursor-pointer
-                                border rounded-tl-lg rounded-br-lg border-[#2596BE]
-                                p-2 px-6
-                                text-[#2596BE]
-                                hover:bg-[rgba(37,150,190,0.1)]
-                                hover:shadow-[0_0_15px_rgba(37,150,190,0.4)]
-                                hover:[text-shadow:0_0_8px_rgba(37,150,190,0.8)]
-                                hover:-translate-y-0.5
-                            "
-                            style={{ 
-                                clipPath: `
-                                    polygon(
-                                    10px 0,100% 0,
-                                    100% calc(100% - 10px),
-                                    calc(100% - 10px) 100%,
-                                    0 100%,0 10px)
-                                `
-                            }}
-                        >
-                            {project.title}
-                        </a>
-                    ) : (
-                        <button 
+            <div className={`flex flex-col items-center gap-10 text-white ${reverse ? "lg:flex-row-reverse" : "lg:flex-row"}`}>
+                <div onMouseEnter={() => !isMobile && setShowBack(true)} onMouseLeave={() => !isMobile && setShowBack(false)} className="min-h-[28rem] flex relative w-full max-w-[583px]">
+                    <div className={`grid grid-cols-1 grid-rows-1 w-full h-full transition-transform duration-700 ${showBack ? "rotate-y-180" : ""}`}>
+                        {/* Front of project card */}
+                        <div 
                             className={`
-                                uppercase border
-                                rounded-tl-lg rounded-br-lg
-                                p-2 px-6
-                                overflow-hidden
-                                text-[#ED3F0A]
-                                border-[#ED3F0A]/70
-                                bg-[rgba(237,63,10,0.08)]
-                                cursor-not-allowed
-                                opacity-90
+                                col-start-1 row-start-1
+                                project-card h-full w-full
+                                text-white/90 font-[Orbitron]
+                                border border-[#2596BE]/30
+                                rounded-lg p-6 bg-black
+                                shadow-lg shadow-[#2596BE]/20
+                                transition-opacity duration-300 ease-in-out
+                                ${isAvailable ? "hover:border-[#2596BE]/60 hover:shadow-xl hover:shadow-[#2596BE]/30 brightness-150" : "grayscale-50"}
+                                ${showBack ? "opacity-0 pointer-events-none" : "opacity-100 z-10"}
                             `}
-                            style={{ 
-                                clipPath: `
-                                    polygon(
-                                    10px 0,100% 0,
-                                    100% calc(100% - 10px),
-                                    calc(100% - 10px) 100%,
-                                    0 100%,0 10px)
-                                `
-                            }}
+                            onClick={() => isMobile && setShowBack(true)}
+                            >
+                            {/* --- Your Front Side Content --- */}
+                            <div className="h-full flex flex-col justify-evenly w-full">
+                                <div>
+                                    <h3
+                                        className="
+                                            text-[#2596BE]
+                                            xl:text-[40px] lg:text-[32px] md:text-[28px] text-2xl
+                                            xl:leading-[50px] lg:leading-[42px] leading-8
+                                            [text-shadow:0_0_6px_rgba(37,150,190,0.6),0_0_18px_rgba(37,150,190,0.35)]
+                                            mb-6 
+                                        "
+                                    >
+                                        {project.title}
+                                    </h3>
+
+                                    {/* ... rest of front side UI */}
+                                    <div className="mb-6 border-l-2 border-[#2596BE]/30 pl-4">
+                                        {project.front.stats.map((stat, index) => (
+                                            <p key={index} className="text-xl text-[#2596BE]">
+                                                {`${stat.label}: `}<span className="text-white">{stat.value}</span>
+                                            </p>
+                                        ))}
+                                        <p className="text-xl text-[#2596BE]">
+                                            {`ROLES: `}<span className="text-white">{project.front.roles.join(", ")}</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="mb-4">
+                                    <h4 className="text-xl text-[#2596BE]">Technologies Used:</h4>
+                                    <ul className="list-disc list-inside text-white/80 text-sm space-y-1">
+                                        {project.front.technologies.map((tech, i) => (
+                                            <li key={i}>{tech}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                                {isAvailable ? (
+                                    <a  
+                                        href={project.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="
+                                            self-start
+                                            uppercase overflow-hidden cursor-pointer
+                                            border rounded-tl-lg rounded-br-lg border-[#2596BE]
+                                            p-2 px-6
+                                            text-[#2596BE]
+                                            hover:bg-[rgba(37,150,190,0.1)]
+                                            hover:shadow-[0_0_15px_rgba(37,150,190,0.4)]
+                                            hover:[text-shadow:0_0_8px_rgba(37,150,190,0.8)]
+                                            hover:-translate-y-0.5
+                                        "
+                                        style={{ 
+                                            clipPath: `
+                                                polygon(
+                                                10px 0,100% 0,
+                                                100% calc(100% - 10px),
+                                                calc(100% - 10px) 100%,
+                                                0 100%,0 10px)
+                                            `
+                                        }}
+                                        onClick={e => e.stopPropagation()}
+                                    >
+                                        {project.title}
+                                    </a>
+                                ) : (
+                                    <button 
+                                        className={`
+                                            self-start
+                                            uppercase border
+                                            rounded-tl-lg rounded-br-lg
+                                            p-2 px-6
+                                            overflow-hidden
+                                            text-[#ED3F0A]
+                                            border-[#ED3F0A]/70
+                                            bg-[rgba(237,63,10,0.08)]
+                                            cursor-not-allowed
+                                            opacity-90
+                                        `}
+                                        style={{ 
+                                            clipPath: `
+                                                polygon(
+                                                10px 0,100% 0,
+                                                100% calc(100% - 10px),
+                                                calc(100% - 10px) 100%,
+                                                0 100%,0 10px)
+                                            `
+                                        }}
+                                        onClick={e => e.stopPropagation()}
+                                    >
+                                        🔒 LOCKED
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Back of project card */}
+                        <div 
+                            className={`
+                                col-start-1 row-start-1
+                                project-card h-full w-full
+                                text-white/90 font-[Orbitron]
+                                border border-[#2596BE]/30
+                                rounded-lg p-6 
+                                bg-black
+                                shadow-lg shadow-[#2596BE]/20
+                                transition-opacity duration-300 ease-in-out
+                                ${isAvailable ? "hover:border-[#2596BE]/60 hover:shadow-xl hover:shadow-[#2596BE]/30 brightness-150" : "grayscale-50"}
+                                ${!showBack ? "opacity-0 pointer-events-none" : "opacity-100 z-10"}
+                            `}
+                            onClick={() => isMobile && setShowBack(false)}
                         >
-                            🔒 LOCKED
-                        </button>
-                    )}
+                            <div className="rotate-y-180">
+                                <h3
+                                    className="
+                                        text-[#2596BE]
+                                        xl:text-[40px] lg:text-[32px] md:text-[28px] text-2xl
+                                        xl:leading-[50px] lg:leading-[42px] leading-8
+                                        [text-shadow:0_0_6px_rgba(37,150,190,0.6),0_0_18px_rgba(37,150,190,0.35)]
+                                        mb-6 
+                                    "
+                                >
+                                    {project.title}
+                                </h3>
+
+                                {/* Add project descriptions below here */}
+                                <div className="mb-6 border-l-2 border-[#2596BE]/30 pl-4">
+                                    {project.stats.map((stat, index) => (
+                                        <p key={index} className="text-xl text-[#2596BE]">
+                                            {`${stat.label}: `}<span className="text-white">{stat.value}</span>
+                                        </p>
+                                    ))}
+                                </div>
+
+                                
+                                <div className="xl:text-2xl md:text-xl text-lg xl:leading-[36px] text-gray-300 mb-8 space-y-2">
+                                    <p>
+                                        {project.description}
+                                    </p>
+                                    <ul className="space-y-1 mt-4">
+                                        {project.features.map((item, index) => (
+                                            <li key={index} className="text-white"><span className="text-[#2596BE]">&gt;</span>{` ${item}`}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                                {isAvailable ? (
+                                    <a  
+                                        href={project.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="
+                                            uppercase overflow-hidden cursor-pointer
+                                            border rounded-tl-lg rounded-br-lg border-[#2596BE]
+                                            p-2 px-6
+                                            text-[#2596BE]
+                                            hover:bg-[rgba(37,150,190,0.1)]
+                                            hover:shadow-[0_0_15px_rgba(37,150,190,0.4)]
+                                            hover:[text-shadow:0_0_8px_rgba(37,150,190,0.8)]
+                                            hover:-translate-y-0.5
+                                        "
+                                        style={{ 
+                                            clipPath: `
+                                                polygon(
+                                                10px 0,100% 0,
+                                                100% calc(100% - 10px),
+                                                calc(100% - 10px) 100%,
+                                                0 100%,0 10px)
+                                            `
+                                        }}
+                                        onClick={e => e.stopPropagation()}
+                                    >
+                                        {project.title}
+                                    </a>
+                                ) : (
+                                    <button 
+                                        className={`
+                                            uppercase border
+                                            rounded-tl-lg rounded-br-lg
+                                            p-2 px-6
+                                            overflow-hidden
+                                            text-[#ED3F0A]
+                                            border-[#ED3F0A]/70
+                                            bg-[rgba(237,63,10,0.08)]
+                                            cursor-not-allowed
+                                            opacity-90
+                                        `}
+                                        style={{ 
+                                            clipPath: `
+                                                polygon(
+                                                10px 0,100% 0,
+                                                100% calc(100% - 10px),
+                                                calc(100% - 10px) 100%,
+                                                0 100%,0 10px)
+                                            `
+                                        }}
+                                        onClick={e => e.stopPropagation()}
+                                    >
+                                        🔒 LOCKED
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Video Container*/}
