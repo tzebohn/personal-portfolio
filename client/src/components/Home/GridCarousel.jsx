@@ -1,11 +1,3 @@
-import UIIcon from "../../assets/icons/ui.svg?react";
-import ResponsiveIcon from "../../assets/icons/responsive.svg?react";
-import UxIcon from "../../assets/icons/UX.svg?react";
-import SecurityIcon from "../../assets/icons/security.svg?react";
-import ApiIcon from "../../assets/icons/api.svg?react";
-import DatabaseIcon from "../../assets/icons/database.svg?react";
-import DeployIcon from "../../assets/icons/deploy.svg?react";
-import DevopsIcon from "../../assets/icons/devops.svg?react";
 import { useEffect, useState } from "react";
 
 export default function GridCarousel({ cards }) {
