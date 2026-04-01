@@ -19,9 +19,15 @@ import RoadmapItems from "../components/Home/RoadmapItems";
 import { useEffect, useRef, useState } from "react";
 import { motion, useTransform, useScroll } from "framer-motion"
 import FaqCards from "../components/Home/FaqCards";
-import { FaQ } from "react-icons/fa6";
-import { FaCarSide } from "react-icons/fa";
 import FeaturedProjects from "../components/Home/FeaturedProjects";
+import { FaReact, FaNodeJs } from "react-icons/fa";
+import { RiTailwindCssFill } from "react-icons/ri";
+import { SiVitest, SiVite, SiExpress, SiMysql, SiPrisma } from "react-icons/si";
+import { IoLogoFirebase } from "react-icons/io5";
+import { BiLogoPostgresql } from "react-icons/bi";
+import { useIsMobile } from "../hooks/useIsMobile";
+import SkillsCarousel from "../components/Home/SkillsCarousel";
+import GridCarousel from "../components/Home/GridCarousel";
 
 // Grid Cards to display 
 const cards = [
@@ -67,10 +73,46 @@ const cards = [
     },
 ]
 
+// Skills to display in overview section
+const skills = [
+    {
+        category: "frontend",
+        items: [
+            { Icon: FaReact, name: "React", rating: 4, color: "#61DAFB" },
+            { Icon: RiTailwindCssFill, name: "TailwindCSS", rating: 4, color: "#38B2AC" },
+            { Icon: SiVite, name: "Vite", rating: 2, color: "#646CFF" },
+        ]
+    },
+    {
+        category: "backend",
+        items: [
+            { Icon: FaNodeJs, name: "Node.js", rating: 3, color: "#339933" },
+            { Icon: SiExpress, name: "Express", rating: 3, color: "#ffffff" },
+        ]
+    }, 
+    {
+        category: "database",
+        items: [
+            { Icon: IoLogoFirebase, name: "Firebase", rating: 3, color: "#FFA000" },
+            { Icon: SiMysql, name: "MySQL", rating: 3, color: "#00758F" },
+            { Icon: BiLogoPostgresql, name: "PostgreSQL", rating: 2, color: "#336791" },
+            { Icon: SiPrisma, name: "Prisma", rating: 2, color: "#0C77C0" },
+        ]
+    }, 
+    {
+        category: "testing",
+        items: [
+            { Icon: SiVitest, name: "Vitest", rating: 2, color: "#6E4FF5" },
+        ]
+    }
+]
+
 export default function Home () {
     const [isMdUp, setIsMdUp] = useState(false) // Tracks if current screen width is 768px or greater
 
     const lineScrollRef = useRef(null)      // Tracks the current scroll height for roadmap container
+
+    const isMobile = useIsMobile()            // Custom hook to track if user is on mobile device
 
     /**
      * Checks if current screen width is >= 768px
@@ -109,32 +151,91 @@ export default function Home () {
 
             {/* Main body content */}
             <main>
-                {/* Introduction section */}
-                <section className="bg-[#03050C] pt-4 px-8">
-                    <div className="flex flex-col gap-4">
-                        <div className="flex flex-col gap-4 lg:items-center">
-                            <h1 className="text-white font-bold text-3xl lg:text-5xl tracking-wide">Overview</h1>
-                            <p className="text-gray-500 font-semibold max-w-xl text-sm xs:text-base md:text-lg lg:text-xl lg:text-center leading-relaxed">
-                                I am a Computer Science bachelor's graduate at CUNY Brooklyn College
-                                with a passion for technology and learning. My interests 
-                                include web development, modern programming frameworks,
-                                and Artifical Intelligence. This portfolio highlights my
-                                projects, technical skills, and growth as a developer.
+                {/* Overview section */}
+                <section className="bg-[#03050C] pt-24 pb-8 px-4 sm:px-8 lg:px-12">
+                    <div className="max-w-7xl mx-auto grid grid-cols-1 xl:grid-cols-2 gap-8 xl:gap-10">
+                        <div className="space-y-5">
+                            <h1 className="text-white font-bold text-3xl sm:text-4xl lg:text-5xl tracking-wide">Overview</h1>
+                            <p className="text-gray-400 font-medium text-sm sm:text-base md:text-lg leading-relaxed">
+                                I am a Computer Science bachelor's graduate at CUNY Brooklyn College, with a passion for building modern web experiences.
+                                I enjoy combining clean UI with robust backend systems, and I’m always learning new ways to improve user experience and code quality.
                             </p>
+                            <div className="grid grid-cols-2 gap-3">
+                                <div className="rounded-xl border border-[#2f3a55] bg-[#0b1231]/70 p-4">
+                                    <h3 className="text-[#85cfff] text-xs sm:text-sm font-semibold">Preferred Location</h3>
+                                    <p className="text-gray-300 text-xs sm:text-sm">New York, USA</p>
+                                </div>
+                                <div className="rounded-xl border border-[#2f3a55] bg-[#0b1231]/70 p-4">
+                                    <h3 className="text-[#85cfff] text-xs sm:text-sm font-semibold">Availability</h3>
+                                    <p className="text-gray-300 text-xs sm:text-sm">Open for part-time & full-time</p>
+                                </div>
+                                <div className="rounded-xl border border-[#2f3a55] bg-[#0b1231]/70 p-4">
+                                    <h3 className="text-[#85cfff] text-xs sm:text-sm font-semibold">Education</h3>
+                                    <p className="text-gray-300 text-xs sm:text-sm">Bachelor's in Computer Science</p>
+                                </div>
+                                <div className="rounded-xl border border-[#2f3a55] bg-[#0b1231]/70 p-4">
+                                    <h3 className="text-[#85cfff] text-xs sm:text-sm font-semibold">Role</h3>
+                                    <p className="text-gray-300 text-xs sm:text-sm">Full-Stack Software Engineer</p>
+                                </div>
+                            </div>
                         </div>
+                        
+                        {/* Skills section */}
+                        {isMobile ? (
+                            <SkillsCarousel skills={skills}/>
+                        ) : (
+                        <div className="rounded-2xl border border-[#2f3a55] bg-[#0e162f] p-5 sm:p-8">
+                            <h2 className="text-white font-bold text-xl sm:text-2xl mb-4">Core Skills</h2>
+                            <div className="grid grid-cols-2 gap-4">
+                                {skills.map((category) => (
+                                    <div key={category.category} className="rounded-lg border border-[#2f3a55] bg-[#111b33] p-4">
+                                        <h3 className="text-blue-400 font-semibold capitalize mb-3">{category.category}</h3>
+                                        <div className="grid grid-cols-2 gap-2">
+                                            {category.items.map((skill, idx) => (
+                                                <div key={idx} className="rounded-md border border-[#2f3a55] bg-[#0b1231] p-2 text-center">
+                                                    <skill.Icon className="mx-auto text-2xl sm:text-3xl mb-1" style={{ color: skill.color }} />
+                                                    <p className="text-gray-200 text-xs sm:text-sm font-medium">{skill.name}</p>
+                                                    <div className="mt-1 flex justify-center gap-0.5">
+                                                        {[...Array(5)].map((_, starIndex) => (
+                                                            <span key={starIndex} className={starIndex < skill.rating ? "text-yellow-400" : "text-gray-600"}>
+                                                                ★
+                                                            </span>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        )}
                     </div>
+                </section>
 
-                    {/* Grid layout section */}
-                    <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 text-white mt-48">
-                        {cards.map((card, i) => (
-                            <GridCard
-                                key={i}
-                                Icon={card.Icon}
-                                title={card.title}
-                                description={card.description}
-                            />
-                        ))}
+                {/* What I do section */}
+                <section className="bg-[#03050C] pt-24 px-8">
+                    <div className="flex flex-col space-y-5 text-center">
+                        <h1 className="text-white font-bold text-3xl sm:text-4xl lg:text-5xl tracking-wide">What I do</h1>
+                        <p className="text-gray-500 font-semibold text-sm xs:text-base md:text-lg lg:text-xl lg:text-center leading-relaxed">
+                            I specialize in creating modern, responsive web applications using cutting-edge technologies. My approach combines technical excellence with a focus on user experience.
+                        </p>
                     </div>
+                    {/* Grid layout section */}
+                    {isMobile ? (
+                        <GridCarousel cards={cards}/>
+                    ) : (
+                        <div className="grid grid-cols-3 md:grid-cols-4 text-white mt-48">
+                            {cards.map((card, i) => (
+                                <GridCard
+                                    key={i}
+                                    Icon={card.Icon}
+                                    title={card.title}
+                                    description={card.description}
+                                />
+                            ))}
+                        </div>        
+                    )}
 
                     {/* Vertical divider */}
                     <div className="mt-4 flex items-center justify-center">

@@ -74,7 +74,8 @@ export default function MainLayout () {
         const element = document.getElementById(id)
         if (element) {
             setMenuOpen(false)
-            element.scrollIntoView()
+            const y = element.getBoundingClientRect().top + window.scrollY
+            window.scrollTo({ top: y })
         }
     }
 
