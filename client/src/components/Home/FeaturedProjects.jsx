@@ -74,12 +74,20 @@ export default function FeaturedProjects ({ project, isAvailable, reverse }) {
                                 </div>
 
                                 <div className="mb-4">
-                                    <h4 className="text-xl text-[#2596BE]">Technologies Used:</h4>
-                                    <ul className="list-disc list-inside text-white/80 text-sm space-y-1">
+                                    <h4 className="text-xl text-[#2596BE] mb-3 tracking-wide">
+                                        Technologies Used
+                                    </h4>
+
+                                    <div className="flex flex-wrap gap-2">
                                         {project.front.technologies.map((tech, i) => (
-                                            <li key={i}>{tech}</li>
+                                        <span
+                                            key={i}
+                                            className="px-3 py-1 text-sm border border-[#2596BE]/40 rounded-md text-white/80 tracking-wider"
+                                        >
+                                            {tech}
+                                        </span>
                                         ))}
-                                    </ul>
+                                    </div>
                                 </div>
 
                                 {isAvailable ? (
@@ -109,7 +117,7 @@ export default function FeaturedProjects ({ project, isAvailable, reverse }) {
                                         }}
                                         onClick={e => e.stopPropagation()}
                                     >
-                                        {project.title}
+                                        View Project →
                                     </a>
                                 ) : (
                                     <button 
@@ -223,7 +231,7 @@ export default function FeaturedProjects ({ project, isAvailable, reverse }) {
                                         }}
                                         onClick={e => e.stopPropagation()}
                                     >
-                                        {project.title}
+                                        View Project →
                                     </a>
                                 ) : (
                                     <button 
