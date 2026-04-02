@@ -140,6 +140,11 @@ export default function FeaturedProjects ({ project, isAvailable, reverse }) {
                                     </button>
                                 )}
                             </div>
+                            {/* Let users know they can flip card */}
+                            <div className="flex items-center justify-center gap-2 text-xs text-white/50 mt-auto">
+                                <span>{isMobile ? "Tap" : "Hover"} to flip</span>
+                                <span className="rotate-180">↻</span>
+                            </div>
                         </div>
 
                         {/* Back of project card */}

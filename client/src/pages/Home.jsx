@@ -505,7 +505,7 @@ export default function Home () {
                                 side={"left"}
                                 phase={7}
                                 status={"planned"}
-                                title={"Finally Getting a Job"}
+                                title={"Getting Employed"}
                                 descriptions={[
                                     "Passed interviews, coding challenges, and vibe checks", 
                                     "Successfully landed a job and achieved employed status 🙂", 
