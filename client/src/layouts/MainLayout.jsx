@@ -95,7 +95,14 @@ export default function MainLayout () {
                         "
                     >
                         <li className="flex items-center justify-center">
-                            <a className="text-white font-semibold text-sm sm:text-base md:text-lg lg:text-xl tracking-wide hover:text-blue-600 transition-colors duration-300">Resume</a>
+                            <a 
+                                href="/resume/TzeBohn_Ling_Resume.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-white font-semibold text-sm sm:text-base md:text-lg lg:text-xl tracking-wide hover:text-blue-600 transition-colors duration-300"
+                            >
+                                Resume
+                            </a>
                         </li>
                         <li className="flex items-center justify-center">
                             <a className="text-white font-semibold text-sm sm:text-base md:text-lg lg:text-xl tracking-wide hover:text-blue-600 transition-colors duration-300" onClick={() => scrollToSection("contact")}>Contact</a>
