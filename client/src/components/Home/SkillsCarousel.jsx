@@ -1,46 +1,47 @@
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 
 export default function SkillsCarousel ({ skills}) {
-    const [currentSlide, setCurrentSlide] = useState(0) // Current slide index for mobile slideshow
-    const [touchStart, setTouchStart] = useState(0)
-    const [touchEnd, setTouchEnd] = useState(0)
+    const [currentSlide, setCurrentSlide] = useState(0)
+    const [touchStart, setTouchStart] = useState(null)
+    const [touchEnd, setTouchEnd] = useState(null)
     const intervalRef = useRef(null)
+    const hasMultipleSlides = skills.length > 1
+
+    const startTimer = useCallback(() => {
+        if (!hasMultipleSlides) return
+        clearInterval(intervalRef.current)
+        intervalRef.current = setInterval(() => {
+            setCurrentSlide((prev) => (prev + 1) % skills.length)
+        }, 5000)
+    }, [hasMultipleSlides, skills.length])
 
     const nextSlide = () => {
         setCurrentSlide((prev) => (prev + 1) % skills.length)
-        resetTimer()
+        startTimer()
     }
+
     const prevSlide = () => {
         setCurrentSlide((prev) => (prev - 1 + skills.length) % skills.length)
-        resetTimer()
+        startTimer()
     }
+
     const goToSlide = (index) => {
         setCurrentSlide(index)
-        resetTimer()
+        startTimer()
     }
 
-    // Reset the auto-advance timer
-    const resetTimer = () => {
-        clearInterval(intervalRef.current)
-        intervalRef.current = setInterval(nextSlide, 5000)
-    }
-
-    // Auto-advance every 5 seconds
     useEffect(() => {
-        intervalRef.current = setInterval(nextSlide, 5000)
+        startTimer()
         return () => clearInterval(intervalRef.current)
-    }, [])
+    }, [startTimer])
 
-    // Handle touch start
     const handleTouchStart = (e) => {
-        setTouchEnd(0)
+        setTouchEnd(null)
         setTouchStart(e.targetTouches[0].clientX)
     }
 
-    // Handle touch move
     const handleTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX)
 
-    // Handle touch end
     const handleTouchEnd = () => {
         if (!touchStart || !touchEnd) return
         const distance = touchStart - touchEnd
@@ -50,53 +51,103 @@ export default function SkillsCarousel ({ skills}) {
         if (isRightSwipe) prevSlide()
     }
 
-    // Keep slideshow height stable by choosing the largest category height
+    if (!skills.length) return null
+
+    const activeSlide = currentSlide % skills.length
     const maxItems = Math.max(...skills.map((category) => category.items.length))
-    const rowHeight = 120 // approx per row height in px (card + spacing)
+    const rowHeight = 112
     const minContentHeight = Math.ceil(maxItems / 2) * rowHeight
+    const currentCategory = skills[activeSlide]
+    const progressWidth = `${((activeSlide + 1) / skills.length) * 100}%`
 
     return (
-        <div className="rounded-2xl border border-[#2f3a55] bg-[#0e162f] p-5 sm:p-8">
-            <h2 className="text-white font-bold text-xl sm:text-2xl mb-4">Core Skills</h2>
-            <div className="relative">
+        <div className="rounded-2xl border border-[#2f3a55] bg-gradient-to-b from-[#121d3d] to-[#0a1228] p-5 shadow-[0_14px_45px_rgba(2,6,23,0.45)] sm:p-8">
+            <h2 className="text-white font-bold text-xl sm:text-2xl">Core Skills</h2>
+            <p className="mt-1 text-xs font-medium tracking-wide text-slate-300">Browse by category and swipe between groups</p>
+
+            <div className="mt-4 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
+                {skills.map((category, index) => (
+                    <button
+                        key={category.category}
+                        onClick={() => goToSlide(index)}
+                        className={`w-full min-w-0 whitespace-nowrap rounded-full border px-3 py-1.5 text-center text-xs font-semibold capitalize transition sm:w-auto sm:min-w-fit ${
+                            index === activeSlide
+                                ? "border-[#62c6ff] bg-[#0b2c53] text-[#a8e3ff]"
+                                : "border-[#2f3a55] bg-[#0d1733] text-slate-300"
+                        }`}
+                        aria-label={`Go to ${category.category} skills`}
+                    >
+                        {category.category}
+                    </button>
+                ))}
+            </div>
+
+            <div className="relative mt-3">
                 <div 
-                    className="rounded-lg border border-[#2f3a55] bg-[#111b33] p-4"
+                    className="rounded-xl border border-[#2f3a55] bg-[#101a36] p-4"
                     style={{ minHeight: `${minContentHeight}px` }}
                     onTouchStart={handleTouchStart}
                     onTouchMove={handleTouchMove}
                     onTouchEnd={handleTouchEnd}
                 >
-                    <h3 className="text-blue-400 font-semibold capitalize mb-3">{skills[currentSlide].category}</h3>
-                    <div className="grid grid-cols-2 gap-2">
-                        {skills[currentSlide].items.map((skill, idx) => (
-                            <div key={idx} className="rounded-md border border-[#2f3a55] bg-[#0b1231] p-2 text-center">
-                                <skill.Icon className="mx-auto text-2xl sm:text-3xl mb-1" style={{ color: skill.color }} />
-                                <p className="text-gray-200 text-xs sm:text-sm font-medium">{skill.name}</p>
-                                <div className="mt-1 flex justify-center gap-0.5">
-                                    {[...Array(5)].map((_, starIndex) => (
-                                        <span key={starIndex} className={starIndex < skill.rating ? "text-yellow-400" : "text-gray-600"}>
+                    <div className="mb-3 flex items-center justify-between gap-3">
+                        <h3 className="text-sm font-semibold capitalize tracking-wide text-[#8ad7ff]">{currentCategory.category}</h3>
+                        <span className="rounded-full border border-[#2f3a55] bg-[#0a142f] px-2.5 py-1 text-[11px] font-semibold text-slate-300">
+                            {currentCategory.items.length} tools
+                        </span>
+                    </div>
+
+                    <div key={currentCategory.category} className="grid grid-cols-2 gap-2.5">
+                        {currentCategory.items.map((skill) => (
+                            <div key={skill.name} className="rounded-lg border border-[#324368] bg-[#0b1330] px-2.5 py-3 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
+                                <skill.Icon className="mx-auto mb-2 text-[1.6rem]" style={{ color: skill.color }} />
+                                <p className="text-xs font-semibold text-gray-100">{skill.name}</p>
+                                <div className="mt-2 flex justify-center gap-0.5">
+                                    {[...Array(5)].map((_, level) => (
+                                        <span
+                                            key={level}
+                                            className={`text-sm leading-none ${level < skill.rating ? "text-[#fbbf24]" : "text-[#31466f]"}`}
+                                        >
                                             ★
                                         </span>
                                     ))}
                                 </div>
+                                <p className="mt-1 text-[10px] font-medium tracking-wide text-slate-400">{skill.rating}/5 proficiency</p>
                             </div>
                         ))}
                     </div>
                 </div>
-                {/* Dots indicator */}
-                <div className="flex justify-center mt-4 space-x-2">
-                    {skills.map((_, index) => (
-                        <button
-                            key={index}
-                            onClick={() => goToSlide(index)}
-                            className={`w-1 h-1 rounded-full ${index === currentSlide ? 'bg-blue-400' : 'bg-gray-600'}`}
-                        />
-                    ))}
+
+                <div className="mt-4 flex items-center gap-3">
+                    <button
+                        onClick={prevSlide}
+                        disabled={!hasMultipleSlides}
+                        aria-label="Previous skill category"
+                        className="rounded-full border border-[#35507a] bg-[#0d2143] px-3 py-2 text-sm font-semibold text-[#b5e8ff] transition hover:bg-[#15315f] disabled:cursor-not-allowed disabled:opacity-45"
+                    >
+                        ←
+                    </button>
+
+                    <div className="flex-1">
+                        <div className="h-1.5 rounded-full bg-[#1a2747]">
+                            <div className="h-full rounded-full bg-gradient-to-r from-[#5ec6ff] to-[#2f82ff] transition-all duration-300" style={{ width: progressWidth }} />
+                        </div>
+                        <p className="mt-1 text-center text-[11px] font-semibold text-slate-300">{activeSlide + 1} of {skills.length}</p>
+                    </div>
+
+                    <button
+                        onClick={nextSlide}
+                        disabled={!hasMultipleSlides}
+                        aria-label="Next skill category"
+                        className="rounded-full border border-[#35507a] bg-[#0d2143] px-3 py-2 text-sm font-semibold text-[#b5e8ff] transition hover:bg-[#15315f] disabled:cursor-not-allowed disabled:opacity-45"
+                    >
+                        →
+                    </button>
                 </div>
-                <div className="flex justify-between mt-4 text-xs text-slate-200">
-                    <button onClick={prevSlide} className="px-3 py-1 bg-white/10 border border-white/15 rounded text-white/70 hover:text-white/90 hover:bg-white/15">←</button>
-                    <button onClick={nextSlide} className="px-3 py-1 bg-white/10 border border-white/15 rounded text-white/70 hover:text-white/90 hover:bg-white/15">→</button>
-                </div>
+
+                {hasMultipleSlides && (
+                    <p className="mt-2 text-center text-[11px] font-medium tracking-wide text-slate-400">Tip: swipe left or right to move quickly</p>
+                )}
             </div>
         </div>
     )

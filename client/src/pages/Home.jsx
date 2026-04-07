@@ -17,7 +17,7 @@ import faqBackground from "../assets/images/faqbackground.jpg"
 import "./home.css"
 import RoadmapItems from "../components/Home/RoadmapItems";
 import { useEffect, useRef, useState } from "react";
-import { motion, useTransform, useScroll } from "framer-motion"
+import { motion as Motion, useTransform, useScroll } from "framer-motion"
 import FaqCards from "../components/Home/FaqCards";
 import FeaturedProjects from "../components/Home/FeaturedProjects";
 import { FaReact, FaNodeJs } from "react-icons/fa";
@@ -141,6 +141,7 @@ export default function Home () {
         [0, isMdUp ? .9 : 1], 
         [0, 1]
     )
+    const totalSkillCount = skills.reduce((total, category) => total + category.items.length, 0)
 
     return (
         <>
@@ -184,28 +185,55 @@ export default function Home () {
                         {isMobile ? (
                             <SkillsCarousel skills={skills}/>
                         ) : (
-                        <div className="rounded-2xl border border-[#2f3a55] bg-[#0e162f] p-5 sm:p-8">
-                            <h2 className="text-white font-bold text-xl sm:text-2xl mb-4">Core Skills</h2>
-                            <div className="grid grid-cols-2 gap-4">
+                        <div className="relative overflow-hidden rounded-2xl border border-[#2f3a55] bg-gradient-to-b from-[#121d3d] via-[#0f1835] to-[#0a1228] p-6 shadow-[0_14px_45px_rgba(2,6,23,0.45)] sm:p-8">
+                            <div className="pointer-events-none absolute -right-10 -top-12 h-44 w-44 rounded-full bg-[#3a8dff]/20 blur-3xl" />
+                            <div className="pointer-events-none absolute -bottom-14 -left-10 h-40 w-40 rounded-full bg-[#1ecad3]/15 blur-3xl" />
+
+                            <div className="relative mb-5 flex items-start justify-between gap-4">
+                                <div>
+                                    <h2 className="text-white font-bold text-xl sm:text-2xl">Core Skills</h2>
+                                    <p className="mt-1 text-sm font-medium text-slate-300">A quick snapshot of my main tools across the stack</p>
+                                </div>
+                            </div>
+
+                            <div className="relative grid grid-cols-2 gap-4">
                                 {skills.map((category) => (
-                                    <div key={category.category} className="rounded-lg border border-[#2f3a55] bg-[#111b33] p-4">
-                                        <h3 className="text-blue-400 font-semibold capitalize mb-3">{category.category}</h3>
-                                        <div className="grid grid-cols-2 gap-2">
-                                            {category.items.map((skill, idx) => (
-                                                <div key={idx} className="rounded-md border border-[#2f3a55] bg-[#0b1231] p-2 text-center">
-                                                    <skill.Icon className="mx-auto text-2xl sm:text-3xl mb-1" style={{ color: skill.color }} />
-                                                    <p className="text-gray-200 text-xs sm:text-sm font-medium">{skill.name}</p>
-                                                    <div className="mt-1 flex justify-center gap-0.5">
+                                    <article
+                                        key={category.category}
+                                        className="rounded-xl border border-[#364a72] bg-[linear-gradient(180deg,#112046_0%,#0d1632_100%)] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_8px_24px_rgba(2,8,25,0.35)]"
+                                    >
+                                        <div className="mb-3 flex items-center justify-between">
+                                            <div>
+                                                <h3 className="text-[#8ad7ff] font-semibold capitalize tracking-wide">{category.category}</h3>
+                                                <div className="mt-1 h-0.5 w-10 rounded-full bg-linear-to-r from-[#67cbff] to-transparent" />
+                                            </div>
+                                            <span className="rounded-full border border-[#2f3a55] bg-[#0a132c] px-2.5 py-1 text-[11px] font-semibold text-slate-300">
+                                                {category.items.length} {category.items.length === 1 ? "skill" : "skills"}
+                                            </span>
+                                        </div>
+
+                                        <div className="grid grid-cols-2 gap-2.5">
+                                            {category.items.map((skill) => (
+                                                <div key={skill.name} className="rounded-lg border border-[#324368] bg-[linear-gradient(180deg,#0d1838_0%,#0a1330_100%)] px-2.5 py-3 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+                                                    <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-full border border-[#2e466f] bg-[#0a1e43] shadow-[0_0_20px_rgba(55,130,255,0.15)]">
+                                                        <skill.Icon className="text-[1.3rem]" style={{ color: skill.color }} />
+                                                    </div>
+                                                    <p className="text-xs font-semibold text-gray-100">{skill.name}</p>
+                                                    <div className="mt-2 flex justify-center gap-0.5">
                                                         {[...Array(5)].map((_, starIndex) => (
-                                                            <span key={starIndex} className={starIndex < skill.rating ? "text-yellow-400" : "text-gray-600"}>
+                                                            <span
+                                                                key={starIndex}
+                                                                className={`text-sm leading-none ${starIndex < skill.rating ? "text-[#fbbf24]" : "text-[#31466f]"}`}
+                                                            >
                                                                 ★
                                                             </span>
                                                         ))}
                                                     </div>
+                                                    <p className="mt-1 text-[10px] font-medium tracking-wide text-slate-400">{skill.rating}/5 proficiency</p>
                                                 </div>
                                             ))}
                                         </div>
-                                    </div>
+                                    </article>
                                 ))}
                             </div>
                         </div>
@@ -420,7 +448,7 @@ export default function Home () {
                     {/* Timeline content cards */}
                     <div className="relative max-w-7xl mx-auto px-4">
                         {/* Vertical line */}
-                        <motion.div 
+                        <Motion.div 
                             style={{ scaleY: lineScale }}
                             className="absolute top-0 left-4 md:left-1/2 md:-translate-x-1/2 h-full w-[4px] bg-[#2596BE] origin-top"
                         />
