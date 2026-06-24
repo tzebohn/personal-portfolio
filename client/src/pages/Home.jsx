@@ -22,9 +22,10 @@ import FaqCards from "../components/Home/FaqCards";
 import FeaturedProjects from "../components/Home/FeaturedProjects";
 import { FaReact, FaNodeJs } from "react-icons/fa";
 import { RiTailwindCssFill } from "react-icons/ri";
-import { SiVitest, SiVite, SiExpress, SiMysql, SiPrisma } from "react-icons/si";
+import { SiVitest, SiVite, SiExpress, SiMysql, SiPrisma, SiReactquery, SiPostman } from "react-icons/si";
 import { IoLogoFirebase } from "react-icons/io5";
 import { BiLogoPostgresql } from "react-icons/bi";
+import { DiRedis } from "react-icons/di";
 import { useIsMobile } from "../hooks/useIsMobile";
 import SkillsCarousel from "../components/Home/SkillsCarousel";
 import GridCarousel from "../components/Home/GridCarousel";
@@ -82,14 +83,16 @@ const skills = [
         items: [
             { Icon: FaReact, name: "React", rating: 4, color: "#61DAFB" },
             { Icon: RiTailwindCssFill, name: "TailwindCSS", rating: 4, color: "#38B2AC" },
+            { Icon: SiReactquery, name: "TanStack Query", rating: 3, color: "#FF4154" },
             { Icon: SiVite, name: "Vite", rating: 2, color: "#646CFF" },
         ]
     },
     {
         category: "backend",
         items: [
-            { Icon: FaNodeJs, name: "Node.js", rating: 3, color: "#339933" },
-            { Icon: SiExpress, name: "Express", rating: 3, color: "#ffffff" },
+            { Icon: FaNodeJs, name: "Node.js", rating: 4, color: "#339933" },
+            { Icon: SiExpress, name: "Express", rating: 4, color: "#ffffff" },
+            { Icon: DiRedis, name: "Redis", rating: 3, color: "#D82C20" }
         ]
     }, 
     {
@@ -105,6 +108,7 @@ const skills = [
         category: "testing",
         items: [
             { Icon: SiVitest, name: "Vitest", rating: 2, color: "#6E4FF5" },
+            { Icon: SiPostman, name: "Postman", rating: 3, color: "#FF6C37" },
         ]
     }
 ]

@@ -60,7 +60,7 @@ export default function SkillsCarousel ({ skills}) {
     const rowGap = 10
     const contentHeaderHeight = 52
     const totalRows = Math.ceil(maxItems / cardsPerRow)
-    const minContentHeight = contentHeaderHeight + (totalRows * cardHeight) + ((totalRows - 1) * rowGap)
+    const minContentHeight = contentHeaderHeight + 21 + (totalRows * cardHeight) + ((totalRows - 1) * rowGap)
     const currentCategory = skills[activeSlide]
     const progressWidth = `${((activeSlide + 1) / skills.length) * 100}%`
 
