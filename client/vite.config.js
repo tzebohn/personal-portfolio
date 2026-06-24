@@ -11,4 +11,14 @@ export default defineConfig({
     svgr(),
   ],
   assetsInclude: ["**/*.glb"],
+  build: {
+    chunkSizeWarningLimit: 1100,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          three: ['three', '@react-three/fiber', '@react-three/drei'],
+        },
+      },
+    },
+  },
 })

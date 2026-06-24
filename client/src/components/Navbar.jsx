@@ -86,7 +86,7 @@ export default function Navbar ({ menuOpen, setMenuOpen, showProjects, setShowPr
                     className="fixed top-0 left-0 w-full z-50 flex justify-between items-center p-3 sm:p-4 md:px-8 lg:px-12 gap-4"
                 >
                     {/* Logo that navigates back to root */}
-                    <NavLink to="/" className="group cursor-pointer flex-shrink-0" onClick={handleNavigate}>
+                    <NavLink to="/" className="group cursor-pointer shrink-0" onClick={handleNavigate}>
                         <svg className={logoSize} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 498 127" fill="none">
                             <g className="logo-stroke">
                                 <path d="M49.44 91.76L8.16 71.12V61.52L49.44 40.88V49.232L19.68 63.824C18.464 64.4 17.312 64.912 16.224 65.36C15.2 65.744 14.432 66 13.92 66.128C14.496 66.256 15.328 66.544 16.416 66.992C17.504 67.376 18.592 67.856 19.68 68.432L49.44 83.12V91.76ZM139.605 98V35.696H120.405V27.824H167.445V35.696H148.245V98H139.605ZM183.728 98V27.92H192.368V90.128H224.048V98H183.728Z" fill="white"/>
@@ -141,7 +141,7 @@ export default function Navbar ({ menuOpen, setMenuOpen, showProjects, setShowPr
                             >   
                                 <div 
                                 className={`
-                                    absolute top-[-6px] sm:top-[-8px] right-[-2px] sm:right-[-3px] bg-[#4e4d6e] text-black rounded-full flex items-center justify-center
+                                    absolute -top-1.5 sm:-top-2 -right-0.5 sm:-right-0.75 bg-[#4e4d6e] text-black rounded-full flex items-center justify-center
                                     transition-transform duration-300 ease-out
                                     group-hover:-translate-y-1
                                     ${badgeSize}

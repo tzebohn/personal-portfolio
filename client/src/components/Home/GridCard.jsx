@@ -5,8 +5,9 @@
  * Displays an SVG icon, a title, and a description.
  */
 
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect, useLayoutEffect } from "react"
 import { useInputDevice } from "../../contexts/inputDevice/useInputDevice"
+import "../styles.css"
 
 export default function GridCard ({ Icon, title, description }) {
     const iconRef = useRef()                        // Tracks SVG icon
@@ -15,53 +16,40 @@ export default function GridCard ({ Icon, title, description }) {
     const { isTouch } = useInputDevice()            // Tracks user input device
     
     /**
-     * Function draws SVG icon when user hovers on (PC)
-     * or clicks (Mobile) on container.
+     * Pre-calculate path lengths and initialize CSS variables on mount.
+     * This avoids recalculating lengths on every hover.
      */
-    const triggerDraw = () => {
-        if (!iconRef.current) return
+    useLayoutEffect(() => {
+        if (!iconRef.current) return;
 
         const paths = iconRef.current.querySelectorAll(
             "path, line, circle, rect, polyline, polygon"
-        )
+        );
 
         paths.forEach((p) => {
             const length = p.getTotalLength();
-
-            // Step 1: hide instantly icon (no animation)
-            p.style.transition = "none";
-            p.style.strokeDasharray = length;
-            p.style.strokeDashoffset = length;
-
-            // Step 2: force browser reflow
-            p.getBoundingClientRect();
-
-            // Step 3: animate draw
-            p.style.transition = "stroke-dashoffset 1s ease-out";
-            p.style.strokeDashoffset = 0;
+            p.style.setProperty("--path-length", length);
+            p.classList.add("grid-card-path");
         });
-    }
+    }, []);
 
     /**
-     * Function resets SVG CSS styles when mouse exits container
+     * Sync the 'active' class with the state to trigger the CSS animation.
+     * This avoids forced reflows (getBoundingClientRect).
      */
-    const resetDraw = () => {
-        const paths = iconRef.current.querySelectorAll(
-            "path, line, circle, rect, polyline, polygon"
-        )
+    useEffect(() => {
+        if (!iconRef.current) return;
 
+        const paths = iconRef.current.querySelectorAll(".grid-card-path");
         paths.forEach((p) => {
-            p.style.transition = "none"
-            p.style.strokeDasharray = ""
-            p.style.strokeDashoffset = ""
-        })
-    }
+            p.classList.toggle("active", active);
+        });
+    }, [active]);
 
     /**
      * Function gets called when cursor enters container
      */
     const handleHover = () => {
-        triggerDraw()
         setActive(true)
     }
 
@@ -69,7 +57,6 @@ export default function GridCard ({ Icon, title, description }) {
      * Function gets called when cursor exits container
      */
     const handleLeave = () => {
-        resetDraw()
         setActive(false)
     }
 
@@ -78,20 +65,13 @@ export default function GridCard ({ Icon, title, description }) {
      * via touchscreen
      */
     const handleMobileClick = () => {
-        // Check if already displaying details
-        if (!active) {
-            triggerDraw()
-            setActive(true)
-        } else {
-            resetDraw()
-            setActive(false)            
-        }
+        setActive(!active)
     }
 
     return (
         <div
             className={`
-                h-[260px]
+                h-65
                 sm:h-auto
                 p-6  
                 transition-colors duration-300
@@ -105,6 +85,7 @@ export default function GridCard ({ Icon, title, description }) {
             <div 
                 className="
                     flex flex-col gap-4 items-center
+                    transform-gpu
                     transition-transform duration-300 ease-out 
                     group-hover:-translate-y-2
                 "
@@ -113,7 +94,7 @@ export default function GridCard ({ Icon, title, description }) {
                 <div>
                     <Icon 
                         ref={iconRef}
-                        className={`border-0 transition-transform duration-100 delay-75 ${active && "-translate-y-1"}`}
+                        className={`border-0 transition-transform duration-100 delay-75 ${active ? "grid-card-active" : ""}`}
                     />
                 </div>
 
@@ -122,7 +103,7 @@ export default function GridCard ({ Icon, title, description }) {
                     className={`
                         text-center text-gray-500 font-medium tracking-wide
                         ${active && "text-white font-semibold"}
-                        transition-transform duration-300 delay-75 group-hover:-translate-y-1
+                        transition-transform duration-300 delay-75
                     `}
                 >
                     {title}
@@ -133,7 +114,7 @@ export default function GridCard ({ Icon, title, description }) {
                     className={`
                         text-gray-500 font-medium
                         ${active ? "opacity-100" : "opacity-0"} text-center
-                        transition-transform duration-300 delay-100 group-hover:-translate-y-1
+                        transition-transform duration-300 delay-100
                     `}>
                     {description}
                 </p>

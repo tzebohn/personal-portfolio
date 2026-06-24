@@ -55,13 +55,17 @@ export default function SkillsCarousel ({ skills}) {
 
     const activeSlide = currentSlide % skills.length
     const maxItems = Math.max(...skills.map((category) => category.items.length))
-    const rowHeight = 112
-    const minContentHeight = Math.ceil(maxItems / 2) * rowHeight
+    const cardsPerRow = 2
+    const cardHeight = 132
+    const rowGap = 10
+    const contentHeaderHeight = 52
+    const totalRows = Math.ceil(maxItems / cardsPerRow)
+    const minContentHeight = contentHeaderHeight + (totalRows * cardHeight) + ((totalRows - 1) * rowGap)
     const currentCategory = skills[activeSlide]
     const progressWidth = `${((activeSlide + 1) / skills.length) * 100}%`
 
     return (
-        <div className="rounded-2xl border border-[#2f3a55] bg-gradient-to-b from-[#121d3d] to-[#0a1228] p-5 shadow-[0_14px_45px_rgba(2,6,23,0.45)] sm:p-8">
+        <div className="rounded-2xl border border-[#2f3a55] bg-linear-to- from-[#121d3d] to-[#0a1228] p-5 shadow-[0_14px_45px_rgba(2,6,23,0.45)] sm:p-8">
             <h2 className="text-white font-bold text-xl sm:text-2xl">Core Skills</h2>
             <p className="mt-1 text-xs font-medium tracking-wide text-slate-300">Browse by category and swipe between groups</p>
 
@@ -99,9 +103,9 @@ export default function SkillsCarousel ({ skills}) {
 
                     <div key={currentCategory.category} className="grid grid-cols-2 gap-2.5">
                         {currentCategory.items.map((skill) => (
-                            <div key={skill.name} className="rounded-lg border border-[#324368] bg-[#0b1330] px-2.5 py-3 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
+                            <div key={skill.name} className="h-33 rounded-lg border border-[#324368] bg-[#0b1330] px-2.5 py-3 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
                                 <skill.Icon className="mx-auto mb-2 text-[1.6rem]" style={{ color: skill.color }} />
-                                <p className="text-xs font-semibold text-gray-100">{skill.name}</p>
+                                <p className="mx-auto flex min-h-7.5 items-center justify-center text-xs font-semibold leading-tight text-gray-100">{skill.name}</p>
                                 <div className="mt-2 flex justify-center gap-0.5">
                                     {[...Array(5)].map((_, level) => (
                                         <span
@@ -130,7 +134,7 @@ export default function SkillsCarousel ({ skills}) {
 
                     <div className="flex-1">
                         <div className="h-1.5 rounded-full bg-[#1a2747]">
-                            <div className="h-full rounded-full bg-gradient-to-r from-[#5ec6ff] to-[#2f82ff] transition-all duration-300" style={{ width: progressWidth }} />
+                            <div className="h-full rounded-full bg-linear-to-r from-[#5ec6ff] to-[#2f82ff] transition-all duration-300" style={{ width: progressWidth }} />
                         </div>
                         <p className="mt-1 text-center text-[11px] font-semibold text-slate-300">{activeSlide + 1} of {skills.length}</p>
                     </div>

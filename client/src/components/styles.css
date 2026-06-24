@@ -105,3 +105,22 @@ button:active .middle {
 .see-projects {
   animation: slide-in-right 0.2s ease-out forwards;
 }
+
+@keyframes redraw {
+  0% {
+    stroke-dasharray: var(--path-length, 1000);
+    stroke-dashoffset: var(--path-length, 1000);
+  }
+  100% {
+    stroke-dasharray: var(--path-length, 1000);
+    stroke-dashoffset: 0;
+  }
+}
+
+.grid-card-path {
+  will-change: stroke-dashoffset;
+}
+
+.grid-card-path.active {
+  animation: redraw 1s ease-out forwards;
+}

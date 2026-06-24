@@ -1,4 +1,4 @@
-import Hero from "../components/Hero/Hero";
+import { lazy, Suspense } from "react";
 import UIIcon from "../assets/icons/ui.svg?react";
 import ResponsiveIcon from "../assets/icons/responsive.svg?react"
 import UxIcon from "../assets/icons/UX.svg?react"
@@ -28,6 +28,8 @@ import { BiLogoPostgresql } from "react-icons/bi";
 import { useIsMobile } from "../hooks/useIsMobile";
 import SkillsCarousel from "../components/Home/SkillsCarousel";
 import GridCarousel from "../components/Home/GridCarousel";
+
+const Hero = lazy(() => import("../components/Hero/Hero"));
 
 // Grid Cards to display 
 const cards = [
@@ -141,13 +143,14 @@ export default function Home () {
         [0, isMdUp ? .9 : 1], 
         [0, 1]
     )
-    const totalSkillCount = skills.reduce((total, category) => total + category.items.length, 0)
 
     return (
         <>
             {/* Hero Banner */}
             <section className="h-screen">
-                <Hero /> 
+                <Suspense fallback={<div className="h-screen bg-[#03050C]" />}>
+                    <Hero /> 
+                </Suspense>
             </section>
 
             {/* Main body content */}
@@ -185,7 +188,7 @@ export default function Home () {
                         {isMobile ? (
                             <SkillsCarousel skills={skills}/>
                         ) : (
-                        <div className="relative overflow-hidden rounded-2xl border border-[#2f3a55] bg-gradient-to-b from-[#121d3d] via-[#0f1835] to-[#0a1228] p-6 shadow-[0_14px_45px_rgba(2,6,23,0.45)] sm:p-8">
+                        <div className="relative overflow-hidden rounded-2xl border border-[#2f3a55] bg-linear-to- from-[#121d3d] via-[#0f1835] to-[#0a1228] p-6 shadow-[0_14px_45px_rgba(2,6,23,0.45)] sm:p-8">
                             <div className="pointer-events-none absolute -right-10 -top-12 h-44 w-44 rounded-full bg-[#3a8dff]/20 blur-3xl" />
                             <div className="pointer-events-none absolute -bottom-14 -left-10 h-40 w-40 rounded-full bg-[#1ecad3]/15 blur-3xl" />
 
@@ -450,7 +453,7 @@ export default function Home () {
                         {/* Vertical line */}
                         <Motion.div 
                             style={{ scaleY: lineScale }}
-                            className="absolute top-0 left-4 md:left-1/2 md:-translate-x-1/2 h-full w-[4px] bg-[#2596BE] origin-top"
+                            className="absolute top-0 left-4 md:left-1/2 md:-translate-x-1/2 h-full w-1 bg-[#2596BE] origin-top"
                         />
 
                         {/* Roadmap items */}
