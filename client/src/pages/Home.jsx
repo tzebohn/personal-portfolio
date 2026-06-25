@@ -10,6 +10,7 @@ import DevopsIcon from "../assets/icons/devops.svg?react"
 import GridCard from "../components/Home/GridCard";
 import ProjectsTransition from "../components/Home/ProjectsTransition";
 import StockMarketImg from "../assets/images/stockscanner.jpg"
+import UbercutsImg from "../assets/images/haircut.png"
 import CollegeInvadersImg from "../assets/images/collegeinvaders.png"
 import MessageboardImg from "../assets/images/messageboard.png"
 import ShopeasyImg from "../assets/images/shopeasy.png"
@@ -304,7 +305,7 @@ export default function Home () {
                                                 "p-limit (npm package)",
                                                 "Puppeteer"
                                             ],
-                                            roles: ["Full Stack Development"],
+                                            roles: ["Full Stack"],
                                             stats: [
                                                 { label: "TEAM SIZE", value: "1" }
                                             ]
@@ -328,6 +329,43 @@ export default function Home () {
                                 />
 
                                 {/* Featured Project 2 */}
+                                <FeaturedProjects
+                                    project={{
+                                        front: {
+                                            technologies: [
+                                                "React & TailwindCSS",
+                                                "Node & Express",
+                                                "Google MediaPipe",
+                                                "Redis",
+                                                "Prisma & PostgresSQL",
+                                                "TanStackQuery",
+                                                "Firebase",
+                                                "Typescript"
+                                            ],
+                                            roles: ["Full Stack"],
+                                            stats: [{ label: "TEAM SIZE", value: "2" }]
+                                        },
+                                        title: "UberCuts",
+                                        stats: [
+                                            { label: "AUTH", value: "SECURE & ROLE-BASED" },
+                                            { label: "AI INTEGRATION", value: "MEDIAPIPE TASK-VISION" }
+                                        ],
+                                        description: "A centralized haircut app for businesses and freelancers with Uber",
+                                        features: [
+                                            "Role based login/signup system",
+                                            "Rate limiting with Redis caching",
+                                            "Face-Shape analysis with Google's Mediapipe"
+                                        ],
+                                        media: {
+                                            type: "image",
+                                            src: UbercutsImg
+                                        }
+                                    }}
+                                    isAvailable={false}
+                                    reverse
+                                />
+
+                                {/* Featured Project 3 */}
                                 <FeaturedProjects
                                     project={{
                                         front: {
@@ -359,10 +397,9 @@ export default function Home () {
                                         href: "https://tzebohn.github.io/collegeinvaders/"
                                     }}
                                     isAvailable={true}
-                                    reverse
                                 />
 
-                                {/* Featured Project 3 */}
+                                {/* Featured Project 4 */}
                                 <FeaturedProjects
                                     project={{
                                         front: {
@@ -395,9 +432,10 @@ export default function Home () {
                                         href: "https://odin-message-board-3i88.onrender.com"
                                     }}
                                     isAvailable={true}
+                                    reverse
                                 />
 
-                                {/* Featured Project 4 */}
+                                {/* Featured Project 5 */}
                                 <FeaturedProjects
                                     project={{
                                         front: {
@@ -429,7 +467,6 @@ export default function Home () {
                                         href: "https://tzebohn.github.io/Odin-Shopping-Cart/"
                                     }}
                                     isAvailable={true}
-                                    reverse
                                 />
                             </div>
                         </div>
