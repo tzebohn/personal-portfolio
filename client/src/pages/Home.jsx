@@ -101,7 +101,7 @@ const skills = [
             { Icon: IoLogoFirebase, name: "Firebase", rating: 3, color: "#FFA000" },
             { Icon: SiMysql, name: "MySQL", rating: 3, color: "#00758F" },
             { Icon: BiLogoPostgresql, name: "PostgreSQL", rating: 2, color: "#336791" },
-            { Icon: SiPrisma, name: "Prisma", rating: 2, color: "#0C77C0" },
+            { Icon: SiPrisma, name: "Prisma", rating: 3, color: "#0C77C0" },
         ]
     }, 
     {
