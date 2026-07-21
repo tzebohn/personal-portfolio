@@ -128,7 +128,7 @@ export default function MainLayout () {
             <div 
                 className={
                     `relative transition-all duration-300 ease-in-out
-                    ${menuOpen ? "scale-90 -translate-y-100 xs:-translate-y-75 md:-translate-y-40 filter brightness-50 pointer-events-none" : "scale-100 translate-y-0 filter brightness-100 pointer-events-auto"}
+                    ${menuOpen ? "scale-90 -translate-y-100 xs:-translate-y-75 md:-translate-y-70 filter brightness-50 pointer-events-none" : "scale-100 translate-y-0 filter brightness-100 pointer-events-auto"}
                     `
                 }
                 onClick={handleMenuClose}

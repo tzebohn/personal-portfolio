@@ -12,6 +12,8 @@ import StockscannerImg from "../assets/images/stockscanner.jpg"
 import MessageboardImg from "../assets/images/messageboard.png"
 import CollegeInvadersImg from "../assets/images/collegeinvaders.png"
 import ShopEasyImg from "../assets/images/shopeasy.png"
+import HandyAndyImg from "../assets/images/handyandy.png"
+import UberCutsImg from "../assets/images/haircut.png"
 
 export default function ProjectGallery ({ onClose }) {
     return (
@@ -35,15 +37,37 @@ export default function ProjectGallery ({ onClose }) {
                 <div className="grid grid-cols-12 w-full mb-16 lg:mb-0">
                     <div className="col-span-12 pr-12 lg:pr-0 lg:col-span-6">
                         <ProjectCards
-                            title={"Stock Scanner"}
+                            title={"HandyANDY"}
                             description={"Full-Stack"}
-                            href={"#"}
-                            image={StockscannerImg}
+                            href={"handy-andy-nine.vercel.app"}
+                            image={HandyAndyImg}
                         />
                     </div>
                 </div>
 
                 {/* Project 2: Right Aligned */}
+                <div className="grid grid-cols-12 w-full mb-16 lg:mb-0">
+                    <div className="col-span-12 pl-12 lg:pl-0 lg:col-start-7 lg:col-span-6 lg:-mt-40">
+                        <ProjectCards
+                            title={"Stock Scanner"}
+                            description={"Full-Stack"}
+                            image={StockscannerImg}
+                        />
+                    </div>
+                </div>
+
+                {/* Project 3: Left Aligned */}
+                <div className="grid grid-cols-12 w-full mb-16 lg:mb-0">
+                    <div className="col-span-12 pr-12 lg:pr-0 lg:col-span-6">
+                        <ProjectCards
+                            title={"UberCuts"}
+                            description={"Full-Stack"}
+                            image={UberCutsImg}
+                        />
+                    </div>
+                </div>
+
+                {/* Project 4: Right Aligned */}
                 <div className="grid grid-cols-12 w-full mb-16 lg:mb-0">
                     <div className="col-span-12 pl-12 lg:pl-0 lg:col-start-7 lg:col-span-6 lg:-mt-40">
                         <ProjectCards
@@ -55,7 +79,7 @@ export default function ProjectGallery ({ onClose }) {
                     </div>
                 </div>
 
-                {/* Project 3: Left Aligned */}
+                {/* Project 5: Left Aligned */}
                 <div className="grid grid-cols-12 w-full mb-16 lg:mb-0">
                     <div className="col-span-12 pr-12 lg:pr-0 lg:col-span-6 lg:-mt-40">
                         <ProjectCards
@@ -67,7 +91,7 @@ export default function ProjectGallery ({ onClose }) {
                     </div>
                 </div>
 
-                {/* Project 4: Right Aligned */}
+                {/* Project 6: Right Aligned */}
                 <div className="grid grid-cols-12 w-full mb-16 lg:mb-0">
                     <div className="col-span-12 pl-12 lg:pl-0 lg:col-start-7 lg:col-span-6 lg:-mt-40">
                         <ProjectCards

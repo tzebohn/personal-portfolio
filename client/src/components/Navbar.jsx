@@ -147,7 +147,7 @@ export default function Navbar ({ menuOpen, setMenuOpen, showProjects, setShowPr
                                     ${badgeSize}
                                 `}
                                 >
-                                    <span className="text-white font-semibold">4</span>
+                                    <span className="text-white font-semibold">6</span>
                                 </div>
                                 <svg className={iconSize} stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M11.063 1.456a1.749 1.749 0 0 1 1.874 0l8.383 5.316a1.751 1.751 0 0 1 0 2.956l-8.383 5.316a1.749 1.749 0 0 1-1.874 0L2.68 9.728a1.751 1.751 0 0 1 0-2.956Zm1.071 1.267a.25.25 0 0 0-.268 0L3.483 8.039a.25.25 0 0 0 0 .422l8.383 5.316a.25.25 0 0 0 .268 0l8.383-5.316a.25.25 0 0 0 0-.422Z"></path>
