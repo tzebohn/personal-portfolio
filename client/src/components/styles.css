@@ -30,33 +30,40 @@
           drop-shadow(0 0 12px rgba(43,160,255,0.5));
 }
 
-button:hover .top {
-  transform: translateX(2px);
-}
-
-button:hover .bottom {
-  transform: translateX(2px);
-}
-
-button:active .middle {
-  fill: #2BA0FF;
-}
-
-.top, .bottom {
-    transition: transform 0.25s ease;
-}
-
-.close-btn line {
-  transform-origin: 50% 50%;
+.nav-toggle {
   transition: transform 0.3s ease;
 }
 
-.close-btn:active .left {
-  transform: rotate(-60deg) translateY(-8px);
+.nav-toggle .hamburger-line {
+  transform-origin: 12px 12px;
+  transition:
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.2s ease;
 }
 
-.close-btn:active .right {
-  transform: rotate(60deg) translateY(8px);
+.nav-toggle.open .top {
+  transform: rotate(45deg) translateY(6px);
+}
+
+.nav-toggle.open .middle {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.nav-toggle.open .bottom {
+  transform: rotate(-45deg) translateY(-6px);
+}
+
+button:hover .nav-toggle:not(.open) .top {
+  transform: translateX(2px);
+}
+
+button:hover .nav-toggle:not(.open) .bottom {
+  transform: translateX(2px);
+}
+
+button:active .nav-toggle:not(.open) .middle {
+  fill: #2BA0FF;
 }
 
 @keyframes slideInFromRight {
