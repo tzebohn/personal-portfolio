@@ -157,15 +157,13 @@ export default function Footer () {
                             </a>
 
                             {/* Instagram link */}
-                            <a
-                                href="#"
-                                target="_blank"
-                                rel="noopener noreferrer"
+                            <button
+                                type="button"
                                 className={`${anchorStyles}`}
                                 aria-label="Follow my Instagram"
                             >
                                 <InstaIcon className={`${iconStyles}`}/>
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
