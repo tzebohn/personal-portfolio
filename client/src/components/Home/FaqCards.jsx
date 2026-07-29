@@ -1,36 +1,77 @@
-/**
- * FaqCards component
- * 
- * Displays frequently asked questions in a card format
- * 
- * props:
- * - title (String): The frequently asked question
- * - description (String): The response to the question
- */
+import { motion, AnimatePresence } from "framer-motion";
+import { IoMdArrowDropdown } from "react-icons/io";
 
-import { useState } from "react";
-import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
+export default function FaqCards({ id, title, description, isOpen, onToggle }) {
+  return (
+    <div
+      className={`
+        rounded-xl border transition-all duration-300
+        ${isOpen
+          ? "border-[#2596BE]/40 bg-[#0e1424] shadow-[0_0_20px_rgba(37,150,190,0.08)]"
+          : "border-gray-700/30 bg-[#080c18] hover:border-gray-600/50 hover:bg-[#0b101f]"
+        }
+      `}
+    >
+      <h3>
+        <button
+          id={`faq-header-${id}`}
+          type="button"
+          onClick={onToggle}
+          aria-expanded={isOpen}
+          aria-controls={`faq-panel-${id}`}
+          className="
+            w-full flex justify-between items-center gap-4
+            text-white px-5 py-4 sm:px-6 sm:py-5
+            cursor-pointer text-left
+            transition-colors duration-200
+            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2596BE]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#080c18] focus-visible:rounded-xl
+            rounded-xl
+          "
+        >
+          <span
+            className={`
+              font-semibold tracking-wide transition-colors duration-200
+              text-sm sm:text-base leading-snug
+              ${isOpen ? "text-white" : "text-white/80"}
+            `}
+          >
+            {title}
+          </span>
 
-export default function FaqCards ({ title, description }) {
-    const [showDetails, setShowDetails] = useState(false)
+          <motion.span
+            animate={{ rotate: isOpen ? 180 : 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className={`
+              shrink-0 text-lg transition-colors duration-200
+              ${isOpen ? "text-[#2596BE]" : "text-[#2596BE]/50"}
+            `}
+          >
+            <IoMdArrowDropdown />
+          </motion.span>
+        </button>
+      </h3>
 
-    return (
-        <div>
-            <button
-                onClick={() => setShowDetails(prev => !prev)} 
-                className={`w-full flex justify-between items-center gap-2 text-white bg-gradient-to-br from-gray-800/90 to-gray-900/90 border border-gray-700/60 transition-all duration-300 ease-out hover:border-gray-600 hover:bg-gray-800/90 active:scale-[0.98] p-4 px-5 cursor-pointer ${showDetails ? "rounded-t-lg" : "rounded-lg"}`}
-            >
-                <span className="font-bold tracking-wider text-base sm:text-xl text-start">{title}</span>
-                <div className={`text-xl transition-transform duration-300 ${showDetails ? "rotate-180": "rotate-0"}`}>
-                    {!showDetails && < IoMdArrowDropdown />}
-                    {showDetails && < IoMdArrowDropup />}
-                </div>
-            </button>
-            {showDetails && (
-                <div className="bg-gray-900 border border-t-0 border-gray-700/60 px-5 py-4 rounded-b-lg animate-fadeIn">
-                    <p className="text-gray-200 text-sm sm:text-base font-semibold tracking-wide leading-7">{description}</p>
-                </div>
-            )}
-        </div>
-    )
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            id={`faq-panel-${id}`}
+            role="region"
+            aria-labelledby={`faq-header-${id}`}
+            key="content"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="overflow-hidden"
+          >
+            <div className="px-5 sm:px-6 pb-5 sm:pb-6 pt-3 border-t border-[#2596BE]/10">
+              <p className="text-gray-300 text-sm sm:text-base leading-relaxed tracking-wide">
+                {description}
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
 }

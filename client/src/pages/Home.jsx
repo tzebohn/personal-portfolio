@@ -119,6 +119,7 @@ const skills = [
 
 export default function Home () {
     const [isMdUp, setIsMdUp] = useState(false) // Tracks if current screen width is 768px or greater
+    const [activeFaq, setActiveFaq] = useState(null) // Tracks which FAQ is currently expanded
 
     const lineScrollRef = useRef(null)      // Tracks the current scroll height for roadmap container
 
@@ -486,63 +487,53 @@ export default function Home () {
                     {/* Grayed out overlay */}
                     <div className="absolute inset-0 bg-black/50"/>
 
-                    <div className="relative flex justify-center items-center max-w-7xl mx-auto py-20">
-                        <div className="">
-                            <h1 
-                                className="
-                                    text-white/90 text-xl xs:text-4xl sm:text-5xl 
-                                    tracking-[0.3em] font-[Orbitron]
-                                    text-center uppercase font-bold 
-                                    transition-all duration-300
-                                    drop-shadow-[0_0_8px_rgba(37,150,190,0.25)]
-                                    glow-text py-10 mb-10
-                                " 
-                                >
-                                    Frequently Asked Questions
-                            </h1>
+                    <div className="relative w-full max-w-7xl mx-auto py-20 px-4">
+                        <h1
+                            className="
+                                text-white/90 text-xl xs:text-4xl sm:text-5xl
+                                tracking-[0.3em] font-[Orbitron]
+                                text-center uppercase font-bold
+                                transition-all duration-300
+                                drop-shadow-[0_0_8px_rgba(37,150,190,0.25)]
+                                glow-text py-10 mb-10
+                            "
+                        >
+                            Frequently Asked Questions
+                        </h1>
 
-                            {/* Questions section */}
-                            <div className="flex flex-col gap-8 p-4 md:max-w-5xl md:mx-auto">
+                        {/* Questions section */}
+                        <div className="flex flex-col gap-4 md:max-w-3xl md:mx-auto">
+                            {[
+                                {
+                                    title: "How do you pronounce your name?",
+                                    description: "I know my name can be a little tricky at first glance — it's pronounced [Tea-zz Bohn]. Like John but with a B."
+                                },
+                                {
+                                    title: "Who are you and what do you do?",
+                                    description: "Self-taught Full Stack Web Developer and CUNY Brooklyn College CS graduate. I primarily work with React and Node.js, with experience in authentication, authorization, databases, deployment, and testing."
+                                },
+                                {
+                                    title: "What technologies do you work with?",
+                                    description: "React, Next.js, Vite, TailwindCSS, Javascript, Typescript, HTML & CSS, TanStackQuery, Firebase, Node.js, Express, Axios, Prisma, Redis, SQL, AWS, Render, Git, etc."
+                                },
+                                {
+                                    title: "What makes you different from others in your field?",
+                                    description: "One of my strongest traits is how adaptable and motivated I am. In the fast evolving field of software engineering with AI, staying flexible and continuously learning is crucial. Therefore, I study to be a generalist, where I focus on the underlying concepts behind commonly used tools, rather than just syntax (which can easily be done by AI). I find it more important to know what tools are available and when to apply them."
+                                },
+                                {
+                                    title: "Do you have any experience with AI",
+                                    description: "Yes, I've been enjoying the use of TUIs like OpenCode and Codex. With OpenCode I am able to experiment with lots of different models including lightweight local LLMs like Gemma 4."
+                                }
+                            ].map((faq, index) => (
                                 <FaqCards
-                                    title={"How do you pronounce your name?"}
-                                    description={"I know my name can be a little tricky at first glance — it's pronounced [Tea-zz Bohn]. Like John but with a B."} 
+                                    key={index}
+                                    id={index}
+                                    title={faq.title}
+                                    description={faq.description}
+                                    isOpen={activeFaq === index}
+                                    onToggle={() => setActiveFaq(activeFaq === index ? null : index)}
                                 />
-                                <FaqCards
-                                    title={"Who are you and what do you do?"}
-                                    description={`
-                                        I am a self-taught Full Stack Web Dev. I primarily work with React and Node.js,
-                                        and I've been spending a lot of time building applications after graduating college.
-                                        `
-                                    }
-                                />
-                                <FaqCards
-                                    title={"What technologies do you work with?"}
-                                    description={`
-                                        React, TailwindCSS, Javascript, Typescript, HTML & CSS, TanStackQuery, Firebase, 
-                                        Node.js, Express, Axios, Prisma, Redis, SQL, AWS, Render, Git, etc.
-                                        `
-                                    } 
-                                />
-                                <FaqCards
-                                    title={"What makes you different from others in your field?"}
-                                    description={`
-                                        I'd say one of my strongest traits is how adaptable and motivated I am. In the fast 
-                                        evolving field of software engineering with AI, staying flexible and continuously
-                                        learning is crucial. Therefore, I study to be a generalist, where I focus on the underlying
-                                        concepts behind commonly used tools, rather than just syntax (which can easily be done by AI). 
-                                        I find it more important to know what tools are available and when to apply them.
-                                        `
-                                    }
-                                />
-                                <FaqCards
-                                    title={"Do you have any experience with AI"}
-                                    description={`
-                                        Yes, I've been enjoying the use of TUIs like OpenCode and Codex. With OpenCode I am
-                                        able to experiment with lots of different models including lightweight local LLMs like Gemma 4.
-                                        `
-                                    } 
-                                />
-                            </div>
+                            ))}
                         </div>
                     </div>
                 </section>
