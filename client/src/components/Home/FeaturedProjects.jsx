@@ -144,7 +144,7 @@ export default function FeaturedProjects ({ project, isAvailable, reverse }) {
                                         }}
                                         onClick={e => e.stopPropagation()}
                                     >
-                                        🔒 LOCKED
+                                        🔒 PRIVATE
                                     </button>
                                 )}
                             </div>
@@ -257,7 +257,7 @@ export default function FeaturedProjects ({ project, isAvailable, reverse }) {
                                         }}
                                         onClick={e => e.stopPropagation()}
                                     >
-                                        🔒 LOCKED
+                                        🔒 PRIVATE
                                     </button>
                                 )}
                             </div>
