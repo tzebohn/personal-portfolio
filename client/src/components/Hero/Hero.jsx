@@ -6,71 +6,55 @@
 
 import heroBg from "../../assets/images/background.jpg"
 import TypingText from "./TypingText"
-import { useState, useRef, useEffect } from "react"
+import { useState } from "react"
 import { Canvas } from "@react-three/fiber"
 import AstralParticles from "./AstralParticles"
+import { FaEnvelope, FaFilePdf, FaGithub, FaLinkedin } from "react-icons/fa6"
 
 export default function Hero () {
-    const heroRef = useRef(null)
-    const buttonRef = useRef(null)
-    const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
     const [buttonOffset, setButtonOffset] = useState({ x: 0, y: 0 })
-    const [isMouseInHero, setIsMouseInHero] = useState(false)
+    const [isTrackingResume, setIsTrackingResume] = useState(false)
 
     /**
-     * Attach mouse listeners to hero container on mount
+     * Create a subtle chase effect only while the cursor is inside the Resume button.
      */
-    useEffect(() => {
-        const hero = heroRef.current
-        if (!hero) return
-
-        const handleMouseMove = (e) => {
-            setMousePos({ x: e.clientX, y: e.clientY })
-        }
-
-        const handleMouseEnter = () => {
-            setIsMouseInHero(true)
-        }
-
-        const handleMouseLeave = () => {
-            setIsMouseInHero(false)
-            // Reset button position when cursor leaves hero section
-            setButtonOffset({ x: 0, y: 0 })
-        }
-
-        hero.addEventListener("mousemove", handleMouseMove)
-        hero.addEventListener("mouseenter", handleMouseEnter)
-        hero.addEventListener("mouseleave", handleMouseLeave)
-
-        return () => {
-            hero.removeEventListener("mousemove", handleMouseMove)
-            hero.removeEventListener("mouseenter", handleMouseEnter)
-            hero.removeEventListener("mouseleave", handleMouseLeave)
-        }
-    }, [])
-
-    /**
-     * Create a subtle chase effect for the Let's Connect button
-     * Only when mouse is inside the hero section
-     */
-    useEffect(() => {
-        if (!buttonRef.current || !isMouseInHero) return
-
-        const buttonRect = buttonRef.current.getBoundingClientRect()
+    const handleResumeMouseMove = (e) => {
+        const buttonRect = e.currentTarget.getBoundingClientRect()
         const buttonCenterX = buttonRect.left + buttonRect.width / 2
         const buttonCenterY = buttonRect.top + buttonRect.height / 2
 
         // Calculate distance from button to cursor
-        const distX = mousePos.x - buttonCenterX
-        const distY = mousePos.y - buttonCenterY
+        const distX = e.clientX - buttonCenterX
+        const distY = e.clientY - buttonCenterY
 
         // Subtle chase effect - only move 15% of the distance
         const offsetX = distX * 0.15
         const offsetY = distY * 0.5
 
         setButtonOffset({ x: offsetX, y: offsetY })
-    }, [mousePos, isMouseInHero])
+    }
 
+    const handleResumeMouseEnter = (e) => {
+        setIsTrackingResume(true)
+        handleResumeMouseMove(e)
+    }
+
+    const handleResumeMouseLeave = () => {
+        setIsTrackingResume(false)
+        setButtonOffset({ x: 0, y: 0 })
+    }
+
+    const secondaryButtonStyles = `
+        inline-flex items-center justify-center gap-2
+        rounded-full px-5 py-3
+        border border-white/20 bg-white/5
+        text-white font-semibold text-sm sm:text-base
+        hover:border-blue-500/70 hover:bg-blue-600/15
+        hover:shadow-[0_0_15px_rgba(37,150,190,0.3)]
+        transition-all duration-300 ease-out
+        active:scale-95
+        pointer-events-auto
+    `
 
     return (
         <section className="relative w-full h-screen overflow-hidden pointer-events-none touch-action-none">
@@ -131,45 +115,86 @@ export default function Hero () {
             {/* Hero text and connect button */}
             <div className="relative z-10 h-full max-w-7xl mx-auto px-6 flex items-center justify-center lg:justify-start">
                 <div className="text-center lg:text-left lg:pl-8">
-                    <div className="max-w-md mx-auto lg:mx-0 text-white">
+                    <div className="max-w-2xl mx-auto lg:mx-0 text-white">
                         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
                             Hi, I'm 
                             <span className="text-blue-600"> TzeBohn</span>
                         </h1>
 
-                        <p className="mt-4 text-base sm:text-lg text-white/80 font-semibold font-mono">
+                        <p className="mt-4 text-xl sm:text-2xl lg:text-3xl text-white font-semibold leading-snug">
+                            Full-Stack Developer seeking Entry-Level & Internship Opportunities
+                        </p>
+
+                        <p className="mt-3 text-sm sm:text-base text-white/80 font-semibold font-mono">
                             <TypingText
-                                text="Software Engineer · Web Developer · Builder"
+                                text="React | Vite | Next.js | Node.js | TypeScript | PostgreSQL"
                                 speed={45}
                             />
                         </p>
 
-                        {/* Connect Button */}
-                        <div ref={heroRef}>
+                        <p className="mt-5 text-sm sm:text-base leading-7 text-white/75 max-w-xl mx-auto lg:mx-0">
+                            I build responsive, data-driven web applications with clean user experiences and practical full-stack architecture.
+                        </p>
+
+                        {/* Recruiter CTAs */}
+                        <div className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-3">
                             <a 
-                                ref={buttonRef}
-                                href="https://forms.gle/yqccyh2pZwnyPuHY6"
+                                href="/resume/TzeBohn_Ling_Resume.pdf"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="
                                     inline-flex items-center justify-center gap-2
-                                    mt-8
-                                    border border-blue-600
+                                    border border-blue-500 bg-blue-600/20
                                     rounded-full px-6 py-3
                                     text-white font-semibold text-sm sm:text-base
+                                    shadow-[0_0_20px_rgba(37,150,190,0.25)]
                                     hover:bg-blue-600/20
                                     hover:shadow-[0_0_15px_rgba(37,150,190,0.4)]
                                     transition-all duration-300 ease-out
                                     active:scale-95
                                     pointer-events-auto
                                 "
+                                onMouseEnter={handleResumeMouseEnter}
+                                onMouseMove={handleResumeMouseMove}
+                                onMouseLeave={handleResumeMouseLeave}
                                 style={{
                                     transform: `translate(${buttonOffset.x}px, ${buttonOffset.y}px)`,
-                                    transition: "transform 0.1s ease-out"
+                                    transition: isTrackingResume 
+                                        ? "transform 0.1s ease-out" 
+                                        : "transform 0.28s cubic-bezier(0.22, 1, 0.36, 1)"
                                 }}
-                                aria-label="Connect with me"
+                                aria-label="View my resume"
                             >
-                                <span>Let's Connect</span>
+                                <FaFilePdf className="h-4 w-4" />
+                                <span>Resume</span>
+                            </a>
+                            <a
+                                href="https://github.com/tzebohn"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={secondaryButtonStyles}
+                                aria-label="View my GitHub"
+                            >
+                                <FaGithub className="h-4 w-4" />
+                                <span>GitHub</span>
+                            </a>
+                            <a
+                                href="https://www.linkedin.com/in/tzebohn-ling-100a992b1/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={secondaryButtonStyles}
+                                aria-label="Connect with me on LinkedIn"
+                            >
+                                <FaLinkedin className="h-4 w-4" />
+                                <span>LinkedIn</span>
+                            </a>
+                            <a
+                                href="mailto:bohnling@gmail.com"
+                                className={secondaryButtonStyles}
+                                aria-label="Email me"
+                            >
+                                <FaEnvelope className="h-4 w-4" />
+                                <span>Email</span>
                             </a>
                         </div>
                     </div>
