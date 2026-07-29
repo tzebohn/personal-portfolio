@@ -467,7 +467,7 @@ export default function Home () {
                                             type: "image",
                                             src: MessageboardImg
                                         },
-                                        href: "https://odin-message-board-3i88.onrender.com"
+                                        href: "https://github.com/tzebohn/Odin-message-board"
                                     }}
                                     isAvailable={true}
                                 />
