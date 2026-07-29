@@ -64,7 +64,7 @@ const cards = [
     {
         Icon: DeployIcon,
         title: "Deployment",
-        description: "I deploy and host web applications on modern plaforms, ensuring they are fast, reliable, and accessible.",
+        description: "I deploy and host web applications on modern platforms, ensuring they are fast, reliable, and accessible.",
     },
     {
         Icon: DevopsIcon,
@@ -598,7 +598,7 @@ export default function Home () {
                                     "Developed a wavefront algorithm to calculate the most optimal path for the robot",
                                     "Studied the fundamentals of robotics, focused on sensors like infrared laser, camera and bumpers", 
                                     "Programmed custom algorithms in C++ to enable robot navigation and obstacle avoidance",
-                                    "Integrated sensor data for real-time decison-making"
+                                    "Integrated sensor data for real-time decision-making"
                                 ]}
                             />
 
