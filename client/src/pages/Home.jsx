@@ -165,7 +165,7 @@ export default function Home () {
             {/* Main body content */}
             <main>
                 {/* Overview section */}
-                <section className="bg-[#03050C] pt-24 pb-8 px-4 sm:px-8 lg:px-12">
+                <section className="bg-[#03050C] pt-24 pb-16 sm:pb-20 md:pb-28 lg:pb-36 px-4 sm:px-8 lg:px-12">
                     <div className="max-w-7xl mx-auto grid grid-cols-1 xl:grid-cols-2 gap-8 xl:gap-10">
                         <div className="space-y-5">
                             <h1 className="text-white font-bold text-3xl sm:text-4xl lg:text-5xl tracking-wide">Overview</h1>
@@ -244,37 +244,6 @@ export default function Home () {
                         </div>
                         )}
                     </div>
-                </section>
-
-                {/* What I do section */}
-                <section className="bg-[#03050C] pt-24 px-8">
-                    <div className="flex flex-col space-y-5 text-center">
-                        <h1 className="text-white font-bold text-3xl sm:text-4xl lg:text-5xl tracking-wide">What I do</h1>
-                        <p className="text-gray-500 font-semibold text-sm xs:text-base md:text-lg lg:text-xl lg:text-center leading-relaxed">
-                            I specialize in creating modern, responsive web applications using cutting-edge technologies. My approach combines technical excellence with a focus on user experience.
-                        </p>
-                    </div>
-                    {/* Grid layout section */}
-                    {isMobile ? (
-                        <GridCarousel cards={cards}/>
-                    ) : (
-                        <div className="grid grid-cols-3 md:grid-cols-4 text-white mt-48">
-                            {cards.map((card, i) => (
-                                <GridCard
-                                    key={i}
-                                    Icon={card.Icon}
-                                    title={card.title}
-                                    description={card.description}
-                                />
-                            ))}
-                        </div>        
-                    )}
-
-                    {/* Vertical divider */}
-                    <div className="mt-4 flex items-center justify-center">
-                        <div className="w-0.5 h-40 bg-gray-700"/>
-                    </div>
-
                 </section>
 
                 {/* Project highlights */}
@@ -501,6 +470,37 @@ export default function Home () {
                     </div>
                 </section>
 
+                {/* What I do section */}
+                <section className="bg-[#03050C] pt-24 px-8">
+                    <div className="flex flex-col space-y-5 text-center">
+                        <h1 className="text-white font-bold text-3xl sm:text-4xl lg:text-5xl tracking-wide">What I do</h1>
+                        <p className="text-gray-500 font-semibold text-sm xs:text-base md:text-lg lg:text-xl lg:text-center leading-relaxed">
+                            I specialize in creating modern, responsive web applications using cutting-edge technologies. My approach combines technical excellence with a focus on user experience.
+                        </p>
+                    </div>
+                    {/* Grid layout section */}
+                    {isMobile ? (
+                        <GridCarousel cards={cards}/>
+                    ) : (
+                        <div className="grid grid-cols-3 md:grid-cols-4 text-white mt-48">
+                            {cards.map((card, i) => (
+                                <GridCard
+                                    key={i}
+                                    Icon={card.Icon}
+                                    title={card.title}
+                                    description={card.description}
+                                />
+                            ))}
+                        </div>        
+                    )}
+
+                    {/* Vertical divider */}
+                    <div className="mt-4 flex items-center justify-center">
+                        <div className="w-0.5 h-40 bg-gray-700"/>
+                    </div>
+
+                </section>
+                
                 {/* FAQ Section */}
                 <section className="relative min-h-screen flex items-center justify-center">
                     {/* Background image */}

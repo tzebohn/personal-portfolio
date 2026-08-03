@@ -22,7 +22,7 @@ export default function ProjectsTransition() {
     // Darkens the container to black
     const darkness = useTransform(
         scrollYProgress,
-        [0.4, 0.52, 0.7],
+        [0.2, 0.45, 0.7],
         [0, 0.5, 1]
     );
     
@@ -34,7 +34,7 @@ export default function ProjectsTransition() {
                 className="relative min-h-[600px] h-[80vh]"
             >   
                 {/* Possible colors #161c44 #0a092d #1e1d25 */}
-                <div className="absolute inset-0 bg-[#1e1d25]" />
+                <div className="absolute inset-0 bg-[#03050C]" />
 
                 <motion.div
                     className="absolute inset-0 bg-black"
