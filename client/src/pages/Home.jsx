@@ -308,6 +308,11 @@ export default function Home () {
                                             roles: ["Full-Stack"],
                                             stats: [
                                                 { label: "TEAM SIZE", value: "2" }
+                                            ],
+                                            accomplishments: [
+                                                "Built a secure admin dashboard with protected routes for managing customer inquiries.",
+                                                "Implemented Redis-based IP rate limiting to help prevent abuse and excessive requests.",
+                                                "Added honeypot spam detection to reduce automated bot submissions and improve form security."
                                             ]
                                         },
                                         title: "HandyANDY",
@@ -344,7 +349,12 @@ export default function Home () {
                                                 "TypeScript"
                                             ],
                                             roles: ["Full-Stack"],
-                                            stats: [{ label: "TEAM SIZE", value: "2" }]
+                                            stats: [{ label: "TEAM SIZE", value: "2" }],
+                                            accomplishments: [
+                                                "Built a secure role-based access control system supporting users, providers, moderators, and administrators.",
+                                                "Developed a custom face shape analysis feature using Google's Face Landmarker Vision Task.",
+                                                "Integrated TanStack Query to optimize data fetching, caching, and overall application performance."
+                                            ]
                                         },
                                         title: "UberCuts",
                                         stats: [
@@ -381,6 +391,11 @@ export default function Home () {
                                             roles: ["Full-Stack"],
                                             stats: [
                                                 { label: "TEAM SIZE", value: "1" }
+                                            ],
+                                            accomplishments: [
+                                                "Built a continuous monitoring system that scans over 3,000+ ticker symbols for newly published news articles in near real time.",
+                                                "Designed a polished UI with instant notifications and audio alerts to keep users informed as soon as new articles are detected.",
+                                                "Implemented bot avoidance techniques using randomized short-lived cached tokens, rotating user agents, and exponential backoff delays to improve reliability and reduce detection."
                                             ]
                                         },
                                         title: "Stock Scanner",
@@ -415,6 +430,11 @@ export default function Home () {
                                             roles: ["Backbone Team", "Codebase Maintainer", "UI/UX Designer"],
                                             stats: [
                                                 { label: "TEAM SIZE", value: "20-30" }
+                                            ],
+                                            accomplishments: [
+                                                "Developed a polished, responsive UI/UX for a classic Space Invaders game using Phaser 3.",
+                                                "Refactored the codebase into reusable, modular components to improve maintainability and scalability.",
+                                                "Collaborated closely with the QA, Documentation, and Specifications teams to align gameplay features with project requirements and ensure a high-quality user experience."
                                             ]
                                         },
                                         title: "College Invaders",
@@ -451,6 +471,11 @@ export default function Home () {
                                             roles: ["Full-Stack"],
                                             stats: [
                                                 { label: "TEAM SIZE", value: "1" }
+                                            ],
+                                            accomplishments: [
+                                                "Built a real-time messaging system using WebSockets for instant communication between users.",
+                                                "Implemented profanity filtering with leo-profanity to help maintain a clean and user-friendly chat experience.",
+                                                "Designed and structured a MySQL database schema to efficiently store and manage chat messages."
                                             ]
                                         },
                                         title: "Message Board",

@@ -90,63 +90,17 @@ export default function FeaturedProjects ({ project, isAvailable, reverse }) {
                                     </div>
                                 </div>
 
-                                {isAvailable ? (
-                                    <a  
-                                        href={project.href}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="
-                                            self-start
-                                            uppercase overflow-hidden cursor-pointer
-                                            border rounded-tl-lg rounded-br-lg border-[#2596BE]
-                                            p-2 px-6
-                                            text-[#2596BE]
-                                            hover:bg-[rgba(37,150,190,0.1)]
-                                            hover:shadow-[0_0_15px_rgba(37,150,190,0.4)]
-                                            hover:[text-shadow:0_0_8px_rgba(37,150,190,0.8)]
-                                            hover:-translate-y-0.5
-                                        "
-                                        style={{ 
-                                            clipPath: `
-                                                polygon(
-                                                10px 0,100% 0,
-                                                100% calc(100% - 10px),
-                                                calc(100% - 10px) 100%,
-                                                0 100%,0 10px)
-                                            `
-                                        }}
-                                        onClick={e => e.stopPropagation()}
-                                    >
-                                        View Project →
-                                    </a>
-                                ) : (
-                                    <button 
-                                        className={`
-                                            self-start
-                                            uppercase border
-                                            rounded-tl-lg rounded-br-lg
-                                            p-2 px-6
-                                            overflow-hidden
-                                            text-[#ED3F0A]
-                                            border-[#ED3F0A]/70
-                                            bg-[rgba(237,63,10,0.08)]
-                                            cursor-not-allowed
-                                            opacity-90
-                                        `}
-                                        style={{ 
-                                            clipPath: `
-                                                polygon(
-                                                10px 0,100% 0,
-                                                100% calc(100% - 10px),
-                                                calc(100% - 10px) 100%,
-                                                0 100%,0 10px)
-                                            `
-                                        }}
-                                        onClick={e => e.stopPropagation()}
-                                    >
-                                        🔒 PRIVATE
-                                    </button>
-                                )}
+                                <div className="mb-4">
+                                    <h4 className="text-xl text-[#2596BE] mb-3 tracking-wide">
+                                        Key Accomplishments
+                                    </h4>
+
+                                    <ul className="space-y-2">
+                                        {project.front.accomplishments.map((acc, i) => (
+                                            <li key={i} className="text-white/90"><span className="text-[#2596BE]">&gt;</span>{` ${acc}`}</li>
+                                        ))}
+                                    </ul>
+                                </div>
                             </div>
                             {/* Let users know they can flip card */}
                             <div className="flex items-center justify-center gap-2 text-xs text-white/50 mt-auto">
