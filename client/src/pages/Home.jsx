@@ -500,7 +500,7 @@ export default function Home () {
                     </div>
 
                 </section>
-                
+
                 {/* FAQ Section */}
                 <section className="relative min-h-screen flex items-center justify-center">
                     {/* Background image */}
@@ -563,7 +563,7 @@ export default function Home () {
                     </div>
                 </section>
 
-                {/* Roadmap / Timeline Section*/}
+                {/* Journey / Timeline Section*/}
                 <section ref={lineScrollRef} id="roadmap" className="bg-[#03050C] py-10">
                     {/* Heading */}
                     <h1 
@@ -576,7 +576,7 @@ export default function Home () {
                             glow-text py-10 mb-10
                         " 
                         >
-                            ROADMAP
+                            JOURNEY
                     </h1>
 
                     {/* Timeline content cards */}
