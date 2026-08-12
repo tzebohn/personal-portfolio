@@ -133,7 +133,7 @@ export default function Hero () {
                         </p>
 
                         <p className="mt-5 text-sm sm:text-base leading-7 text-white/75 max-w-xl mx-auto lg:mx-0">
-                            I build responsive, data-driven web applications with clean user experiences and practical full-stack architecture.
+                            Backend-leaning full-stack developer focused on building applications across frontend interfaces, APIs, authentication, databases, real-time systems, and cloud deployment.
                         </p>
 
                         {/* Recruiter CTAs */}
