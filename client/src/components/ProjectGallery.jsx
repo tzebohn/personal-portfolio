@@ -85,7 +85,7 @@ export default function ProjectGallery ({ onClose }) {
                         <ProjectCards
                             title={"MessageBoard"}
                             description={"Full-Stack"}
-                            href={"https://odin-message-board-3i88.onrender.com"}
+                            href={"https://github.com/tzebohn/Odin-message-board"}
                             image={MessageboardImg}
                         />
                     </div>
