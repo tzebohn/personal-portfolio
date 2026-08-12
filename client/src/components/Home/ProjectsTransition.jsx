@@ -4,7 +4,7 @@
  * Creates a nice transition to Projects section on scroll 
  */
 
-import { motion, useScroll, useTransform } from "framer-motion"
+import { motion as Motion, useScroll, useTransform } from "framer-motion"
 import { useRef } from "react"
 import DivingGif from "../../assets/images/diving.gif"
 import "./project.css"
@@ -36,7 +36,7 @@ export default function ProjectsTransition() {
                 {/* Possible colors #161c44 #0a092d #1e1d25 */}
                 <div className="absolute inset-0 bg-[#03050C]" />
 
-                <motion.div
+                <Motion.div
                     className="absolute inset-0 bg-black"
                     style={{ opacity: darkness }}
                 />

@@ -3,7 +3,11 @@ import { InputDeviceContext } from "./InputDeviceContext";
 
 export default function InputDeviceProvider ({ children }) {
     // Tracks if user on Mobile touch screen
-    const [isTouch, setIsTouch] = useState(false)
+    const [isTouch, setIsTouch] = useState(() => {
+        if (typeof window === "undefined") return false
+
+        return window.matchMedia("(hover: none)").matches
+    })
 
     /**
      * Check if user is on Mobile touch screen on component mount
@@ -13,7 +17,6 @@ export default function InputDeviceProvider ({ children }) {
 
         // Check primary input device (Mouse or Touch)
         const mq = window.matchMedia("(hover: none)")
-        setIsTouch(mq.matches)
 
         const handler = (e) => setIsTouch(e.matches)
         mq.addEventListener("change", handler)

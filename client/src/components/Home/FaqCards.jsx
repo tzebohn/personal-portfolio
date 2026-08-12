@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion as Motion } from "framer-motion";
 import { IoMdArrowDropdown } from "react-icons/io";
 
 export default function FaqCards({ id, title, description, isOpen, onToggle }) {
@@ -38,7 +38,7 @@ export default function FaqCards({ id, title, description, isOpen, onToggle }) {
             {title}
           </span>
 
-          <motion.span
+          <Motion.span
             animate={{ rotate: isOpen ? 180 : 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className={`
@@ -47,13 +47,13 @@ export default function FaqCards({ id, title, description, isOpen, onToggle }) {
             `}
           >
             <IoMdArrowDropdown />
-          </motion.span>
+          </Motion.span>
         </button>
       </h3>
 
       <AnimatePresence initial={false}>
         {isOpen && (
-          <motion.div
+          <Motion.div
             id={`faq-panel-${id}`}
             role="region"
             aria-labelledby={`faq-header-${id}`}
@@ -69,7 +69,7 @@ export default function FaqCards({ id, title, description, isOpen, onToggle }) {
                 {description}
               </p>
             </div>
-          </motion.div>
+          </Motion.div>
         )}
       </AnimatePresence>
     </div>

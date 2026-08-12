@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { createElement, useEffect, useState } from "react";
 
 export default function GridCarousel({ cards }) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -49,7 +49,7 @@ export default function GridCarousel({ cards }) {
           <div className="flex flex-row flex-shrink-0 justify-center items-center gap-2">
             {[-2, -1, 0, 1, 2].map((position) => {
               const index = getIndexForPosition(position);
-              const card = cards[index];
+              const CardIcon = cards[index].Icon;
 
               return (
                 <div
@@ -61,7 +61,7 @@ export default function GridCarousel({ cards }) {
                   onTouchEnd={() => setIsPaused(false)}
                   className={sizeStyles[position]}
                 >
-                  <card.Icon className={iconSizes[position]} />
+                  {createElement(CardIcon, { className: iconSizes[position] })}
                 </div>
               );
             })}

@@ -8,7 +8,6 @@ export default function Model () {
     const { scene } = useGLTF(modelUrl)
 
     const isMobile = viewport.width < 2
-    const isTablet = viewport.width >= 2 && viewport.width < 6
 
     const idleRef = useRef()
 

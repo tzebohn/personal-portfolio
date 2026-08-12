@@ -5,7 +5,7 @@
  * Displays an SVG icon, a title, and a description.
  */
 
-import { useRef, useState, useEffect, useLayoutEffect } from "react"
+import { createElement, useRef, useState, useEffect, useLayoutEffect } from "react"
 import { useInputDevice } from "../../contexts/inputDevice/useInputDevice"
 import "../styles.css"
 
@@ -92,10 +92,10 @@ export default function GridCard ({ Icon, title, description }) {
             >
                 {/* Icon */}
                 <div>
-                    <Icon 
-                        ref={iconRef}
-                        className={`border-0 transition-transform duration-100 delay-75 ${active ? "grid-card-active" : ""}`}
-                    />
+                    {createElement(Icon, {
+                        ref: iconRef,
+                        className: `border-0 transition-transform duration-100 delay-75 ${active ? "grid-card-active" : ""}`
+                    })}
                 </div>
 
                 {/* Title */}

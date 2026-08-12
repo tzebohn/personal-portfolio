@@ -1,5 +1,5 @@
 import { Points, PointMaterial } from "@react-three/drei"
-import { useMemo, useRef } from "react"
+import { useLayoutEffect, useMemo, useRef } from "react"
 import { useFrame } from "@react-three/fiber"
 import * as THREE from "three"
 
@@ -14,26 +14,34 @@ export default function AstralParticles({
 }) {
 
     const ref = useRef()
+    const velocitiesRef = useRef(null)
+    const positions = useMemo(() => new Float32Array(count * 3), [count])
 
-    const { positions, velocities } = useMemo(() => {
-        const pos = new Float32Array(count * 3)
-        const vel = new Float32Array(count)
+    useLayoutEffect(() => {
+        if (!ref.current) return
+
+        const positionAttribute = ref.current.geometry.attributes.position
+        const arr = positionAttribute.array
+        const velocities = new Float32Array(count)
 
         for (let i = 0; i < count; i++) {
-        pos[i * 3 + 0] = (Math.random() - 0.5) * 10
-        pos[i * 3 + 1] = (Math.random() - 0.5) * 6
-        pos[i * 3 + 2] = -Math.random() * depth
+            arr[i * 3 + 0] = (Math.random() - 0.5) * 10
+            arr[i * 3 + 1] = (Math.random() - 0.5) * 6
+            arr[i * 3 + 2] = -Math.random() * depth
 
-        vel[i] = Math.random() * speed + speed * 0.3
+            velocities[i] = Math.random() * speed + speed * 0.3
         }
 
-        return { positions: pos, velocities: vel }
+        velocitiesRef.current = velocities
+        positionAttribute.needsUpdate = true
     }, [count, depth, speed])
 
     useFrame((state, delta) => {
         if (!ref.current) return
+        if (!velocitiesRef.current) return
 
         const arr = ref.current.geometry.attributes.position.array
+        const velocities = velocitiesRef.current
 
         for (let i = 0; i < count; i++) {
         // upward drift
