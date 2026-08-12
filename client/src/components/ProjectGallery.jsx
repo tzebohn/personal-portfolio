@@ -39,7 +39,7 @@ export default function ProjectGallery ({ onClose }) {
                         <ProjectCards
                             title={"HandyANDY"}
                             description={"Full-Stack"}
-                            href={"handy-andy-nine.vercel.app"}
+                            href={"https://handy-andy-nine.vercel.app"}
                             image={HandyAndyImg}
                         />
                     </div>
