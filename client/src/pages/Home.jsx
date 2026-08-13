@@ -168,7 +168,7 @@ export default function Home () {
                 <section className="bg-[#03050C] pt-24 pb-16 sm:pb-20 md:pb-28 lg:pb-36 px-4 sm:px-8 lg:px-12">
                     <div className="max-w-7xl mx-auto grid grid-cols-1 xl:grid-cols-2 gap-8 xl:gap-10">
                         <div className="space-y-5">
-                            <h1 className="text-white font-bold text-3xl sm:text-4xl lg:text-5xl tracking-wide">Overview</h1>
+                            <h2 className="text-white font-bold text-3xl sm:text-4xl lg:text-5xl tracking-wide">Overview</h2>
                             <p className="text-gray-400 font-medium text-sm sm:text-base md:text-lg leading-relaxed">
                                 I am a Computer Science bachelor's graduate at CUNY Brooklyn College, with a passion for building modern web experiences.
                                 I enjoy combining clean UI with robust backend systems, and I’m always learning new ways to improve user experience and code quality.
@@ -473,7 +473,7 @@ export default function Home () {
                 {/* What I do section */}
                 <section className="bg-[#03050C] pt-24 px-8">
                     <div className="flex flex-col space-y-5 text-center">
-                        <h1 className="text-white font-bold text-3xl sm:text-4xl lg:text-5xl tracking-wide">What I do</h1>
+                        <h2 className="text-white font-bold text-3xl sm:text-4xl lg:text-5xl tracking-wide">What I do</h2>
                         <p className="text-gray-500 font-semibold text-sm xs:text-base md:text-lg lg:text-xl lg:text-center leading-relaxed">
                             I specialize in creating modern, responsive web applications using cutting-edge technologies. My approach combines technical excellence with a focus on user experience.
                         </p>
@@ -513,7 +513,7 @@ export default function Home () {
                     <div className="absolute inset-0 bg-black/50"/>
 
                     <div className="relative w-full max-w-7xl mx-auto py-20 px-4">
-                        <h1
+                        <h2
                             className="
                                 text-white/90 text-xl xs:text-4xl sm:text-5xl
                                 tracking-[0.3em] font-[Orbitron]
@@ -524,7 +524,7 @@ export default function Home () {
                             "
                         >
                             Frequently Asked Questions
-                        </h1>
+                        </h2>
 
                         {/* Questions section */}
                         <div className="flex flex-col gap-4 md:max-w-3xl md:mx-auto">
@@ -566,18 +566,18 @@ export default function Home () {
                 {/* Journey / Timeline Section*/}
                 <section ref={lineScrollRef} id="roadmap" className="bg-[#03050C] py-10">
                     {/* Heading */}
-                    <h1 
-                        className="
-                            text-white/90 text-4xl sm:text-5xl 
-                            tracking-[0.3em] font-[Orbitron]
-                            text-center uppercase font-bold 
-                            transition-all duration-300
-                            drop-shadow-[0_0_8px_rgba(37,150,190,0.25)]
-                            glow-text py-10 mb-10
-                        " 
-                        >
+                        <h2 
+                            className="
+                                text-white/90 text-4xl sm:text-5xl 
+                                tracking-[0.3em] font-[Orbitron]
+                                text-center uppercase font-bold 
+                                transition-all duration-300
+                                drop-shadow-[0_0_8px_rgba(37,150,190,0.25)]
+                                glow-text py-10 mb-10
+                            " 
+                            >
                             JOURNEY
-                    </h1>
+                        </h2>
 
                     {/* Timeline content cards */}
                     <div className="relative max-w-7xl mx-auto px-4">

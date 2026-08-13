@@ -234,6 +234,7 @@ export default function FeaturedProjects ({ project, isAvailable, reverse }) {
                     ) : (
                         <img 
                             src={project.media.src}
+                            alt={`${project.title} project preview`}
                             className="w-full h-full object-cover rounded-lg"
                             loading="lazy"
                         />
