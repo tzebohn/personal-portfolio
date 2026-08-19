@@ -22,9 +22,24 @@ import { useEffect, useRef, useState } from "react";
 import { motion as Motion, useTransform, useScroll } from "framer-motion"
 import FaqCards from "../components/Home/FaqCards";
 import FeaturedProjects from "../components/Home/FeaturedProjects";
-import { FaReact, FaNodeJs } from "react-icons/fa";
+import { FaReact, FaNodeJs, FaPython } from "react-icons/fa";
 import { RiTailwindCssFill, RiNextjsFill } from "react-icons/ri";
-import { SiVitest, SiVite, SiExpress, SiMysql, SiPrisma, SiReactquery, SiPostman } from "react-icons/si";
+import { 
+    SiVitest, 
+    SiVite, 
+    SiExpress, 
+    SiMysql, 
+    SiPrisma, 
+    SiReactquery, 
+    SiPostman, 
+    SiTypescript, 
+    SiJavascript, 
+    SiCplusplus, 
+    SiHtml5, 
+    SiGit, 
+    SiPuppeteer,
+    SiNodemon
+} from "react-icons/si";
 import { IoLogoFirebase } from "react-icons/io5";
 import { BiLogoPostgresql } from "react-icons/bi";
 import { DiRedis } from "react-icons/di";
@@ -78,46 +93,58 @@ const cards = [
     },
 ]
 
-// Skills to display in overview section
+// Skills to display in overview section organized by technical domain
 const skills = [
     {
-        category: "frontend",
+        category: "Languages",
         items: [
-            { Icon: FaReact, name: "React", rating: 4, color: "#61DAFB" },
-            { Icon: RiTailwindCssFill, name: "TailwindCSS", rating: 4, color: "#38B2AC" },
-            { Icon: SiReactquery, name: "TanStack", rating: 3, color: "#FF4154" },
-            { Icon: SiVite, name: "Vite", rating: 3, color: "#646CFF" },
-            { Icon: RiNextjsFill, name: "Next.js", rating: 3, color: "#ffffff" },
+            { Icon: SiTypescript, name: "TypeScript", color: "#3178C6", context: "Full-stack type safety, shared data contracts, and strict component interfaces across Next.js and Node.js applications." },
+            { Icon: SiJavascript, name: "JavaScript (ES6+)", color: "#F7DF1E", context: "Modern async/await workflows, event loops, DOM manipulation, and Phaser 3 arcade physics logic." },
+            { Icon: FaPython, name: "Python", color: "#3776AB", context: "Object-oriented design patterns, foundational data structures and sorting algorithms." },
+            { Icon: SiHtml5, name: "HTML5 & CSS3", color: "#E34F26", context: "Semantic web architecture, responsive layouts, accessibility standards, and custom CSS animations." },
         ]
     },
     {
-        category: "backend",
+        category: "Frontend Architecture",
         items: [
-            { Icon: FaNodeJs, name: "Node.js", rating: 4, color: "#339933" },
-            { Icon: SiExpress, name: "Express", rating: 4, color: "#ffffff" },
-            { Icon: DiRedis, name: "Redis", rating: 3, color: "#D82C20" },
-            { Icon: RiNextjsFill, name: "Next.js", rating: 3, color: "#ffffff" },
+            { Icon: FaReact, name: "React", color: "#61DAFB", context: "Component-driven architecture, custom hooks, reusable UI component systems, and state synchronization." },
+            { Icon: SiVite, name: "Vite", color: "#646CFF", context: "Used to develop and build React applications with fast HMR, streamlined local tooling, and optimized production bundles." },
+            { Icon: RiNextjsFill, name: "Next.js", color: "#ffffff", context: "Production App Router workflows, server-side rendering (SSR), protected admin routes, and API endpoints." },
+            { Icon: RiTailwindCssFill, name: "TailwindCSS", color: "#38B2AC", context: "Modern responsive utility styling, futuristic dark-mode themes, and custom animation design tokens." },
+            { Icon: SiReactquery, name: "TanStack Query", color: "#FF4154", context: "Server-state caching, automatic background refetching, and optimistic UI mutation updates." },
+        ]
+    },
+    {
+        category: "Backend & Distributed Systems",
+        items: [
+            { Icon: FaNodeJs, name: "Node.js", color: "#339933", context: "Asynchronous backend runtimes, background monitoring daemons, and microservices architecture." },
+            { Icon: SiExpress, name: "Express", color: "#ffffff", context: "RESTful API design, modular controller routes, authentication gateways, and centralized error handling." },
+            { Icon: DiRedis, name: "Redis", color: "#D82C20", context: "Distributed sliding-window rate limiting, session caching, and token storage via Upstash Redis." },
+            { Icon: SiNodemon, name: "Nodemon", color: "#76D04B", context: "Used across Node.js projects to automatically restart the server during development." },
+            { Icon: SiPuppeteer, name: "Puppeteer", color: "#40B5A4", context: "Automated real-time stock news scraping across 3,000+ tickers with concurrency queues and bot evasion." },
         ]
     }, 
     {
-        category: "database",
+        category: "Databases & Caching",
         items: [
-            { Icon: IoLogoFirebase, name: "Firebase", rating: 3, color: "#FFA000" },
-            { Icon: SiMysql, name: "MySQL", rating: 3, color: "#00758F" },
-            { Icon: BiLogoPostgresql, name: "PostgreSQL", rating: 2, color: "#336791" },
-            { Icon: SiPrisma, name: "Prisma", rating: 3, color: "#0C77C0" },
+            { Icon: BiLogoPostgresql, name: "PostgreSQL", color: "#336791", context: "Relational database schema modeling, indexing, foreign keys, and serverless hosting with Neon." },
+            { Icon: SiPrisma, name: "Prisma ORM", color: "#0C77C0", context: "Type-safe database client queries, automated relational migrations, and declarative data validation." },
+            { Icon: SiMysql, name: "MySQL", color: "#00758F", context: "Relational table architectures, query optimizations, and diagnosis/resolution of transaction deadlocks." },
+            { Icon: IoLogoFirebase, name: "Firebase", color: "#FFA000", context: "Role-based authentication, real-time database listeners, and secure cloud authorization rules." },
         ]
     }, 
     {
-        category: "testing",
+        category: "DevOps & Tooling",
         items: [
-            { Icon: SiVitest, name: "Vitest", rating: 2, color: "#6E4FF5" },
-            { Icon: SiPostman, name: "Postman", rating: 3, color: "#FF6C37" },
+            { Icon: SiVitest, name: "Vitest", color: "#6E4FF5", context: "Automated unit and integration testing suites to verify component logic and utility functions." },
+            { Icon: SiPostman, name: "Postman", color: "#FF6C37", context: "API contract testing, HTTP status code validation, header debugging, and automated test runners." },
+            { Icon: SiGit, name: "Git & GitHub", color: "#F05032", context: "Version control workflows, multi-developer branch management, pull request reviews, and CI/CD hosting." },
         ]
     }
 ]
 
 export default function Home () {
+    const [activeSkillCategory, setActiveSkillCategory] = useState(0) // Tracks selected domain tab on desktop
     const [isMdUp, setIsMdUp] = useState(false) // Tracks if current screen width is 768px or greater
     const [activeFaq, setActiveFaq] = useState(null) // Tracks which FAQ is currently expanded
 
@@ -165,30 +192,54 @@ export default function Home () {
             {/* Main body content */}
             <main>
                 {/* Overview section */}
-                <section className="bg-[#03050C] pt-24 pb-16 sm:pb-20 md:pb-28 lg:pb-36 px-4 sm:px-8 lg:px-12">
-                    <div className="max-w-7xl mx-auto grid grid-cols-1 xl:grid-cols-2 gap-8 xl:gap-10">
-                        <div className="space-y-5">
-                            <h2 className="text-white font-bold text-3xl sm:text-4xl lg:text-5xl tracking-wide">Overview</h2>
-                            <p className="text-gray-400 font-medium text-sm sm:text-base md:text-lg leading-relaxed">
-                                I am a Computer Science bachelor's graduate at CUNY Brooklyn College, with a passion for building modern web experiences.
-                                I enjoy combining clean UI with robust backend systems, and I’m always learning new ways to improve user experience and code quality.
-                            </p>
-                            <div className="grid grid-cols-2 gap-3">
-                                <div className="rounded-xl border border-[#2f3a55] bg-[#0b1231]/70 p-4">
-                                    <h3 className="text-[#85cfff] text-xs sm:text-sm font-semibold">Preferred Location</h3>
-                                    <p className="text-gray-300 text-xs sm:text-sm">New York, USA</p>
-                                </div>
-                                <div className="rounded-xl border border-[#2f3a55] bg-[#0b1231]/70 p-4">
-                                    <h3 className="text-[#85cfff] text-xs sm:text-sm font-semibold">Availability</h3>
-                                    <p className="text-gray-300 text-xs sm:text-sm">Open for part-time & full-time</p>
-                                </div>
-                                <div className="rounded-xl border border-[#2f3a55] bg-[#0b1231]/70 p-4">
-                                    <h3 className="text-[#85cfff] text-xs sm:text-sm font-semibold">Education</h3>
-                                    <p className="text-gray-300 text-xs sm:text-sm">Bachelor's in Computer Science</p>
-                                </div>
-                                <div className="rounded-xl border border-[#2f3a55] bg-[#0b1231]/70 p-4">
-                                    <h3 className="text-[#85cfff] text-xs sm:text-sm font-semibold">Role</h3>
-                                    <p className="text-gray-300 text-xs sm:text-sm">Full-Stack Software Engineer</p>
+                <section className="relative overflow-hidden bg-[#03050C] pt-24 pb-16 sm:pb-20 md:pb-28 lg:pb-36 px-4 sm:px-8 lg:px-12">
+                    <div className="pointer-events-none absolute inset-0 overview-field" />
+                    <div className="pointer-events-none absolute left-1/2 top-0 h-px w-[80vw] -translate-x-1/2 bg-gradient-to-r from-transparent via-[#2596BE]/35 to-transparent" />
+                    <div className="pointer-events-none absolute -left-32 top-16 h-72 w-72 rounded-full bg-[#2596BE]/10 blur-3xl" />
+                    <div className="pointer-events-none absolute right-[-12rem] bottom-10 h-96 w-96 rounded-full bg-[#3a8dff]/10 blur-3xl" />
+
+                    <div className="relative max-w-7xl mx-auto grid grid-cols-1 xl:grid-cols-[0.85fr_1.15fr] gap-12 xl:gap-16 items-start">
+                        <div className="xl:sticky xl:top-28 space-y-8">
+                            <div className="space-y-5">
+                                <p className="font-[Orbitron] text-[11px] sm:text-xs uppercase tracking-[0.35em] text-[#2596BE]">Profile / Systems Focus</p>
+                                <h2 className="max-w-xl text-white font-bold text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[0.95]">
+                                    Overview
+                                </h2>
+                                <p className="max-w-2xl text-slate-300/90 font-medium text-sm sm:text-base md:text-lg leading-relaxed">
+                                    I am a Computer Science graduate from CUNY Brooklyn College (GPA &gt; 3.5, Dean's List)                                                                                                         
+                                    with a passion for full-stack engineering and distributed web systems. My experience ranges from                                                                                                
+                                    designing concurrent data scrapers and Redis-backed rate limiters to implementing on-device computer vision                                                                                     
+                                    pipelines and clean React interfaces. I focus on writing maintainable, tested code and building software                                                                                        
+                                    that solves concrete operational problems.
+                                </p>
+                            </div>
+
+                            <div className="relative overflow-hidden rounded-xl border border-[#2596BE]/15 bg-[#050b18]/60 backdrop-blur-sm">
+                                <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#2596BE]/30 to-transparent" />
+                                
+                                <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 divide-[#2596BE]/10">
+                                    {[
+                                        { label: "Preferred Location", value: "New York, USA" },
+                                        { label: "Availability", value: "Open for part-time & full-time" },
+                                        { label: "Education", value: "Bachelor's in Computer Science" },
+                                        { label: "Role", value: "Full-Stack Software Engineer" },
+                                    ].map((item, index) => (
+                                        <div
+                                            key={item.label}
+                                            className={`
+                                                group p-4 sm:p-5 transition-colors duration-200 hover:bg-[#2596BE]/[0.03]
+                                                ${index % 2 === 0 ? "sm:border-r sm:border-[#2596BE]/10" : ""}
+                                                ${index < 2 ? "sm:border-b sm:border-[#2596BE]/10" : ""}
+                                            `}
+                                        >
+                                            <span className="block text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.2em] text-[#2596BE]/70 transition-colors duration-200 group-hover:text-[#2596BE]">
+                                                {item.label}
+                                            </span>
+                                            <span className="mt-1.5 block text-sm sm:text-[15px] font-semibold text-slate-100 leading-snug tracking-tight">
+                                                {item.value}
+                                            </span>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>
@@ -197,51 +248,69 @@ export default function Home () {
                         {isMobile ? (
                             <SkillsCarousel skills={skills}/>
                         ) : (
-                        <div className="relative overflow-hidden rounded-2xl border border-[#2f3a55]/10 bg-[#0b1231]/5 p-8">
-                            <div className="pointer-events-none absolute -right-10 -top-12 h-44 w-44 rounded-full bg-[#3a8dff]/8 blur-3xl" />
-                            <div className="pointer-events-none absolute -bottom-14 -left-10 h-40 w-40 rounded-full bg-[#1ecad3]/5 blur-3xl" />
+                            <div className="relative overflow-hidden border border-[#2596BE]/15 bg-[#050b18]/65 shadow-[0_24px_80px_-48px_rgba(37,150,190,0.55)] backdrop-blur-sm">
+                                <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#2596BE]/60 to-transparent" />
+                                <div className="pointer-events-none absolute right-0 top-0 h-56 w-56 translate-x-1/3 -translate-y-1/3 rounded-full bg-[#2596BE]/10 blur-3xl" />
 
-                            <div className="relative mb-10">
-                                <h2 className="text-white font-bold text-xl sm:text-2xl">Core Skills</h2>
-                                <p className="mt-1.5 text-sm font-medium text-slate-300">A quick snapshot of my main tools across the stack</p>
-                            </div>
+                                <div className="grid min-h-[620px] grid-cols-[240px_1fr]">
+                                    <div className="border-r border-[#2596BE]/10 bg-black/15 p-6">
+                                        <p className="font-[Orbitron] text-[10px] uppercase tracking-[0.3em] text-[#2596BE]/80">Technical Domains</p>
+                                        <p className="mt-3 text-sm leading-relaxed text-slate-400">Core technologies mapped to practical production context.</p>
 
-                            <div className="relative grid grid-cols-2 gap-x-12 gap-y-12">
-                                {skills.map((cat) => (
-                                    <section key={cat.category}>
-                                        <h3 className="mb-3 text-base text-[#8ad7ff] font-semibold capitalize tracking-wide">{cat.category}</h3>
-                                        <div className="mb-5 h-px bg-linear-to-r from-[#67cbff]/25 to-transparent" />
-
-                                        <div className="grid grid-cols-2 gap-x-5 gap-y-6">
-                                            {cat.items.map((skill) => (
-                                                <div key={skill.name}>
-                                                    <div className="flex items-center gap-3">
-                                                        <skill.Icon className="shrink-0 w-5 h-5" style={{ color: skill.color }} />
-                                                        <span className="truncate text-sm font-medium text-gray-100">{skill.name}</span>
-                                                    </div>
-                                                    <div
-                                                        className="mt-2.5 h-0.5 overflow-hidden rounded-full bg-[#1a2747]"
-                                                        role="progressbar"
-                                                        aria-valuenow={skill.rating}
-                                                        aria-valuemin={0}
-                                                        aria-valuemax={5}
-                                                        aria-label={`${skill.name} proficiency: ${skill.rating} out of 5`}
+                                        <div className="mt-10 space-y-1" role="tablist" aria-label="Technical domain categories">
+                                            {skills.map((domain, index) => {
+                                                const isActive = index === activeSkillCategory;
+                                                return (
+                                                    <button
+                                                        key={domain.category}
+                                                        role="tab"
+                                                        aria-selected={isActive}
+                                                        onClick={() => setActiveSkillCategory(index)}
+                                                        className={`group relative w-full cursor-pointer px-0 py-4 text-left transition-colors duration-300 ${isActive ? "text-white" : "text-slate-500 hover:text-slate-200"}`}
                                                     >
-                                                        <div
-                                                            className="h-full rounded-full transition-all duration-500"
-                                                            style={{
-                                                                width: `${(skill.rating / 5) * 100}%`,
-                                                                background: `linear-gradient(90deg, ${skill.color}60, ${skill.color})`
-                                                            }}
-                                                        />
+                                                        <span className={`absolute left-0 top-1/2 h-8 w-px -translate-y-1/2 transition-all duration-300 ${isActive ? "bg-[#2596BE] shadow-[0_0_14px_rgba(37,150,190,0.75)]" : "bg-[#2596BE]/15 group-hover:bg-[#2596BE]/35"}`} />
+                                                        <span className="block pl-5 font-[Orbitron] text-[10px] tracking-[0.24em] text-[#2596BE]/65">0{index + 1}</span>
+                                                        <span className="mt-1 block pl-5 text-sm font-semibold leading-tight tracking-wide">{domain.category}</span>
+                                                    </button>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+
+                                    <div className="relative p-8 lg:p-10">
+                                        <div className="mb-8 flex items-end justify-between gap-8 border-b border-[#2596BE]/10 pb-7">
+                                            <div>
+                                                <h3 className="max-w-xl text-3xl font-bold leading-tight tracking-tight text-white lg:text-4xl">
+                                                    {skills[activeSkillCategory].category}
+                                                </h3>
+                                            </div>
+                                            <div className="text-right">
+                                                <p className="font-[Orbitron] text-3xl text-[#2596BE]">{skills[activeSkillCategory].items.length}</p>
+                                                <p className="text-xs uppercase tracking-[0.2em] text-slate-500">Technologies</p>
+                                            </div>
+                                        </div>
+
+                                        <div className="divide-y divide-[#2596BE]/10">
+                                            {skills[activeSkillCategory].items.map((skill) => (
+                                                <div 
+                                                    key={skill.name}
+                                                    className="group grid grid-cols-[auto_1fr] gap-x-4 py-5 transition-colors duration-300 hover:bg-[#2596BE]/[0.025]"
+                                                >
+                                                    <div className="mt-1 flex h-10 w-10 items-center justify-center border border-[#2596BE]/15 bg-black/20 transition-all duration-300 group-hover:border-[#2596BE]/35">
+                                                        <skill.Icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" style={{ color: skill.color }} />
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="text-base font-semibold tracking-wide text-white transition-colors duration-300 group-hover:text-[#e8f8ff]">{skill.name}</h4>
+                                                        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-300/90">
+                                                            {skill.context}
+                                                        </p>
                                                     </div>
                                                 </div>
                                             ))}
                                         </div>
-                                    </section>
-                                ))}
+                                    </div>
+                                </div>
                             </div>
-                        </div>
                         )}
                     </div>
                 </section>

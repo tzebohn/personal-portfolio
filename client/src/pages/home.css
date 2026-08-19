@@ -55,3 +55,14 @@
 .project-card {
     transform: translateZ(0);
 }
+
+.overview-field {
+    background-image:
+        radial-gradient(circle at 20% 10%, rgba(37, 150, 190, 0.12), transparent 28rem),
+        radial-gradient(circle at 85% 35%, rgba(58, 141, 255, 0.08), transparent 24rem),
+        linear-gradient(rgba(37, 150, 190, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37, 150, 190, 0.035) 1px, transparent 1px);
+    background-size: auto, auto, 56px 56px, 56px 56px;
+    mask-image: linear-gradient(to bottom, transparent, black 12%, black 86%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 12%, black 86%, transparent);
+}
