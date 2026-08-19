@@ -3,7 +3,4 @@
 @theme {
     --breakpoint-xs: 480px
 }
-
-* {
-    cursor: none !important
-}
+

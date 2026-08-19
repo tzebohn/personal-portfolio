@@ -10,15 +10,11 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import Cursor from "../components/Cursor";
 import '../App.css'
-import { useInputDevice } from "../contexts/inputDevice/useInputDevice";
 import { useEffect, useState } from "react";
 import ProjectGallery from "../components/ProjectGallery";
 
 export default function MainLayout () {
-    const {isTouch} = useInputDevice()
-
     const [menuOpen, setMenuOpen] = useState(false)         // Tracks whether 
     const [showProjects, setShowProjects] = useState(false) // Tracks visibility of ProjectsGallery component
 
@@ -81,8 +77,6 @@ export default function MainLayout () {
 
     return (
         <div className=" relative min-h-screen bg-linear-to-br from-[#0f0a1a] to-[#05070a]">
-            {!isTouch && <Cursor />}
-
             <Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} showProjects={showProjects} setShowProjects={setShowProjects}/>
 
             {/* Menu overlay links */}
