@@ -41,32 +41,32 @@ export default function ProjectsTransition() {
                     style={{ opacity: darkness }}
                 />
 
-                <div className="absolute inset-0 flex flex-col items-center">
+                <div className="absolute inset-0 flex flex-col items-center gap-8 px-4 sm:gap-12 md:gap-16 lg:gap-20">
                     {/* Falling visual GIF */}
                     <img
                         src={DivingGif}
                         alt="GIF of someone free diving"
                         className="
-                            w-[300px] sm:w-[400px]
-                            h-[300px] sm:h-[400px]
+                            relative z-10
+                            w-[300px] sm:w-[400px] md:w-[460px] lg:w-[520px]
+                            h-[300px] sm:h-[400px] md:h-[460px] lg:h-[520px]
                             object-contain
                         "
                     />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                        <h4 
-                            className="
-                                text-white/90 text-4xl sm:text-5xl 
-                                tracking-[0.3em] font-[Orbitron]
-                                text-center uppercase font-bold 
-                                transition-all duration-300
-                                drop-shadow-[0_0_8px_rgba(37,150,190,0.25)]
-                                glow-text
-                            " 
-                            >
-                                PROJECT ARCHIVE
-                                <span className="ml-1 text-[#2596be] animate-pulse">|</span>
-                        </h4>
-                    </div>
+                    <h4
+                        className="
+                            relative z-0
+                            text-white/90 text-4xl sm:text-5xl
+                            tracking-[0.3em] font-[Orbitron]
+                            text-center uppercase font-bold
+                            transition-all duration-300
+                            drop-shadow-[0_0_8px_rgba(37,150,190,0.25)]
+                            glow-text
+                        "
+                        >
+                            PROJECT ARCHIVE
+                            <span className="ml-1 text-[#2596be] animate-pulse">|</span>
+                    </h4>
                 </div>
             </div>
         </div>

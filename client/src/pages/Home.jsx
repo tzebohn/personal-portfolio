@@ -327,7 +327,7 @@ export default function Home () {
                             <div className="astral-grid" />
 
                             {/* Project Content */}
-                            <div className="relative flex flex-col items-center px-5 lg:px-10">
+                            <div className="relative flex flex-col items-center px-5 lg:px-10 pt-20">
                                 {/* Featured Project 1 */}
                                 <FeaturedProjects
                                     project={{
