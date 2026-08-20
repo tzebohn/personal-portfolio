@@ -1,17 +1,11 @@
 /**
- * PhaseDot component
+ * PhaseDots component
  * 
- * Displays a nice visual dot on the vertical line
- * for better UX
- * 
- * props:
- * - status (string): Determines the type of Dot to display
- * (e.g. "complete", "progress", "planned") 
+ * Displays a visual dot on the vertical timeline line
+ * for better visual hierarchy and UX.
  */
 
-import { FaCheckCircle } from "react-icons/fa";
-
-export default function PhaseDots({ status }) {
+export default function PhaseDots() {
   return (
     <div 
         className="
@@ -27,9 +21,7 @@ export default function PhaseDots({ status }) {
             flex items-center justify-center
         "
     >
-        {status === "complete" && <FaCheckCircle className="w-4 h-4 xs:w-6 xs:h-6 md:w-8 md:h-8 text-[#2596BE] drop-shadow-[0_0_2px_#2596BE]"/>}
-        {status === "progress" && <div className="w-4 h-4 xs:w-6 xs:h-6 md:w-8 md:h-8 rounded-full bg-[#2596BE] drop-shadow-[0_0_2px_#2596BE] animate-pulse"/>}
-        {status === "planned" && <div className="w-4 h-4 rounded-full bg-gray-300/50 border border-gray-400"/>}
+        <div className="w-4 h-4 xs:w-5 xs:h-5 md:w-6 md:h-6 rounded-full bg-[#2596BE] drop-shadow-[0_0_4px_#2596BE] border-2 border-[#2596BE]/60"/>
     </div>
   )
 }

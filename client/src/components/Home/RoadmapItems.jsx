@@ -1,46 +1,34 @@
 /**
  * RoadmapItems component
  * 
- * Displays the details of easch roadmap phase as a card.
- * Each card shows information like phase title, description, status, etc.
+ * Displays a milestone card on the engineering experience timeline.
+ * Each card shows a year, title, description, and technical highlights.
  * 
  * Props:
  * - side (string): Determines which side to display the card on
  * (e.g. "left" or "right")
  * 
- * - phase (number): The phase label
+ * - year (string): The year or date range for this milestone
  * 
- * - status (string): Current status of the phase (e.g. "complete" or "in progress")
+ * - title (string): The main heading of the milestone
  * 
- * - title (string): The main heading of the roadmap phase
+ * - description (string): A 1–2 sentence summary of what was accomplished
  * 
- * - description (string[]): An array of bullet point descriptions 
- * 
- * - registerDot (React state function): Updates array Dots state from parent (Home.jsx)
+ * - highlights (string[]): An array of technology/skill tags
  */
 
-// Global tailwindcss 
-const cardContainer = `flex items-center justify-between gap-2`
-
 import "./project.css"
-import { IoIosCheckmarkCircle } from "react-icons/io";
-import { FaSpinner } from "react-icons/fa";
-import { FaHourglassHalf } from "react-icons/fa6";
-import { useRef } from "react";
 import PhaseDots from "./PhaseDots";
 
-export default function RoadmapItems ({ side, phase, status, title, descriptions = [] }) {
-    const isRight = side === "right"    // Determines whether to display left or right
-
-    const itemRef = useRef(null)    // Tracks the RoadmapItems container
+export default function RoadmapItems ({ side, year, title, description, highlights = [] }) {
+    const isRight = side === "right"
 
     return (
         <div className="relative">
-            {/* Phase Dots */}
-            <PhaseDots status={status}/>
+            {/* Timeline node */}
+            <PhaseDots />
 
             <div 
-                ref={itemRef}
                 className={`
                     relative
                     w-full md:w-1/2
@@ -57,41 +45,33 @@ export default function RoadmapItems ({ side, phase, status, title, descriptions
                     <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 rounded-bl-md border-[#2596BE]/80 group-hover:border-white/90"/>
                     <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 rounded-br-md border-[#2596BE]/80 group-hover:border-white/90"/>
 
-                    {/* Card content goes here */}
+                    {/* Card content */}
                     <div className="flex flex-col gap-4 font-mono">
-                        <div className="flex items-center justify-between">
-                            <h3 className="text-[#2596BE] tracking-wider">Phase {phase}</h3>
-                            {status === "complete" && (
-                            <div className={`${cardContainer}`}>
-                                <IoIosCheckmarkCircle className="text-sm text-green-300"/>
-                                <span className="font-[Orbitron] text-white text-sm">{status}</span>
-                            </div>                           
-                            )}
-                            {status === "progress" && (
-                            <div className={`${cardContainer}`}>
-                                <FaSpinner className="text-sm text-red-600 animate-spin"/>
-                                <span className="font-[Orbitron] text-red-600 text-sm">{status}</span>
-                            </div>                           
-                            )}
-                            {status === "planned" && (
-                            <div className={`${cardContainer}`}>
-                                <FaHourglassHalf className="text-sm text-gray-500"/>
-                                <span className="font-[Orbitron] text-gray-500 text-sm">{status}</span>
-                            </div>                           
-                            )}
-                        </div>
-                        
+                        {/* Year badge */}
+                        <span className="font-[Orbitron] text-[#2596BE] tracking-wider text-sm">{year}</span>
+
                         {/* Divider */}
                         <div className="border-t border-neutral-600/30"/>
                         
-                        <h2 className="font-[Orbitron] text-2xl md:text-3xl tracking-wide">{title}</h2>
+                        {/* Milestone title */}
+                        <h3 className="font-[Orbitron] text-xl md:text-2xl tracking-wide text-white">{title}</h3>
 
-                        {/* Bullets */}
-                        <ul className="list-disc pl-4 mt-4 space-y-2 text-sm md:text-base">
-                            {descriptions.map((item, index) => (
-                                <li className="marker:text-[#2596BE]" key={index}>{item}</li>
-                            ))}
-                        </ul>
+                        {/* Description */}
+                        <p className="text-slate-300/90 text-sm md:text-base leading-relaxed">{description}</p>
+
+                        {/* Technical highlights */}
+                        {highlights.length > 0 && (
+                            <div className="flex flex-wrap gap-2 mt-1">
+                                {highlights.map((tech, index) => (
+                                    <span 
+                                        key={index}
+                                        className="text-xs font-[Orbitron] tracking-wide text-[#2596BE]/90 bg-[#2596BE]/10 px-2.5 py-1 rounded-sm border border-[#2596BE]/20"
+                                    >
+                                        {tech}
+                                    </span>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

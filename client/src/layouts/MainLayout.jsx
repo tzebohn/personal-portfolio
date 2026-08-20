@@ -93,19 +93,19 @@ export default function MainLayout () {
                                 href="/resume/TzeBohn_Ling_Resume.pdf"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-white font-semibold text-sm sm:text-base md:text-lg lg:text-xl tracking-wide hover:text-blue-600 transition-colors duration-300"
+                                className="cursor-pointer text-white font-semibold text-sm sm:text-base md:text-lg lg:text-xl tracking-wide hover:text-blue-600 transition-colors duration-300"
                             >
                                 Resume
                             </a>
                         </li>
                         <li className="flex items-center justify-center">
-                            <a className="text-white font-semibold text-sm sm:text-base md:text-lg lg:text-xl tracking-wide hover:text-blue-600 transition-colors duration-300" onClick={() => scrollToSection("contact")}>Contact</a>
+                            <a className="cursor-pointer text-white font-semibold text-sm sm:text-base md:text-lg lg:text-xl tracking-wide hover:text-blue-600 transition-colors duration-300" onClick={() => scrollToSection("contact")}>Contact</a>
                         </li>
                         <li className="flex items-center justify-center">
-                            <a className="text-white font-semibold text-sm sm:text-base md:text-lg lg:text-xl tracking-wide hover:text-blue-600 transition-colors duration-300" onClick={() => scrollToSection("roadmap")}>Roadmap</a>
+                            <a className="cursor-pointer text-white font-semibold text-sm sm:text-base md:text-lg lg:text-xl tracking-wide hover:text-blue-600 transition-colors duration-300" onClick={() => scrollToSection("experience")}>Experience</a>
                         </li>
                         <li className="flex items-center justify-center">
-                            <a className="text-white font-semibold text-sm sm:text-base md:text-lg lg:text-xl tracking-wide hover:text-blue-600 transition-colors duration-300" onClick={() => scrollToSection("projects")}>Projects</a>
+                            <a className="cursor-pointer text-white font-semibold text-sm sm:text-base md:text-lg lg:text-xl tracking-wide hover:text-blue-600 transition-colors duration-300" onClick={() => scrollToSection("projects")}>Projects</a>
                         </li>
                     </ul>
                 </div>

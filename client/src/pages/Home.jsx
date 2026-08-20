@@ -148,7 +148,7 @@ export default function Home () {
     const [isMdUp, setIsMdUp] = useState(false) // Tracks if current screen width is 768px or greater
     const [activeFaq, setActiveFaq] = useState(null) // Tracks which FAQ is currently expanded
 
-    const lineScrollRef = useRef(null)      // Tracks the current scroll height for roadmap container
+    const lineScrollRef = useRef(null)      // Tracks the current scroll height for experience timeline container
 
     const isMobile = useIsMobile()            // Custom hook to track if user is on mobile device
 
@@ -632,8 +632,8 @@ export default function Home () {
                     </div>
                 </section>
 
-                {/* Journey / Timeline Section*/}
-                <section ref={lineScrollRef} id="roadmap" className="bg-[#03050C] py-10">
+                {/* Engineering Experience & Academic Milestones */}
+                <section ref={lineScrollRef} id="experience" className="bg-[#03050C] py-10">
                     {/* Heading */}
                         <h2 
                             className="
@@ -642,11 +642,14 @@ export default function Home () {
                                 text-center uppercase font-bold 
                                 transition-all duration-300
                                 drop-shadow-[0_0_8px_rgba(37,150,190,0.25)]
-                                glow-text py-10 mb-10
+                                glow-text py-10 mb-4
                             " 
                             >
-                            JOURNEY
+                            EXPERIENCE
                         </h2>
+                        <p className="text-center text-slate-400/80 text-sm sm:text-base font-mono tracking-wide max-w-2xl mx-auto mb-10 px-4">
+                            A progression of the engineering projects, academic milestones, and technical experiences that have shaped my development.
+                        </p>
 
                     {/* Timeline content cards */}
                     <div className="relative max-w-7xl mx-auto px-4">
@@ -656,91 +659,46 @@ export default function Home () {
                             className="absolute top-0 left-4 md:left-1/2 md:-translate-x-1/2 h-full w-1 bg-[#2596BE] origin-top"
                         />
 
-                        {/* Roadmap items */}
+                        {/* Timeline milestones */}
                         <div className="space-y-10">
                             <RoadmapItems 
                                 side={"left"}
-                                phase={1}
-                                status={"complete"}
-                                title={"Learned Java Programming"}
-                                descriptions={[
-                                    "Mastered Java syntax and OOP concepts (inheritance, polymorphism, encapsulation)", 
-                                    "Built proficient programs", 
-                                    "Implemented data structures and sorting algorithms to optimize performance",
-                                    "Developed strong skills in debugging and error handling"
-                                ]}
+                                year={"2021 – 2023"}
+                                title={"CS Foundations & Algorithm Design"}
+                                description={"Built core engineering fundamentals through Java OOP, C++ memory management, and autonomous robotics programming — including a wavefront pathfinding algorithm with real-time sensor integration."}
+                                highlights={["Java", "C++", "Data Structures", "Algorithms", "Robotics"]}
                             />
 
                             <RoadmapItems 
                                 side={"right"}
-                                phase={2}
-                                status={"complete"}
-                                title={"Intermediate C++ Programming"}
-                                descriptions={[
-                                    "Gained experience in C++ syntax, structuring classes and objects", 
-                                    "Learned pointers, references, and memory management techniques (stack & heap)", 
-                                    "Applied advanced C++ features like constructors and destructors ",
-                                ]}
+                                year={"May 2025"}
+                                title={"B.S. Computer Science — CUNY Brooklyn College"}
+                                description={"Graduated with a GPA > 3.5 and Dean's List honors. Coursework included Data Structures & Algorithms, Large-Scale Application Design, Databases, Networks & Protocols, and a 25+ person collaborative game engineering project."}
+                                highlights={["Dean's List", "GPA > 3.5", "Large-Scale Apps", "Data Structures", "Databases", "Networks"]}
                             />
 
                             <RoadmapItems 
                                 side={"left"}
-                                phase={3}
-                                status={"complete"}
-                                title={"Learned Robotics Basics & Developed Autonomous Behaviors"}
-                                descriptions={[
-                                    "Developed a wavefront algorithm to calculate the most optimal path for the robot",
-                                    "Studied the fundamentals of robotics, focused on sensors like infrared laser, camera and bumpers", 
-                                    "Programmed custom algorithms in C++ to enable robot navigation and obstacle avoidance",
-                                    "Integrated sensor data for real-time decision-making"
-                                ]}
+                                year={"2024 – 2025"}
+                                title={"Full-Stack Web Applications"}
+                                description={"Developed and deployed multiple full-stack applications — a real-time messaging platform with WebSockets, an interactive e-commerce storefront, and this portfolio featuring Three.js 3D particle effects and Framer Motion animations."}
+                                highlights={["React", "Node.js", "Express", "JavaScript", "MySQL", "WebSockets", "Three.js", "Axios", "Cors", "Figma", "Postman", "Vitest", "AWS", "Render"]}
                             />
 
                             <RoadmapItems 
                                 side={"right"}
-                                phase={4}
-                                status={"complete"}
-                                title={"Graduate College"}
-                                descriptions={[
-                                    "Bachelor's Degree in Computer Science", 
-                                    "Completed core CS coursework and projects", 
-                                    "Built strong problem-solving and technical skills"
-                                ]}
+                                year={"2025 - 2026"}
+                                title={"Production Backend Systems & Data Engineering"}
+                                description={"Engineered a high-throughput news bot monitoring 3,000+ stock tickers with concurrency queues and bot-evasion strategies. Built a service marketplace with on-device AI vision, multi-tier RBAC, Redis caching, and PostgreSQL persistence."}
+                                highlights={["TypeScript", "Puppeteer", "MySQL", "PostgreSQL", "Redis", "Prisma", "MediaPipe", "RBAC", "TanStack Query"]}
                             />
 
                             <RoadmapItems 
                                 side={"left"}
-                                phase={5}
-                                status={"progress"}
-                                title={"Self-Learning Web Development Basics"}
-                                descriptions={[
-                                    "Learned core HTML, CSS, and Javascript concepts", 
-                                    "Built projects using React, Tailwind, Node.js, and Express", 
-                                    "Used modern tools like Vitest for testing",
-                                    "Practiced debugging and problem-solving through hands-on development"
-                                ]}
-                            />
-
-                            <RoadmapItems 
-                                side={"right"}
-                                phase={6}
-                                status={"progress"}
-                                title={"Networking & Career Development"}
-                                descriptions={[
-                                    "Build professional connections through networking and outreach", 
-                                    "Actively searching and applying for internships and entry-level roles", 
-                                    "Preparing for interviews through Leetcode and resume refinement"
-                                ]}
-                            />
-                            <RoadmapItems 
-                                side={"left"}
-                                phase={7}
-                                status={"planned"}
-                                title={"Getting Employed"}
-                                descriptions={[
-                                    "Passed interviews, coding challenges, and vibe checks", 
-                                    "Successfully landed a job and achieved employed status 🙂", 
-                                ]}
+                                year={"2026 – Present"}
+                                title={"Freelance Full-Stack Development"}
+                                description={"Delivered a production client inquiry management platform as a freelance developer — featuring an admin dashboard with server-side filtering, cursor-based pagination, Redis rate limiting, Google OAuth 2.0 authentication, and automated email notifications."}
+                                highlights={["Next.js", "TypeScript", "PostgreSQL", "Redis", "OAuth 2.0", "Prisma", "Nodemailer", "Vercel"]}
                             />
                         </div>
                     </div>
