@@ -14,3 +14,12 @@
 body {
   background-color: #03050C;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .main-layout-menu,
+  .main-layout-menu-item,
+  .main-layout-shell {
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+  }
+}
