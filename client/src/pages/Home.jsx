@@ -12,16 +12,14 @@ import ProjectsTransition from "../components/Home/ProjectsTransition";
 import StockMarketImg from "../assets/images/stockscanner.jpg"
 import UbercutsImg from "../assets/images/haircut.png"
 import HandyAndyImg from "../assets/images/handyandy.png"
-import CollegeInvadersImg from "../assets/images/collegeinvaders.png"
-import MessageboardImg from "../assets/images/messageboard.png"
-import ShopeasyImg from "../assets/images/shopeasy.png"
 import faqBackground from "../assets/images/faqbackground.jpg"
 import "./home.css"
 import RoadmapItems from "../components/Home/RoadmapItems";
 import { useEffect, useRef, useState } from "react";
-import { motion as Motion, useTransform, useScroll } from "framer-motion"
+import { motion as Motion, useTransform, useScroll, useReducedMotion } from "framer-motion"
 import FaqCards from "../components/Home/FaqCards";
-import FeaturedProjects from "../components/Home/FeaturedProjects";
+import FeaturedProject from "../components/Home/FeaturedProject";
+import SideProject from "../components/Home/SideProject";
 import { FaReact, FaNodeJs, FaPython } from "react-icons/fa";
 import { RiTailwindCssFill, RiNextjsFill } from "react-icons/ri";
 import { 
@@ -143,14 +141,131 @@ const skills = [
     }
 ]
 
+const featuredProjects = [
+    {
+        title: "HandyANDY",
+        accent: "cyan",
+        description:
+            "Built a secure, centralized admin dashboard that streamlines customer inquiry management by allowing administrators to review, organize, filter, and update requests through a responsive interface.",
+        longDescription:
+            "Customer inquiries required a centralized and efficient management system that could securely organize incoming requests while protecting the platform from spam and abuse. I developed a full-stack administrative dashboard using Next.js, TypeScript, Prisma, and PostgreSQL, allowing administrators to efficiently review, sort, filter, paginate, and update customer inquiries. To strengthen reliability and security, I implemented Google OAuth authentication with NextAuth.js, Redis-based IP rate limiting, and honeypot spam detection for public forms. The result is a scalable and responsive management system that improves administrative workflow while providing a secure foundation for future business features.",
+        technologies: ["Next.js", "React", "TailwindCSS", "TypeScript", "Prisma & PostgreSQL", "Google OAuth", "NextAuth.js", "Upstash Redis", "Neon", "Nodemailer", "Cloudinary"],
+        githubUrl: "https://github.com/tzebohn/HandyANDY",
+        liveUrl: "https://handy-andy-nine.vercel.app/",
+        image: HandyAndyImg,
+        imgStyle: "object-[20%_center]",
+        highlights: [
+            "Developed a hidden, secure centralized dashboard for administrators to manage and organize customer inquiries.",
+            "Implemented optimized pagination, sorting, and filtering to efficiently handle and navigate large volumes of requests.",
+            "Protected public forms from abuse using Upstash Redis IP rate limiting and honeypot-based spam detection.",
+            "Created a responsive administrative workflow for reviewing, updating, and organizing customer requests."
+        ],
+        techHighlights: [
+            "Built the full-stack application with Next.js, React, TypeScript, Tailwind CSS, Prisma, and PostgreSQL.",
+            "Implemented secure Google OAuth authentication and protected dashboard access using NextAuth.js.",
+            "Integrated Upstash Redis, Neon PostgreSQL, Cloudinary and Nodemailer for rate limiting, cloud database infrastructure, and email notifications."
+        ],
+    },
+    {
+        title: "Stock Scanner",
+        accent: "blue",
+        description:
+            "Built a real-time market news scanner and RESTful API that continuously monitors stock tickers, processes market data, stores normalized results, and exposes the data through backend endpoints.",
+        longDescription:
+            "Developed a full-stack, long-running Node.js data processing system that continuously scans configurable stock tickers for market news and pricing data, persists normalized results to MySQL, and exposes stored data through RESTful API endpoints. Built a concurrency-controlled scanning pipeline using Promise.all() and a limiter to process multiple tickers while preventing uncontrolled request spikes. Implemented a cached token management system with Puppeteer and request interception, using a shared Promise lock to prevent concurrent refresh operations. Normalized and validated external responses before asynchronously persisting results through a database write queue, while adding adaptive cooldowns, randomized scheduling, and error handling to improve reliability when external services return unexpected or incomplete responses.",
+        technologies: ["React", "TailwindCSS", "Node.js", "Express", "MySQL", "Puppeteer", "p-limit"],
+        githubUrl: "https://github.com/tzebohn/stock-scanner",
+        liveUrl: null,
+        image: StockMarketImg,
+        imgStyle: "",
+        highlights: [
+            "Built a continuous scanning pipeline that processes multiple stock tickers concurrently while controlling workload through a concurrency limiter.",
+            "Developed RESTful API endpoints to expose stored market and news data, separating data collection, persistence, and client access responsibilities.",
+            "Implemented token caching and a shared Promise-based refresh lock to prevent duplicate browser automation and concurrent token refresh operations.",
+            "Improved scanner resilience with adaptive cooldowns, randomized scheduling, queued database writes, and fault isolation so individual ticker failures do not stop the scanner."
+        ],
+        techHighlights: [
+            "Node.js & JavaScript — built a long-running asynchronous scanner and RESTful API using async/await, Promise.all(), and controlled concurrency.",
+            "Puppeteer & Axios — used browser network inspection for token acquisition alongside HTTP requests for efficient data retrieval.",
+            "MySQL & Async Queues — normalized and persisted market data with queued database writes and clear separation between scanning, storage, and API layers."
+        ],
+    },
+    {
+        title: "UberCuts",
+        accent: "violet",
+        description:
+            "A centralized platform that connects users with haircut providers and businesses, enabling service discovery, role-based access, appointment management, and AI-powered face shape analysis.",
+        longDescription:
+            "Built a full-stack haircut marketplace designed to centralize the process of discovering haircut services and connecting users with providers and businesses. The platform implements role-based authentication and authorization for administrators, moderators, providers, and regular users, using Firebase for authentication while synchronizing user identities with a PostgreSQL database for application-level authorization. Users can browse listed services and schedule appointments, while providers and businesses can manage their offerings. The platform also integrates Google MediaPipe to analyze facial features and provide face shape analysis. TanStack Query is used to optimize client-side data fetching by caching and reusing requests, while the backend uses Express, Prisma, PostgreSQL, Redis, and Zod to support scalable data management, validation, and API operations.",
+        technologies: ["React", "TailwindCSS", "TypeScript", "Firebase", "TanStack Query", "Node.js", "Express", "Zod", "Google MediaPipe", "Prisma", "PostgreSQL", "Redis"],
+        githubUrl: "https://github.com/tzebohn/uber-cuts",
+        liveUrl: null,
+        image: UbercutsImg,
+        imgStyle: "object-left",
+        highlights: [
+            "Developed a centralized platform that allows users to discover haircut services, connect with providers and businesses, and schedule appointments through a unified system.",
+            "Implemented a role-based authentication and authorization system supporting administrators, moderators, providers, and regular users with controlled access to platform features.",
+            "Integrated Firebase authentication with a PostgreSQL database to synchronize user identities and enforce application-level authorization across the platform.",
+            "Added AI-powered face shape analysis using Google MediaPipe, allowing the application to analyze facial features as part of a personalized haircut discovery experience."
+        ],
+        techHighlights: [
+            "Built the full-stack application with React, TypeScript, TailwindCSS, Node.js, and Express, using Zod for type-safe request validation and structured API handling.",
+            "Used TanStack Query to optimize client-side data fetching through caching and request reuse, reducing unnecessary duplicate API requests.",
+            "Designed the backend data layer with Prisma, PostgreSQL, and Redis to support structured data management, authorization, and scalable application performance."
+        ],
+    },
+]
+
+const sideProjects = [
+    {
+        title: "Mini MessageBoard",
+        description: "A platform for real-time open conversations and discussions.",
+        technologies: ["React", "TailwindCSS", "JavaScript", "Node.js", "Express", "MySQL", "WebSockets", "leo-profanity", "AWS", "Render"],
+        githubUrl: "https://github.com/tzebohn/mini-message-board",
+    },
+    {
+        title: "CollegeInvaders",
+        description: "A modern take on the classic Space Invaders arcade shooter.",
+        technologies: ["Phaser 3", "JavaScript", "HTML/CSS", "Subversion"],
+        githubUrl: "https://github.com/tzebohn/collegeinvaders",
+    },
+    {
+        title: "ShopEasy",
+        description: "A modern eCommerce website inspired by ShopEasy, featuring product browsing, searching, and cart checkouts.",
+        technologies: ["React", "TailwindCSS", "JavaScript", "Framer Motion", "Vitest"],
+        githubUrl: "https://github.com/tzebohn/Odin-Shopping-Cart",
+    },
+    {
+        title: "DineFinder",
+        description: "DineFiner uses the Yelp Fusion API to help indecisive people find and choose where to eat.",
+        technologies: ["JavaScript", "Node.js", "Express", "Yelp Fusion"],
+        githubUrl: "https://github.com/tzebohn/DineFinder",
+    },
+    {
+        title: "GROQ Todolist",
+        description: "An experimental WebGL landing page exploring shader-driven backgrounds.",
+        technologies: ["Python", "GROQ"],
+        githubUrl: "https://github.com/tzebohn/Todolist",
+    },
+    {
+        title: "Tic-Tac-Toe",
+        description: "A simple Tic-Tac-Toe game where you can play against a friend or challenge the computer",
+        technologies: ["React", "TailwindCSS", "JavaScript", "Vitest", "Github Actions"],
+        githubUrl: "https://github.com/tzebohn/tic-tac-toe",
+    },
+]
+
 export default function Home () {
-    const [activeSkillCategory, setActiveSkillCategory] = useState(0) // Tracks selected domain tab on desktop
-    const [isMdUp, setIsMdUp] = useState(false) // Tracks if current screen width is 768px or greater
-    const [activeFaq, setActiveFaq] = useState(null) // Tracks which FAQ is currently expanded
+    const [activeSkillCategory, setActiveSkillCategory] = useState(0)   // Tracks selected domain tab on desktop
+    const [isMdUp, setIsMdUp] = useState(false)                         // Tracks if current screen width is 768px or greater
+    const [activeProject, setActiveProject] = useState(null)            // Tracks which FeaturedProject is currently expanded
+    const [activeFaq, setActiveFaq] = useState(null)                    // Tracks which FAQ is currently expanded
 
-    const lineScrollRef = useRef(null)      // Tracks the current scroll height for experience timeline container
+    const lineScrollRef = useRef(null)                   // Tracks the current scroll height for experience timeline container
 
-    const isMobile = useIsMobile()            // Custom hook to track if user is on mobile device
+    const isMobile = useIsMobile()                      // Custom hook to track if user is on mobile device
+    const prefersReducedMotion = useReducedMotion()    // Respects prefers-reduced-motion
+    const reduceMotion = import.meta.env.DEV ? false: prefersReducedMotion
 
     /**
      * Checks if current screen width is >= 768px
@@ -320,220 +435,72 @@ export default function Home () {
                     {/* Nice transition into projects */}
                     < ProjectsTransition />
                     
-                    {/* Projects go down here */}
-                    <div className="bg-black pt-20">
+
+                    <div className="bg-black pb-24 pt-20 md:pb-32">
                         <div className="relative overflow-hidden">
                             {/* Grid layer goes here */}
                             <div className="astral-grid" />
 
                             {/* Project Content */}
-                            <div className="relative flex flex-col items-center px-5 lg:px-10 pt-20">
-                                {/* Featured Project 1 */}
-                                <FeaturedProjects
-                                    project={{
-                                        front: {
-                                            technologies: [
-                                                "Next.js",
-                                                "React & TailwindCSS",
-                                                "TypeScript",
-                                                "Prisma & PostgreSQL",
-                                                "Google OAuth",
-                                                "NextAuth.js",
-                                                "Upstash Redis",
-                                                "Neon",
-                                                "Nodemailer"
-                                            ],
-                                            roles: ["Full-Stack"],
-                                            stats: [
-                                                { label: "TEAM SIZE", value: "2" }
-                                            ],
-                                            accomplishments: [
-                                                "Built a secure admin dashboard with protected routes for managing customer inquiries.",
-                                                "Implemented Redis-based IP rate limiting to help prevent abuse and excessive requests.",
-                                                "Added honeypot spam detection to reduce automated bot submissions and improve form security."
-                                            ]
-                                        },
-                                        title: "HandyANDY",
-                                        stats: [
-                                            { label: "INQUIRY MANAGEMENT", value: "FULLY OPERATIONAL" },
-                                            { label: "ACCESS CONTROL", value: "GOOGLE OAUTH + RBAC" }
-                                        ],
-                                        description: "A centralized dashboard for managing customer inquiries, allowing administrators to review, organize, and update requests through a responsive interface.",
-                                        features: [
-                                            "Search, filtering, sorting, and pagination",
-                                            "Redis rate-limiting & honeypot spam detection"
-                                        ],
-                                        media: {
-                                            type: "image",
-                                            src: HandyAndyImg
-                                        },
-                                        href: "https://handy-andy-nine.vercel.app/"
-                                    }}
-                                    isAvailable={true}
-                                />
+                            <div className="relative flex flex-col items-center px-5 lg:px-10 pt-16">
+                                <Motion.div
+                                    initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+                                    whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                                    viewport={{ once: true, margin: "-100px" }}
+                                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                                    className="w-full max-w-6xl"
+                                >
+                                    {/* Featured projects — Tier 1 */}
+                                    <header className="max-w-3xl">
+                                        <p className="font-[Orbitron] text-[11px] uppercase tracking-[0.35em] text-[#2596BE]">
+                                            Portfolio / Selected Work
+                                        </p>
+                                        <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
+                                            Featured Projects
+                                        </h2>
+                                        <p className="mt-4 text-sm leading-relaxed text-slate-300/85 md:text-base">
+                                            A few of the systems I am most proud of. Expand any project for the deeper technical story, then jump straight to the source.
+                                        </p>
+                                    </header>
 
-                                {/* Featured Project 2 */}
-                                <FeaturedProjects
-                                    project={{
-                                        front: {
-                                            technologies: [
-                                                "React & TailwindCSS",
-                                                "Node & Express",
-                                                "Google MediaPipe",
-                                                "Redis",
-                                                "Prisma & PostgreSQL",
-                                                "TanStackQuery",
-                                                "Firebase",
-                                                "TypeScript"
-                                            ],
-                                            roles: ["Full-Stack"],
-                                            stats: [{ label: "TEAM SIZE", value: "2" }],
-                                            accomplishments: [
-                                                "Built a secure role-based access control system supporting users, providers, moderators, and administrators.",
-                                                "Developed a custom face shape analysis feature using Google's Face Landmarker Vision Task.",
-                                                "Integrated TanStack Query to optimize data fetching, caching, and overall application performance."
-                                            ]
-                                        },
-                                        title: "UberCuts",
-                                        stats: [
-                                            { label: "AUTH", value: "SECURE & ROLE-BASED" },
-                                            { label: "AI INTEGRATION", value: "MEDIAPIPE TASK-VISION" }
-                                        ],
-                                        description: "A centralized haircut app for businesses and freelancers with Uber",
-                                        features: [
-                                            "Role based login/signup system",
-                                            "Rate limiting with Redis caching",
-                                            "Face-Shape analysis with Google's Mediapipe"
-                                        ],
-                                        media: {
-                                            type: "image",
-                                            src: UbercutsImg
-                                        }
-                                    }}
-                                    isAvailable={false}
-                                    reverse
-                                />
+                                    <div className="mt-10 space-y-6 md:space-y-8">
+                                        {featuredProjects.map((project, index) => (
+                                            <FeaturedProject 
+                                                key={project.title} 
+                                                project={project} 
+                                                index={index} 
+                                                isOpen={activeProject === index}
+                                                onToggle={() => setActiveProject(activeProject === index ? null : index)} 
+                                            />
+                                        ))}
+                                    </div>
 
-                                {/* Featured Project 3 */}
-                                <FeaturedProjects
-                                    project={{
-                                        front: {
-                                            technologies: [
-                                                "React & TailwindCSS",
-                                                "Node.js",
-                                                "Express",
-                                                "MySQL",
-                                                "p-limit (npm package)",
-                                                "Puppeteer"
-                                            ],
-                                            roles: ["Full-Stack"],
-                                            stats: [
-                                                { label: "TEAM SIZE", value: "1" }
-                                            ],
-                                            accomplishments: [
-                                                "Built a continuous monitoring system that scans over 3,000+ ticker symbols for newly published news articles in near real time.",
-                                                "Designed a polished UI with instant notifications and audio alerts to keep users informed as soon as new articles are detected.",
-                                                "Implemented bot avoidance techniques using randomized short-lived cached tokens, rotating user agents, and exponential backoff delays to improve reliability and reduce detection."
-                                            ]
-                                        },
-                                        title: "Stock Scanner",
-                                        stats: [
-                                            { label: "MARKET DATA", value: "LIVE & CONTINUOUS" },
-                                            { label: "SIGNAL TYPE", value: "MOMENTUM & NEWS" }
-                                        ],
-                                        description: "A data-driven tool for monitoring stock momentum. Aggregates live news and market data to help users quickly identify trending stocks.",
-                                        features: [
-                                            "Real-time data aggregation",
-                                            "Clean, responsive data visualizations"
-                                        ],
-                                        media: {
-                                            type: "image",
-                                            src: StockMarketImg
-                                        }
-                                    }}
-                                    isAvailable={false}
-                                />
-                                
-                                {/* Featured Project 4 */}
-                                <FeaturedProjects
-                                    project={{
-                                        front: {
-                                            technologies: [
-                                                "Phaser",
-                                                "Javascript",
-                                                "HTML & CSS",
-                                                "Subversion",
-                                                "Github Pages"
-                                            ],
-                                            roles: ["Backbone Team", "Codebase Maintainer", "UI/UX Designer"],
-                                            stats: [
-                                                { label: "TEAM SIZE", value: "20-30" }
-                                            ],
-                                            accomplishments: [
-                                                "Developed a polished, responsive UI/UX for a classic Space Invaders game using Phaser 3.",
-                                                "Refactored the codebase into reusable, modular components to improve maintainability and scalability.",
-                                                "Collaborated closely with the QA, Documentation, and Specifications teams to align gameplay features with project requirements and ensure a high-quality user experience."
-                                            ]
-                                        },
-                                        title: "College Invaders",
-                                        stats: [
-                                            { label: "GAMEPLAY STATUS", value: "FULLY OPERATIONAL" },
-                                            { label: "CORE MECHANICS", value: "SHOOT & DODGE" }
-                                        ],
-                                        description: "A modern take on the classic Space Invaders arcade shooter. Players defend College against descending agents with responsive controls and smooth gameplay.",
-                                        features: [
-                                            "Progressive enemy waves with escalating difficulty",
-                                            "Score tracking"
-                                        ],
-                                        media: {
-                                            type: "image",
-                                            src: CollegeInvadersImg
-                                        },
-                                        href: "https://tzebohn.github.io/collegeinvaders/"
-                                    }}
-                                    isAvailable={true}
-                                    reverse={true}
-                                />
+                                    {/* Side projects — Tier 2 */}
+                                    <section className="mt-20 md:mt-28" aria-labelledby="side-projects-heading">
+                                        <div className="flex flex-col gap-4 border-b border-[#2596BE]/10 pb-5 sm:flex-row sm:items-end sm:justify-between">
+                                            <div>
+                                                <p className="font-[Orbitron] text-[11px] uppercase tracking-[0.35em] text-[#2596BE]">
+                                                    More / Experiments
+                                                </p>
+                                                <h3
+                                                    id="side-projects-heading"
+                                                    className="mt-3 text-2xl font-bold tracking-tight text-white sm:text-3xl"
+                                                >
+                                                    Side Projects
+                                                </h3>
+                                            </div>
+                                            <p className="max-w-sm text-sm leading-relaxed text-slate-400">
+                                                Smaller builds and explorations across different tools and ideas.
+                                            </p>
+                                        </div>
 
-                                {/* Featured Project 5 */}
-                                <FeaturedProjects
-                                    project={{
-                                        front: {
-                                            technologies: [
-                                                "React & TailwindCSS",
-                                                "Node.js & Express",
-                                                "MySQL",
-                                                "WebSockets",
-                                                "AWS & Render for deployment"
-                                            ],
-                                            roles: ["Full-Stack"],
-                                            stats: [
-                                                { label: "TEAM SIZE", value: "1" }
-                                            ],
-                                            accomplishments: [
-                                                "Built a real-time messaging system using WebSockets for instant communication between users.",
-                                                "Implemented profanity filtering with leo-profanity to help maintain a clean and user-friendly chat experience.",
-                                                "Designed and structured a MySQL database schema to efficiently store and manage chat messages."
-                                            ]
-                                        },
-                                        title: "Message Board",
-                                        stats: [
-                                            { label: "MESSAGES", value: "VALIDATED & VERIFIED" },
-                                            { label: "STATUS", value: "ACTIVE & MODERATED" }
-                                        ],
-                                        description: "A platform for open conversations and discussions.",
-                                        features: [
-                                            "Automatic strict profanity filtering",
-                                            "Real-time messaging via WebSockets"
-                                        ],
-                                        media: {
-                                            type: "image",
-                                            src: MessageboardImg
-                                        },
-                                        href: "https://github.com/tzebohn/Odin-message-board"
-                                    }}
-                                    isAvailable={true}
-                                />
+                                        <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                                            {sideProjects.map((project, index) => (
+                                                <SideProject key={project.title} project={project} index={index} />
+                                            ))}
+                                        </div>
+                                    </section>
+                                </Motion.div>
                             </div>
                         </div>
                     </div>
@@ -608,7 +575,7 @@ export default function Home () {
                                 },
                                 {
                                     title: "What technologies do you work with?",
-                                    description: "React, Next.js, Vite, TailwindCSS, Javascript, Typescript, HTML & CSS, TanStackQuery, Firebase, Node.js, Express, Axios, Prisma, Redis, SQL, AWS, Render, Git, etc."
+                                    description: "React, Next.js, Vite, TailwindCSS, JavaScript, TypeScript, HTML & CSS, TanStackQuery, Firebase, Node.js, Express, Axios, Prisma, Redis, SQL, AWS, Render, Git, etc."
                                 },
                                 {
                                     title: "What makes you different from others in your field?",

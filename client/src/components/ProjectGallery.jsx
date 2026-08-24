@@ -51,6 +51,7 @@ export default function ProjectGallery ({ onClose }) {
                         <ProjectCards
                             title={"Stock Scanner"}
                             description={"Full-Stack"}
+                            href={"https://github.com/tzebohn/stock-scanner"}
                             image={StockscannerImg}
                         />
                     </div>
@@ -62,6 +63,7 @@ export default function ProjectGallery ({ onClose }) {
                         <ProjectCards
                             title={"UberCuts"}
                             description={"Full-Stack"}
+                            href={"https://github.com/tzebohn/uber-cuts"}
                             image={UberCutsImg}
                         />
                     </div>

@@ -4,11 +4,14 @@ import './index.css'
 import { RouterProvider } from 'react-router-dom'
 import router from './router/index.jsx'
 import InputDeviceProvider from './contexts/inputDevice/InputDeviceProvider.jsx'
+import { MotionConfig } from "framer-motion";
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <InputDeviceProvider>
-      <RouterProvider router={router}/>
-    </InputDeviceProvider>
+    <MotionConfig reducedMotion={import.meta.env.DEV ? "never" : "user"}>
+      <InputDeviceProvider>
+        <RouterProvider router={router}/>
+      </InputDeviceProvider>
+    </MotionConfig>
   </StrictMode>,
 )
