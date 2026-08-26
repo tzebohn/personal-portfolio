@@ -58,7 +58,7 @@ export default function FeaturedProject({ project, index, isOpen, onToggle }) {
             transition={{ duration: 0.6, ease: EASE }}
             className="group relative overflow-hidden rounded-xl border border-[#2596BE]/15 bg-[#050b18]/60 shadow-[0_24px_80px_-60px_rgba(37,150,190,0.5)] backdrop-blur-sm transition-colors duration-300 hover:border-[#2596BE]/35"
         >
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#2596BE]/30 to-transparent" />
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[#2596BE]/30 to-transparent" />
 
             <div className="grid md:grid-cols-[320px_1fr]">
                 {/* Visual */}
@@ -210,9 +210,9 @@ export default function FeaturedProject({ project, index, isOpen, onToggle }) {
                                                 <button
                                                     type="button"
                                                     onClick={handleExploreArchitecture}
-                                                    className={`${!isEnteringArch && "cursor-pointer"} group/cta relative flex w-full items-center justify-between overflow-hidden rounded-xl border border-[#2596BE]/30 bg-[#030915]/85 p-4 text-left shadow-[0_4px_24px_-8px_rgba(37,150,190,0.25)] transition-all duration-300 hover:border-[#2596BE]/80 hover:bg-[#2596BE]/[0.08] hover:shadow-[0_0_25px_-3px_rgba(37,150,190,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2596BE] sm:p-5`}
+                                                    className={`${!isEnteringArch && "cursor-pointer"} group/cta relative flex w-full items-center justify-between overflow-hidden rounded-xl border border-[#2596BE]/30 bg-[#030915]/85 p-4 text-left shadow-[0_4px_24px_-8px_rgba(37,150,190,0.25)] transition-all duration-300 hover:border-[#2596BE]/80 hover:bg-[#2596BE]/8 hover:shadow-[0_0_25px_-3px_rgba(37,150,190,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2596BE] sm:p-5`}
                                                 >
-                                                    <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#2596BE]/70 to-transparent" />
+                                                    <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[#2596BE]/70 to-transparent" />
                                                     
                                                     {/* Subtle Light Scanline Sweep on hover */}
                                                     <span className="cta-scanline group-hover/cta:animate-[ctaSweep_1.5s_infinite_linear]" />

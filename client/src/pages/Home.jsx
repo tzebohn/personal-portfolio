@@ -334,9 +334,9 @@ export default function Home () {
                 {/* Overview section */}
                 <section className="relative overflow-hidden bg-[#03050C] pt-24 pb-16 sm:pb-20 md:pb-28 lg:pb-36 px-4 sm:px-8 lg:px-12">
                     <div className="pointer-events-none absolute inset-0 overview-field" />
-                    <div className="pointer-events-none absolute left-1/2 top-0 h-px w-[80vw] -translate-x-1/2 bg-gradient-to-r from-transparent via-[#2596BE]/35 to-transparent" />
+                    <div className="pointer-events-none absolute left-1/2 top-0 h-px w-[80vw] -translate-x-1/2 bg-linear-to-r from-transparent via-[#2596BE]/35 to-transparent" />
                     <div className="pointer-events-none absolute -left-32 top-16 h-72 w-72 rounded-full bg-[#2596BE]/10 blur-3xl" />
-                    <div className="pointer-events-none absolute right-[-12rem] bottom-10 h-96 w-96 rounded-full bg-[#3a8dff]/10 blur-3xl" />
+                    <div className="pointer-events-none absolute -right-48 bottom-10 h-96 w-96 rounded-full bg-[#3a8dff]/10 blur-3xl" />
 
                     <div className="relative max-w-7xl mx-auto grid grid-cols-1 xl:grid-cols-[0.85fr_1.15fr] gap-12 xl:gap-16 items-start">
                         <div className="xl:sticky xl:top-28 space-y-8">
@@ -355,7 +355,7 @@ export default function Home () {
                             </div>
 
                             <div className="relative overflow-hidden rounded-xl border border-[#2596BE]/15 bg-[#050b18]/60 backdrop-blur-sm">
-                                <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#2596BE]/30 to-transparent" />
+                                <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[#2596BE]/30 to-transparent" />
                                 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 divide-[#2596BE]/10">
                                     {[
@@ -367,7 +367,7 @@ export default function Home () {
                                         <div
                                             key={item.label}
                                             className={`
-                                                group p-4 sm:p-5 transition-colors duration-200 hover:bg-[#2596BE]/[0.03]
+                                                group p-4 sm:p-5 transition-colors duration-200 hover:bg-[#2596BE]/3
                                                 ${index % 2 === 0 ? "sm:border-r sm:border-[#2596BE]/10" : ""}
                                                 ${index < 2 ? "sm:border-b sm:border-[#2596BE]/10" : ""}
                                             `}
@@ -389,10 +389,10 @@ export default function Home () {
                             <SkillsCarousel skills={skills}/>
                         ) : (
                             <div className="relative overflow-hidden border border-[#2596BE]/15 bg-[#050b18]/65 shadow-[0_24px_80px_-48px_rgba(37,150,190,0.55)] backdrop-blur-sm">
-                                <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#2596BE]/60 to-transparent" />
+                                <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[#2596BE]/60 to-transparent" />
                                 <div className="pointer-events-none absolute right-0 top-0 h-56 w-56 translate-x-1/3 -translate-y-1/3 rounded-full bg-[#2596BE]/10 blur-3xl" />
 
-                                <div className="grid min-h-[620px] grid-cols-[240px_1fr]">
+                                <div className="grid min-h-155 grid-cols-[240px_1fr]">
                                     <div className="border-r border-[#2596BE]/10 bg-black/15 p-6">
                                         <p className="font-[Orbitron] text-[10px] uppercase tracking-[0.3em] text-[#2596BE]/80">Technical Domains</p>
                                         <p className="mt-3 text-sm leading-relaxed text-slate-400">Core technologies mapped to practical production context.</p>
@@ -434,7 +434,7 @@ export default function Home () {
                                             {skills[activeSkillCategory].items.map((skill) => (
                                                 <div 
                                                     key={skill.name}
-                                                    className="group grid grid-cols-[auto_1fr] gap-x-4 py-5 transition-colors duration-300 hover:bg-[#2596BE]/[0.025]"
+                                                    className="group grid grid-cols-[auto_1fr] gap-x-4 py-5 transition-colors duration-300 hover:bg-[#2596BE]/2.5"
                                                 >
                                                     <div className="mt-1 flex h-10 w-10 items-center justify-center border border-[#2596BE]/15 bg-black/20 transition-all duration-300 group-hover:border-[#2596BE]/35">
                                                         <skill.Icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" style={{ color: skill.color }} />
