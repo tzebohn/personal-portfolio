@@ -12,6 +12,8 @@ import ProjectsTransition from "../components/Home/ProjectsTransition";
 import StockMarketImg from "../assets/images/stockscanner.jpg"
 import UbercutsImg from "../assets/images/haircut.png"
 import HandyAndyImg from "../assets/images/handyandy.png"
+import HandyAndyFlowchartSvg from "../assets/diagrams/handyandy_flowchart.svg"
+import StockScannerSvg from "../assets/diagrams/stock-scanner.svg"
 import faqBackground from "../assets/images/faqbackground.jpg"
 import "./home.css"
 import RoadmapItems from "../components/Home/RoadmapItems";
@@ -165,6 +167,18 @@ const featuredProjects = [
             "Implemented secure Google OAuth authentication and protected dashboard access using NextAuth.js.",
             "Integrated Upstash Redis, Neon PostgreSQL, Cloudinary and Nodemailer for rate limiting, cloud database infrastructure, and email notifications."
         ],
+        architecture: {
+            title: "System Architecture",
+            subtitle: "Full-Stack Next.js Application",
+            description: "Request flow, authentication gateways, distributed rate limiting, and relational database persistence.",
+            image: HandyAndyFlowchartSvg,
+            alt: "System architecture diagram showing users interacting with Next.js client, API routes, Upstash Redis, Google OAuth, and PostgreSQL.",
+            flowLegend: [
+                { badge: "User Flow", path: "Public Inquiry Form → Next.js API Routes → Upstash Redis Check → PostgreSQL (Neon)" },
+                { badge: "Auth Flow", path: "Google OAuth 2.0 → NextAuth.js Callback → Protected Admin Session & Dashboard" },
+                { badge: "Security", path: "Sliding-Window IP Rate Limiter (Redis) + Honeypot Anti-Spam Protection" }
+            ]
+        }
     },
     {
         title: "Stock Scanner",
@@ -189,6 +203,17 @@ const featuredProjects = [
             "Puppeteer & Axios — used browser network inspection for token acquisition alongside HTTP requests for efficient data retrieval.",
             "MySQL & Async Queues — normalized and persisted market data with queued database writes and clear separation between scanning, storage, and API layers."
         ],
+        architecture: {
+            title: "System Architecture",
+            subtitle: "Full-Stack Vite Application",
+            description: "Automated scanning, token extraction, hidden API services, queued article processing, and relational database persistence.",
+            image: StockScannerSvg,
+            alt: "System architecture diagram showing the life cycle of the stock scanner.",
+            flowLegend: [
+                { badge: "Scanner Flow", path: "Scanner loop → Hidden API Services → Write Queue → MySQL → Repeat" },
+                { badge: "Client Flow", path: "Client polling → RESTful API → MySQL → Display Newly Posted Articles" },
+            ]
+        }
     },
     {
         title: "UberCuts",
