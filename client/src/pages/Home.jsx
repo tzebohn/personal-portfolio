@@ -332,14 +332,20 @@ export default function Home () {
             {/* Main body content */}
             <main>
                 {/* Overview section */}
-                <section className="relative overflow-hidden bg-[#03050C] pt-24 pb-16 sm:pb-20 md:pb-28 lg:pb-36 px-4 sm:px-8 lg:px-12">
+                <section id="overview" className="relative overflow-hidden bg-[#03050C] pt-24 pb-16 sm:pb-20 md:pb-28 lg:pb-36 px-4 sm:px-8 lg:px-12">
                     <div className="pointer-events-none absolute inset-0 overview-field" />
                     <div className="pointer-events-none absolute left-1/2 top-0 h-px w-[80vw] -translate-x-1/2 bg-linear-to-r from-transparent via-[#2596BE]/35 to-transparent" />
                     <div className="pointer-events-none absolute -left-32 top-16 h-72 w-72 rounded-full bg-[#2596BE]/10 blur-3xl" />
                     <div className="pointer-events-none absolute -right-48 bottom-10 h-96 w-96 rounded-full bg-[#3a8dff]/10 blur-3xl" />
 
                     <div className="relative max-w-7xl mx-auto grid grid-cols-1 xl:grid-cols-[0.85fr_1.15fr] gap-12 xl:gap-16 items-start">
-                        <div className="xl:sticky xl:top-28 space-y-8">
+                        <Motion.div
+                            initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+                            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-60px" }}
+                            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                            className="xl:sticky xl:top-28 space-y-8"
+                        >
                             <div className="space-y-5">
                                 <p className="font-[Orbitron] text-[11px] sm:text-xs uppercase tracking-[0.35em] text-[#2596BE]">Profile / Systems Focus</p>
                                 <h2 className="max-w-xl text-white font-bold text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[0.95]">
@@ -382,76 +388,83 @@ export default function Home () {
                                     ))}
                                 </div>
                             </div>
-                        </div>
+                        </Motion.div>
                         
                         {/* Skills section */}
-                        {isMobile ? (
-                            <SkillsCarousel skills={skills}/>
-                        ) : (
-                            <div className="relative overflow-hidden border border-[#2596BE]/15 bg-[#050b18]/65 shadow-[0_24px_80px_-48px_rgba(37,150,190,0.55)] backdrop-blur-sm">
-                                <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[#2596BE]/60 to-transparent" />
-                                <div className="pointer-events-none absolute right-0 top-0 h-56 w-56 translate-x-1/3 -translate-y-1/3 rounded-full bg-[#2596BE]/10 blur-3xl" />
+                        <Motion.div
+                            initial={reduceMotion ? false : { opacity: 0, y: 28 }}
+                            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-60px" }}
+                            transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                        >
+                            {isMobile ? (
+                                <SkillsCarousel skills={skills}/>
+                            ) : (
+                                <div className="relative overflow-hidden border border-[#2596BE]/15 bg-[#050b18]/65 shadow-[0_24px_80px_-48px_rgba(37,150,190,0.55)] backdrop-blur-sm">
+                                    <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[#2596BE]/60 to-transparent" />
+                                    <div className="pointer-events-none absolute right-0 top-0 h-56 w-56 translate-x-1/3 -translate-y-1/3 rounded-full bg-[#2596BE]/10 blur-3xl" />
 
-                                <div className="grid min-h-155 grid-cols-[240px_1fr]">
-                                    <div className="border-r border-[#2596BE]/10 bg-black/15 p-6">
-                                        <p className="font-[Orbitron] text-[10px] uppercase tracking-[0.3em] text-[#2596BE]/80">Technical Domains</p>
-                                        <p className="mt-3 text-sm leading-relaxed text-slate-400">Core technologies mapped to practical production context.</p>
+                                    <div className="grid min-h-155 grid-cols-[240px_1fr]">
+                                        <div className="border-r border-[#2596BE]/10 bg-black/15 p-6">
+                                            <p className="font-[Orbitron] text-[10px] uppercase tracking-[0.3em] text-[#2596BE]/80">Technical Domains</p>
+                                            <p className="mt-3 text-sm leading-relaxed text-slate-400">Core technologies mapped to practical production context.</p>
 
-                                        <div className="mt-10 space-y-1" role="tablist" aria-label="Technical domain categories">
-                                            {skills.map((domain, index) => {
-                                                const isActive = index === activeSkillCategory;
-                                                return (
-                                                    <button
-                                                        key={domain.category}
-                                                        role="tab"
-                                                        aria-selected={isActive}
-                                                        onClick={() => setActiveSkillCategory(index)}
-                                                        className={`group relative w-full cursor-pointer px-0 py-4 text-left transition-colors duration-300 ${isActive ? "text-white" : "text-slate-500 hover:text-slate-200"}`}
-                                                    >
-                                                        <span className={`absolute left-0 top-1/2 h-8 w-px -translate-y-1/2 transition-all duration-300 ${isActive ? "bg-[#2596BE] shadow-[0_0_14px_rgba(37,150,190,0.75)]" : "bg-[#2596BE]/15 group-hover:bg-[#2596BE]/35"}`} />
-                                                        <span className="block pl-5 font-[Orbitron] text-[10px] tracking-[0.24em] text-[#2596BE]/65">0{index + 1}</span>
-                                                        <span className="mt-1 block pl-5 text-sm font-semibold leading-tight tracking-wide">{domain.category}</span>
-                                                    </button>
-                                                );
-                                            })}
-                                        </div>
-                                    </div>
-
-                                    <div className="relative p-8 lg:p-10">
-                                        <div className="mb-8 flex items-end justify-between gap-8 border-b border-[#2596BE]/10 pb-7">
-                                            <div>
-                                                <h3 className="max-w-xl text-3xl font-bold leading-tight tracking-tight text-white lg:text-4xl">
-                                                    {skills[activeSkillCategory].category}
-                                                </h3>
-                                            </div>
-                                            <div className="text-right">
-                                                <p className="font-[Orbitron] text-3xl text-[#2596BE]">{skills[activeSkillCategory].items.length}</p>
-                                                <p className="text-xs uppercase tracking-[0.2em] text-slate-500">Technologies</p>
+                                            <div className="mt-10 space-y-1" role="tablist" aria-label="Technical domain categories">
+                                                {skills.map((domain, index) => {
+                                                    const isActive = index === activeSkillCategory;
+                                                    return (
+                                                        <button
+                                                            key={domain.category}
+                                                            role="tab"
+                                                            aria-selected={isActive}
+                                                            onClick={() => setActiveSkillCategory(index)}
+                                                            className={`group relative w-full cursor-pointer px-0 py-4 text-left transition-colors duration-300 ${isActive ? "text-white" : "text-slate-500 hover:text-slate-200"}`}
+                                                        >
+                                                            <span className={`absolute left-0 top-1/2 h-8 w-px -translate-y-1/2 transition-all duration-300 ${isActive ? "bg-[#2596BE] shadow-[0_0_14px_rgba(37,150,190,0.75)]" : "bg-[#2596BE]/15 group-hover:bg-[#2596BE]/35"}`} />
+                                                            <span className="block pl-5 font-[Orbitron] text-[10px] tracking-[0.24em] text-[#2596BE]/65">0{index + 1}</span>
+                                                            <span className="mt-1 block pl-5 text-sm font-semibold leading-tight tracking-wide">{domain.category}</span>
+                                                        </button>
+                                                    );
+                                                })}
                                             </div>
                                         </div>
 
-                                        <div className="divide-y divide-[#2596BE]/10">
-                                            {skills[activeSkillCategory].items.map((skill) => (
-                                                <div 
-                                                    key={skill.name}
-                                                    className="group grid grid-cols-[auto_1fr] gap-x-4 py-5 transition-colors duration-300 hover:bg-[#2596BE]/2.5"
-                                                >
-                                                    <div className="mt-1 flex h-10 w-10 items-center justify-center border border-[#2596BE]/15 bg-black/20 transition-all duration-300 group-hover:border-[#2596BE]/35">
-                                                        <skill.Icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" style={{ color: skill.color }} />
-                                                    </div>
-                                                    <div>
-                                                        <h4 className="text-base font-semibold tracking-wide text-white transition-colors duration-300 group-hover:text-[#e8f8ff]">{skill.name}</h4>
-                                                        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-300/90">
-                                                            {skill.context}
-                                                        </p>
-                                                    </div>
+                                        <div className="relative p-8 lg:p-10">
+                                            <div className="mb-8 flex items-end justify-between gap-8 border-b border-[#2596BE]/10 pb-7">
+                                                <div>
+                                                    <h3 className="max-w-xl text-3xl font-bold leading-tight tracking-tight text-white lg:text-4xl">
+                                                        {skills[activeSkillCategory].category}
+                                                    </h3>
                                                 </div>
-                                            ))}
+                                                <div className="text-right">
+                                                    <p className="font-[Orbitron] text-3xl text-[#2596BE]">{skills[activeSkillCategory].items.length}</p>
+                                                    <p className="text-xs uppercase tracking-[0.2em] text-slate-500">Technologies</p>
+                                                </div>
+                                            </div>
+
+                                            <div className="divide-y divide-[#2596BE]/10">
+                                                {skills[activeSkillCategory].items.map((skill) => (
+                                                    <div 
+                                                        key={skill.name}
+                                                        className="group grid grid-cols-[auto_1fr] gap-x-4 py-5 transition-colors duration-300 hover:bg-[#2596BE]/2.5"
+                                                    >
+                                                        <div className="mt-1 flex h-10 w-10 items-center justify-center border border-[#2596BE]/15 bg-black/20 transition-all duration-300 group-hover:border-[#2596BE]/35">
+                                                            <skill.Icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" style={{ color: skill.color }} />
+                                                        </div>
+                                                        <div>
+                                                            <h4 className="text-base font-semibold tracking-wide text-white transition-colors duration-300 group-hover:text-[#e8f8ff]">{skill.name}</h4>
+                                                            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-300/90">
+                                                                {skill.context}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        )}
+                            )}
+                        </Motion.div>
                     </div>
                 </section>
 
@@ -532,63 +545,101 @@ export default function Home () {
                 </section>
 
                 {/* What I do section */}
-                <section className="bg-[#03050C] pt-24 px-8">
-                    <div className="flex flex-col space-y-5 text-center">
-                        <h2 className="text-white font-bold text-3xl sm:text-4xl lg:text-5xl tracking-wide">What I do</h2>
-                        <p className="text-gray-500 font-semibold text-sm xs:text-base md:text-lg lg:text-xl lg:text-center leading-relaxed">
+                <section id="capabilities" className="relative bg-[#03050C] pt-24 pb-12 px-6 sm:px-8">
+                    <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[#2596BE]/25 to-transparent" />
+
+                    <Motion.div
+                        initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+                        whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-60px" }}
+                        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                        className="flex flex-col space-y-4 text-center max-w-3xl mx-auto"
+                    >
+                        <p className="font-[Orbitron] text-[11px] uppercase tracking-[0.35em] text-[#2596BE]">
+                            Capabilities / Systems
+                        </p>
+                        <h2 className="text-white font-bold text-3xl sm:text-4xl lg:text-5xl tracking-wide">
+                            What I do
+                        </h2>
+                        <p className="text-slate-400 font-medium text-sm sm:text-base md:text-lg leading-relaxed">
                             I specialize in creating modern, responsive web applications using cutting-edge technologies. My approach combines technical excellence with a focus on user experience.
                         </p>
-                    </div>
+                    </Motion.div>
+
                     {/* Grid layout section */}
-                    {isMobile ? (
-                        <GridCarousel cards={cards}/>
-                    ) : (
-                        <div className="grid grid-cols-3 md:grid-cols-4 text-white mt-48">
-                            {cards.map((card, i) => (
-                                <GridCard
-                                    key={i}
-                                    Icon={card.Icon}
-                                    title={card.title}
-                                    description={card.description}
-                                />
-                            ))}
-                        </div>        
-                    )}
+                    <Motion.div
+                        initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+                        whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-50px" }}
+                        transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                        className="max-w-6xl mx-auto"
+                    >
+                        {isMobile ? (
+                            <GridCarousel cards={cards}/>
+                        ) : (
+                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 text-white mt-12 sm:mt-16 md:mt-20">
+                                {cards.map((card, i) => (
+                                    <GridCard
+                                        key={i}
+                                        Icon={card.Icon}
+                                        title={card.title}
+                                        description={card.description}
+                                    />
+                                ))}
+                            </div>        
+                        )}
+                    </Motion.div>
 
-                    {/* Vertical divider */}
-                    <div className="mt-4 flex items-center justify-center">
-                        <div className="w-0.5 h-40 bg-gray-700"/>
+                    {/* Vertical transition divider */}
+                    <div className="mt-12 flex items-center justify-center">
+                        <div className="w-0.5 h-24 bg-linear-to-b from-[#2596BE]/60 via-[#2596BE]/20 to-transparent shadow-[0_0_12px_rgba(37,150,190,0.5)]"/>
                     </div>
-
                 </section>
 
                 {/* FAQ Section */}
-                <section className="relative min-h-screen flex items-center justify-center">
+                <section id="faq" className="relative min-h-screen flex items-center justify-center overflow-hidden">
                     {/* Background image */}
                     <div
                         className="absolute inset-0 bg-cover bg-center"
                         style={{ backgroundImage: `url(${faqBackground})` }}
                     />
 
-                    {/* Grayed out overlay */}
-                    <div className="absolute inset-0 bg-black/50"/>
+                    {/* Soft gradient blend over background */}
+                    <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-[#03050C] via-black/60 to-[#03050C]"/>
 
-                    <div className="relative w-full max-w-7xl mx-auto py-20 px-4">
-                        <h2
+                    <div className="relative z-10 w-full max-w-7xl mx-auto py-20 px-4">
+                        <Motion.h2
+                            initial={reduceMotion ? false : { opacity: 0, y: 35, filter: "blur(8px)" }}
+                            whileInView={
+                                reduceMotion
+                                    ? undefined
+                                    : { opacity: 1, y: 0, filter: "blur(0px)" }
+                            }
+                            viewport={{ once: true, amount: 0.2 }}
+                            transition={{
+                                duration: 0.8,
+                                ease: [0.22, 1, 0.36, 1],
+                            }}
                             className="
                                 text-white/90 text-xl xs:text-4xl sm:text-5xl
                                 tracking-[0.3em] font-[Orbitron]
                                 text-center uppercase font-bold
-                                transition-all duration-300
                                 drop-shadow-[0_0_8px_rgba(37,150,190,0.25)]
-                                glow-text py-10 mb-10
+                                glow-text py-10 mb-8
                             "
                         >
                             Frequently Asked Questions
-                        </h2>
+                        </Motion.h2>
+
 
                         {/* Questions section */}
-                        <div className="flex flex-col gap-4 md:max-w-3xl md:mx-auto">
+                        <Motion.div
+                            initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+                            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+                            className="flex flex-col gap-4 md:max-w-3xl md:mx-auto"
+                        >
                             {[
                                 {
                                     title: "How do you pronounce your name?",
@@ -620,13 +671,20 @@ export default function Home () {
                                     onToggle={() => setActiveFaq(activeFaq === index ? null : index)}
                                 />
                             ))}
-                        </div>
+                        </Motion.div>
                     </div>
                 </section>
 
                 {/* Engineering Experience & Academic Milestones */}
-                <section ref={lineScrollRef} id="experience" className="bg-[#03050C] py-10">
+                <section ref={lineScrollRef} id="experience" className="bg-[#03050C] py-14">
                     {/* Heading */}
+                    <Motion.div
+                        initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+                        whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-60px" }}
+                        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                        className="text-center mb-12"
+                    >
                         <h2 
                             className="
                                 text-white/90 text-4xl sm:text-5xl 
@@ -634,14 +692,15 @@ export default function Home () {
                                 text-center uppercase font-bold 
                                 transition-all duration-300
                                 drop-shadow-[0_0_8px_rgba(37,150,190,0.25)]
-                                glow-text py-10 mb-4
+                                glow-text py-4 mb-2
                             " 
-                            >
+                        >
                             EXPERIENCE
                         </h2>
-                        <p className="text-center text-slate-400/80 text-sm sm:text-base font-mono tracking-wide max-w-2xl mx-auto mb-10 px-4">
+                        <p className="text-center text-slate-400/80 text-sm sm:text-base font-mono tracking-wide max-w-2xl mx-auto px-4">
                             A progression of the engineering projects, academic milestones, and technical experiences that have shaped my development.
                         </p>
+                    </Motion.div>
 
                     {/* Timeline content cards */}
                     <div className="relative max-w-7xl mx-auto px-4">

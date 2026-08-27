@@ -12,20 +12,42 @@
  * 
  */
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import "./styles.css"
 
 export default function Navbar ({ menuOpen, setMenuOpen, showProjects, setShowProjects }) {
-    const [showBar, setShowBar] = useState(true)    // Tracks Navbar visibility
-    const lastScrollY = useRef(window.scrollY)      // Tracks the last scroll position
+    const [showBar, setShowBar] = useState(true)        // Tracks Navbar visibility
+    const lastScrollY = useRef(window.scrollY)          // Tracks the last scroll position
+    const scrollAnimationRef = useRef(null)             // Tracks active scroll-to-top RAF
+    const isScrollingToTop = useRef(false)              // Tracks if smooth scroll-to-top is running
 
-    const location = useLocation()                  // Tracks current URL path      
+    const location = useLocation()                      // Tracks current URL path      
     
+    /**
+     * Cancels any in-flight scroll-to-top animation check
+     */
+    const cancelScrollToTop = useCallback(() => {
+        if (scrollAnimationRef.current) {
+            cancelAnimationFrame(scrollAnimationRef.current)
+            scrollAnimationRef.current = null
+        }
+        isScrollingToTop.current = false
+    }, [])
+
+    /**
+     * Clean up any active scroll animation on unmount
+     */
+    useEffect(() => {
+        return () => {
+            cancelScrollToTop()
+        }
+    }, [cancelScrollToTop])
+
     /**
      * Runs on component mount
      * 
-     * Attachs a scroll eventlistener to track scroll position
+     * Attaches a scroll eventlistener to track scroll position
      * and controls the Navbar's visibility
      */
     useEffect(() => {
@@ -37,8 +59,8 @@ export default function Navbar ({ menuOpen, setMenuOpen, showProjects, setShowPr
         const updateScroll = () => {
             const currentScrollY = window.scrollY
 
-            // User scrolled up
-            if (currentScrollY < lastScrollY.current - treshold) {
+            // User scrolled up or is at the very top
+            if (currentScrollY <= 10 || currentScrollY < lastScrollY.current - treshold) {
                 setShowBar(true)
             } 
             // User scrolled down
@@ -53,7 +75,7 @@ export default function Navbar ({ menuOpen, setMenuOpen, showProjects, setShowPr
         window.addEventListener("scroll", updateScroll)
 
         // Clean up event listener(s)
-        return (() => removeEventListener("scroll", updateScroll))
+        return () => window.removeEventListener("scroll", updateScroll)
     }, [])
 
     // Global tailwindcss styles
@@ -74,10 +96,107 @@ export default function Navbar ({ menuOpen, setMenuOpen, showProjects, setShowPr
         // User is already at homepage when button was clicked
         if (location.pathname === "/") {
             e.preventDefault()
+            cancelScrollToTop()
+            if (menuOpen) {
+                setMenuOpen(false)
+            }
             window.scrollTo({ top: 0, behavior: "smooth" })
         }
         // Else let react router handle navigation to home
     }
+
+    /**
+     * Handles clicking the Stack (menu toggle) button.
+     * 
+     * Sequence:
+     * 1. If menu is currently open -> close menu immediately.
+     * 2. If menu is currently closed:
+     *    - If already at scrollTop <= 1 -> open menu immediately.
+     *    - If scrolled down -> start smooth scroll to top (scrollTop: 0),
+     *      wait until the scroll position actually reaches 0,
+     *      confirm scroll is complete, and only then set menuOpen = true.
+     */
+    const handleToggleMenu = useCallback(() => {
+        // If menu is open, clicking simply closes it
+        if (menuOpen) {
+            cancelScrollToTop()
+            setMenuOpen(false)
+            return
+        }
+
+        // Prevent redundant trigger if smooth scroll-to-top is already in progress
+        if (isScrollingToTop.current) {
+            return
+        }
+
+        const getScrollTop = () => 
+            window.scrollY ?? document.documentElement.scrollTop ?? document.body.scrollTop ?? 0
+
+        const currentY = getScrollTop()
+        const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches
+
+        // If already at the top or user prefers reduced motion, open immediately
+        if (currentY <= 1 || prefersReducedMotion) {
+            if (currentY > 0) {
+                window.scrollTo({ top: 0, behavior: "auto" })
+            }
+            setMenuOpen(true)
+            return
+        }
+
+        // Initiate smooth scroll to top while menu is still closed
+        isScrollingToTop.current = true
+        window.scrollTo({ top: 0, behavior: "smooth" })
+
+        let lastY = currentY
+        let stationaryFrames = 0
+
+        // Function called when top is confirmed
+        const finalizeScrollToTop = () => {
+            cancelScrollToTop()
+            window.scrollTo({ top: 0, behavior: "auto" })
+            setMenuOpen(true)
+        }
+
+        // Also listen for browser 'scrollend' as an accelerated completion trigger where supported
+        const handleScrollEnd = () => {
+            const y = getScrollTop()
+            if (y <= 1) {
+                window.removeEventListener("scrollend", handleScrollEnd)
+                finalizeScrollToTop()
+            }
+        }
+        window.addEventListener("scrollend", handleScrollEnd, { once: true })
+
+        // Frame-by-frame scroll position verification
+        const checkScrollComplete = () => {
+            const y = getScrollTop()
+
+            // Target reached!
+            if (y <= 0.5) {
+                window.removeEventListener("scrollend", handleScrollEnd)
+                finalizeScrollToTop()
+                return
+            }
+
+            // Detect if scrolling has ceased moving (e.g. stalled or reached boundary)
+            if (Math.abs(y - lastY) < 0.5) {
+                stationaryFrames++
+                if (stationaryFrames >= 10) {
+                    window.removeEventListener("scrollend", handleScrollEnd)
+                    finalizeScrollToTop()
+                    return
+                }
+            } else {
+                stationaryFrames = 0
+                lastY = y
+            }
+
+            scrollAnimationRef.current = requestAnimationFrame(checkScrollComplete)
+        }
+
+        scrollAnimationRef.current = requestAnimationFrame(checkScrollComplete)
+    }, [menuOpen, setMenuOpen, cancelScrollToTop])
 
     return (
         <>
@@ -135,6 +254,7 @@ export default function Navbar ({ menuOpen, setMenuOpen, showProjects, setShowPr
                                 className={`${iconButtons} relative group`}
                                 aria-label="Open projects menu"
                                 onClick={() => {
+                                    cancelScrollToTop()
                                     setMenuOpen(false)
                                     setShowProjects(true)
                                 }}
@@ -160,8 +280,8 @@ export default function Navbar ({ menuOpen, setMenuOpen, showProjects, setShowPr
                         {/* Navigation stack button */}
                         <button 
                             className={`${iconButtons}`}
-                            aria-label="Open menu"
-                            onClick={() => setMenuOpen(prev => !prev)}
+                            aria-label={menuOpen ? "Close menu" : "Open menu"}
+                            onClick={handleToggleMenu}
                         >   
                             <svg 
                                 className={`nav-toggle ${iconSize} ${menuOpen ? 'open' : ''}`}

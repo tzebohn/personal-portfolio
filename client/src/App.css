@@ -11,11 +11,18 @@
   animation: blink 2s steps(1) infinite;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: #03050C;
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
   .main-layout-menu,
   .main-layout-menu-item,
   .main-layout-shell {

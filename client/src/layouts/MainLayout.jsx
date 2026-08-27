@@ -73,6 +73,7 @@ export default function MainLayout () {
             setMenuOpen(false)
             const y = element.getBoundingClientRect().top + window.scrollY
             window.scrollTo({ top: y })
+            element.scrollIntoView({ behavior: "smooth" })
         }
     }
 
@@ -83,14 +84,14 @@ export default function MainLayout () {
             {/* Menu overlay links */}
             <div 
                 className={
-                    `main-layout-menu fixed inset-x-0 top-0 z-40 px-5 pt-[4.25rem] pb-4 transition-[opacity,transform] duration-300 ease-out xs:pt-[4.75rem] sm:px-6 sm:pt-20 md:pt-24 lg:pt-28
+                    `main-layout-menu fixed inset-x-0 top-0 z-40 px-5 pt-17 pb-4 transition-[opacity,transform] duration-300 ease-out xs:pt-19 sm:px-6 sm:pt-20 md:pt-24 lg:pt-28
                     ${menuOpen ? "pointer-events-auto scale-100 opacity-100" : "pointer-events-none scale-[0.985] opacity-0"}
                     `
                 }
                 aria-hidden={!menuOpen}
             >
                 <ul 
-                    className="mx-auto grid w-full max-w-[38rem] grid-cols-2 gap-x-3 gap-y-2 sm:max-w-3xl sm:grid-cols-4 sm:gap-x-6 sm:rounded-full sm:border sm:border-white/10 sm:bg-white/[0.045] sm:px-3 sm:py-2 sm:shadow-[0_18px_70px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.08)] sm:backdrop-blur-md md:gap-x-8 lg:gap-x-10"
+                    className="mx-auto grid w-full max-w-152 grid-cols-2 gap-x-3 gap-y-2 sm:max-w-3xl sm:grid-cols-4 sm:gap-x-6 sm:rounded-full sm:border sm:border-white/10 sm:bg-white/4.5 sm:px-3 sm:py-2 sm:shadow-[0_18px_70px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.08)] sm:backdrop-blur-md md:gap-x-8 lg:gap-x-10"
                 >
                     <li 
                         className={`main-layout-menu-item flex items-center justify-center transition-[opacity,transform] duration-300 ease-out ${menuOpen ? "scale-100 opacity-100" : "scale-95 opacity-0"}`}
@@ -138,7 +139,7 @@ export default function MainLayout () {
             <div 
                 className={
                     `main-layout-shell relative z-0 origin-top transition-[transform,filter,border-radius,box-shadow] duration-300 ease-out will-change-transform
-                    ${menuOpen ? "pointer-events-none translate-y-40 scale-[0.955] overflow-hidden rounded-[2rem] shadow-[0_30px_90px_rgba(0,0,0,0.45)] brightness-[0.62] saturate-[0.9] sm:translate-y-24 sm:scale-[0.965] md:translate-y-28 md:scale-[0.97] lg:translate-y-32 lg:scale-[0.975]" : "pointer-events-auto translate-y-0 scale-100 rounded-none shadow-none brightness-100 saturate-100"}
+                    ${menuOpen ? "pointer-events-none translate-y-40 scale-[0.955] overflow-hidden rounded-4xl shadow-[0_30px_90px_rgba(0,0,0,0.45)] brightness-[0.62] saturate-[0.9] sm:translate-y-24 sm:scale-[0.965] md:translate-y-28 md:scale-[0.97] lg:translate-y-32 lg:scale-[0.975]" : "pointer-events-auto translate-y-0 scale-100 rounded-none shadow-none brightness-100 saturate-100"}
                     `
                 }
                 onClick={handleMenuClose}

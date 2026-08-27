@@ -1,17 +1,18 @@
 /**
  * ProjectsTransition component
  * 
- * Creates a nice transition to Projects section on scroll 
+ * Creates a cinematic scroll transition into the Projects archive.
  */
 
-import { motion as Motion, useScroll, useTransform } from "framer-motion"
+import { motion as Motion, useScroll, useTransform, useReducedMotion } from "framer-motion"
 import { useRef } from "react"
 import DivingGif from "../../assets/images/diving.gif"
 import "./project.css"
 
 export default function ProjectsTransition() {
-
     const transitionRef = useRef(null)    // Tracks the main container
+    const prefersReducedMotion = useReducedMotion()
+    const reduce = import.meta.env.DEV ? false : prefersReducedMotion
 
     // Tracks the scroll height
     const { scrollYProgress } = useScroll({
@@ -25,15 +26,41 @@ export default function ProjectsTransition() {
         [0.2, 0.45, 0.7],
         [0, 0.5, 1]
     );
-    
+
+    // Subtle parallax motion for the diving visual
+    const gifY = useTransform(
+        scrollYProgress,
+        [0, 1],
+        reduce ? [0, 0] : [-30, 35]
+    );
+
+    const gifScale = useTransform(
+        scrollYProgress,
+        [0.1, 0.5, 0.9],
+        reduce ? [1, 1, 1] : [0.94, 1, 1.03]
+    );
+
+    const titleOpacity = useTransform(
+        scrollYProgress,
+        [0.15, 0.42],
+        reduce ? [1, 1] : [0, 1]
+    );
+
+    const titleY = useTransform(
+        scrollYProgress,
+        [0.15, 0.42],
+        reduce ? [0, 0] : [20, 0]
+    );
 
     return (
-        <div>
+        <div className="relative overflow-hidden">
+            {/* Top ambient blend */}
+            <div className="pointer-events-none absolute inset-x-0 top-0 z-20 h-24 bg-linear-to-b from-[#03050C] to-transparent" />
+
             <div
                 ref={transitionRef}
-                className="relative min-h-[600px] h-[80vh]"
+                className="relative min-h-150 h-[80vh] flex items-center justify-center"
             >   
-                {/* Possible colors #161c44 #0a092d #1e1d25 */}
                 <div className="absolute inset-0 bg-[#03050C]" />
 
                 <Motion.div
@@ -41,19 +68,20 @@ export default function ProjectsTransition() {
                     style={{ opacity: darkness }}
                 />
 
-                <div className="absolute inset-0 flex flex-col items-center gap-8 px-4 sm:gap-12 md:gap-16 lg:gap-20">
-                    {/* Falling visual GIF */}
-                    <img
+                <div className="relative z-10 flex flex-col items-center gap-6 px-4 sm:gap-10 md:gap-14">
+                    {/* Falling visual GIF with subtle scroll parallax */}
+                    <Motion.img
                         src={DivingGif}
-                        alt="GIF of someone free diving"
+                        alt="Visual animation transitioning into the project archive"
+                        style={{ y: gifY, scale: gifScale }}
                         className="
-                            relative z-10
-                            w-[300px] sm:w-[400px] md:w-[460px] lg:w-[520px]
-                            h-[300px] sm:h-[400px] md:h-[460px] lg:h-[520px]
-                            object-contain
+                            w-70 sm:w-95 md:w-110 lg:w-120
+                            h-70 sm:h-95 md:h-110 lg:h-120
+                            object-contain drop-shadow-[0_0_35px_rgba(37,150,190,0.2)]
                         "
                     />
-                    <h4
+                    <Motion.h4
+                        style={{ opacity: titleOpacity, y: titleY }}
                         className="
                             relative z-0
                             text-white/90 text-4xl sm:text-5xl
@@ -63,10 +91,10 @@ export default function ProjectsTransition() {
                             drop-shadow-[0_0_8px_rgba(37,150,190,0.25)]
                             glow-text
                         "
-                        >
-                            PROJECT ARCHIVE
-                            <span className="ml-1 text-[#2596be] animate-pulse">|</span>
-                    </h4>
+                    >
+                        PROJECT ARCHIVE
+                        <span className="ml-1 text-[#2596be] animate-pulse">|</span>
+                    </Motion.h4>
                 </div>
             </div>
         </div>

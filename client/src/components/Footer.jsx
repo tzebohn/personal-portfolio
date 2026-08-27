@@ -7,9 +7,14 @@ import DiscordIcon from "../assets/icons/discord.svg?react"
 import { FaRegHandshake } from "react-icons/fa6"
 import { useInputDevice } from "../contexts/inputDevice/useInputDevice"
 import { useState } from "react"
+import { motion as Motion, useReducedMotion } from "framer-motion"
+
+const EASE = [0.22, 1, 0.36, 1];
 
 export default function Footer () {
     const { isTouch } = useInputDevice()
+    const prefersReducedMotion = useReducedMotion()
+    const reduce = import.meta.env.DEV ? false : prefersReducedMotion
 
     const [copied, setCopied] = useState(false)
 
@@ -46,18 +51,22 @@ export default function Footer () {
     return (
         <>  
             {/* Extra spacing for blending background */}
-            <div className="h-32 bg-gradient-to-b from-[#03050C] to-[#0a0d14]"></div>
+            <div className="h-32 bg-linear-to-b from-[#03050C] to-[#0a0d14]"></div>
             
             <footer className="relative bg-[#03050C] pt-16 md:pt-24 px-6 md:px-12 lg:px-20 border-t border-gray-900/50">
                 {/* Upper feature panel */}
                 <section className="relative mx-auto max-w-3xl mb-16 text-white">
-                    <div 
+                    <Motion.div 
+                        initial={reduce ? false : { opacity: 0, y: 24 }}
+                        whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-60px" }}
+                        transition={{ duration: 0.6, ease: EASE }}
                         className="
                             flex flex-col gap-4 items-center p-8
                             md:flex-none md:grid md:grid-cols-3 md:gap-6
-                            rounded-lg bg-[#03050C] 
-                            border-2 border-purple-500/30 backdrop-blur-xl 
-                            shadow-[0_0_50px_-12px_rgba(168,85,247,0.4)]
+                            rounded-xl bg-[#03050C]/90 
+                            border border-purple-500/30 backdrop-blur-xl 
+                            shadow-[0_0_50px_-12px_rgba(168,85,247,0.35)]
                             text-white
                             overflow-hidden
                         "
@@ -73,16 +82,16 @@ export default function Footer () {
                             rel="noopener noreferrer"
                             className={`
                                  flex items-center justify-center gap-4 
-                                 border rounded-full p-2 xs:px-4
-                                 hover:bg-gray-800
-                                 active:bg-gray-800
+                                 border border-purple-500/40 rounded-full p-2 xs:px-4
+                                 bg-purple-600/10 hover:bg-purple-600/20 hover:border-purple-500/70
+                                 active:bg-purple-600/30 transition-all duration-300
                             `}
                             aria-label="Fill out contact form"
                         >
                             <FaRegHandshake className="w-6 h-6 sm:w-8 sm:h-8 text-white"/>
                             <span className="text-sm xs:text-lg font-semibold">Let's Connect</span>
                         </a>
-                    </div>
+                    </Motion.div>
                 </section>
 
                  {/* Bottom meta footer */}
@@ -95,7 +104,14 @@ export default function Footer () {
                      />
                      
                      {/* Social buttons */}
-                     <div id="contact" className="relative z-10 flex justify-center pt-24 pb-6">
+                     <Motion.div 
+                         id="contact" 
+                         initial={reduce ? false : { opacity: 0, y: 18 }}
+                         whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+                         viewport={{ once: true, margin: "-40px" }}
+                         transition={{ duration: 0.5, delay: 0.08, ease: EASE }}
+                         className="relative z-10 flex justify-center pt-24 pb-6"
+                     >
                          <div className="grid grid-cols-3 gap-8 md:gap-12">
                              {/* Github link */}
                              <a
@@ -164,14 +180,14 @@ export default function Footer () {
                                  <InstaIcon className={`${iconStyles}`}/>
                              </button>
                          </div>
-                     </div>
+                     </Motion.div>
                  </div>
                  
                  {/* Divider */}
                  <div className="mt-10 pb-2 border-t border-gray-900"></div>
              </footer>
              
-             <div className="text-white bg-gradient-to-b from-black via-[#04060d] to-[#090e1a]">
+             <div className="text-white bg-linear-to-b from-black via-[#04060d] to-[#090e1a]">
                  <div className="min-h-24 flex flex-col items-center md:flex-row md:justify-between md:items-end px-4">
                      <nav className="flex flex-wrap justify-center gap-8 order-1 md:order-2">
                          <a 

@@ -201,6 +201,16 @@ export default function Hero () {
                 </div>
             </div>
 
+            {/* Bottom ambient gradient transition into Overview */}
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#03050C] via-[#03050C]/60 to-transparent" />
+
+            {/* Subtle scroll cue */}
+            <div className="pointer-events-none absolute bottom-5 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 transition-opacity duration-300 hover:opacity-90">
+                <span className="font-[Orbitron] text-[9px] uppercase tracking-[0.3em] text-[#2596BE]">Scroll</span>
+                <div className="h-7 w-4 rounded-full border border-[#2596BE]/40 p-0.5 flex justify-center">
+                    <span className="h-1.5 w-1 rounded-full bg-[#2596BE] animate-bounce" />
+                </div>
+            </div>
         </section>
     )
 }
