@@ -34,7 +34,6 @@ import {
     SiPostman, 
     SiTypescript, 
     SiJavascript, 
-    SiCplusplus, 
     SiHtml5, 
     SiGit, 
     SiPuppeteer,
@@ -244,7 +243,7 @@ const featuredProjects = [
 const sideProjects = [
     {
         title: "Mini MessageBoard",
-        description: "A platform for real-time open conversations and discussions.",
+        description: "A platform for real-time conversations and open discussions, powered by WebSockets.",
         technologies: ["React", "TailwindCSS", "JavaScript", "Node.js", "Express", "MySQL", "WebSockets", "leo-profanity", "AWS", "Render"],
         githubUrl: "https://github.com/tzebohn/mini-message-board",
     },
@@ -267,8 +266,8 @@ const sideProjects = [
         githubUrl: "https://github.com/tzebohn/DineFinder",
     },
     {
-        title: "GROQ Todolist",
-        description: "An experimental WebGL landing page exploring shader-driven backgrounds.",
+        title: "GroqTasks",
+        description: "A classic to-do list app enhanced with Groq-powered AI that suggests tasks as you type.",
         technologies: ["Python", "GROQ"],
         githubUrl: "https://github.com/tzebohn/Todolist",
     },
